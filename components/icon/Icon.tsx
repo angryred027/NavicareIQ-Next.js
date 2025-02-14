@@ -44,6 +44,17 @@ type IconProps = {
             <path d="M17.3241 17.5753C12.5916 22.3078 11.5858 22.4852 6.34315 17.2425C1.1005 11.9999 1.27208 10.9999 6.34315 5.92883C11.4142 0.857761 12.2279 0.499893 17.6569 5.92883C23.0858 11.3578 22.8995 11.9999 17.3241 17.5753Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             <path d="M12 8C12.2761 8 12.5 7.77614 12.5 7.5C12.5 7.22386 12.2761 7 12 7C11.7239 7 11.5 7.22386 11.5 7.5C11.5 7.77614 11.7239 8 12 8Z" fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"/>
         </>
+    ),
+    'info-circle': (
+      <>
+        <path d="M11 15V11M11 7H11.01M21 11C21 16.5228 16.5228 21 11 21C5.47715 21 1 16.5228 1 11C1 5.47715 5.47715 1 11 1C16.5228 1 21 5.47715 21 11Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </>
+    ),
+    close: (
+      <>
+        <path d="M18 6L6 18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M6 6L18 18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </>
     )
   };
   

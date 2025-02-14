@@ -4,6 +4,7 @@ import { forwardRef, useState, useRef, useEffect } from 'react';
 import ArrowDownIcon from '@/assets/icons/arrow-down.svg';
 import CheckIcon from '@/assets/icons/check.svg';
 import Image from 'next/image';
+import CheckBox from '@/components/checkbox/CheckBox';
 
 type Option = {
   value: string;
@@ -18,8 +19,9 @@ type SelectProps = {
   disabled?: boolean;
   required?: boolean;
   className?: string;
-  value?: string;
-  onChange?: (value: string) => void;
+  multiple?: boolean;
+  value?: string | string[];
+  onChange?: (value: string | string[]) => void;
 };
 
 const Select = forwardRef<HTMLDivElement, SelectProps>(
@@ -32,17 +34,19 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       disabled = false,
       required = false,
       className = '',
+      multiple = false,
       value,
       onChange,
     },
     ref
   ) => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
     const [isFocused, setIsFocused] = useState(false);
     const selectRef = useRef<HTMLDivElement>(null);
     
-    const selectedOption = options.find(opt => opt.value === value);
-    const hasValue = !!selectedOption;
+    const selectedValues = Array.isArray(value) ? value : [value].filter(Boolean);
+    const selectedOptions = options.filter(opt => selectedValues.includes(opt.value));
+    const hasValue = selectedOptions.length > 0;
 
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
@@ -55,6 +59,20 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       document.addEventListener('mousedown', handleClickOutside);
       return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
+
+    const handleSelect = (option: Option) => {
+      if (disabled) return;
+
+      if (multiple) {
+        const newValues = selectedValues.includes(option.value)
+          ? selectedValues.filter(v => v !== option.value)
+          : [...selectedValues, option.value];
+        onChange?.(newValues as string[]);
+      } else {
+        onChange?.(option.value);
+        setIsOpen(false);
+      }
+    };
 
     const baseSelectStyles = `
       w-full
@@ -115,6 +133,10 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     `;
 
     const optionsStyles = `
+      py-2
+      flex
+      flex-col
+      gap-1
       absolute
       top-full
       left-0
@@ -149,11 +171,16 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       ${error ? 'text-status-error-600' : 'text-system-dark-500'}
     `;
 
-    const handleSelect = (option: Option) => {
-      if (!disabled) {
-        onChange?.(option.value);
-        setIsOpen(false);
+    const getSelectedLabel = () => {
+      if (!hasValue) return 'Select';
+      
+      if (multiple) {
+        return selectedOptions
+          .map(option => option.label)
+          .join(', ');
       }
+      
+      return selectedOptions[0]?.label;
     };
 
     return (
@@ -168,10 +195,13 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
             onFocus={() => setIsFocused(true)}
             tabIndex={disabled ? -1 : 0}
           >
-            <span className={!selectedOption ? 'text-system-dark-300' : 'truncate whitespace-nowrap'}>
-              {selectedOption?.label || 'Select'}
+             <span className={`
+              truncate
+              max-w-[90%]
+              ${!hasValue ? 'text-system-dark-300' : ''}
+            `}>
+              {getSelectedLabel()}
             </span>
-        
           </div>
           <div 
               className={`
@@ -181,10 +211,14 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                 text-system-dark-500
                 transition-transform
                 duration-150
+                cursor-pointer
                 ${isOpen ? 'transform rotate-180' : ''}
                 ${disabled ? 'text-system-dark-300' : ''}
                 ${error ? 'text-status-error-600' : ''}
               `}
+              onClick={() => {
+                setIsOpen(!isOpen);
+              }}
             >
               <Image src={ArrowDownIcon} alt="arrow-down" width={20} height={20} />
             </div>
@@ -205,11 +239,27 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                     ${optionStyles}
                     ${option.value === value ? 'text-poppy-900 text-body-bold' : ''}
                   `}
-                  onClick={() => handleSelect(option)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleSelect(option);
+                  }}
                 >
-                  <span className='truncate whitespace-nowrap'>{option.label}</span>
-                  {option.value === value && (
-                    <Image src={CheckIcon} alt="check" width={20} height={20} />
+                  {multiple ? (
+                    <CheckBox 
+                      label={option.label}  
+                      onChange={() => {}}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                      checked={selectedValues.includes(option.value) || false} 
+                    />
+                  ) : (
+                    <>
+                      <span className='truncate whitespace-nowrap'>{option.label}</span>
+                      {option.value === value && (
+                        <Image src={CheckIcon} alt="check" width={20} height={20} />
+                      )}
+                    </>
                   )}
                 </div>
               ))}
