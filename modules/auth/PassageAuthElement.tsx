@@ -10,17 +10,16 @@ export default function PassageAuthElement({ appId }: PassageAuthElementProps) {
   const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (elementRef.current) {
-      const passageAuth = document.createElement('passage-auth');
-      passageAuth.setAttribute('app-id', appId);
-      elementRef.current.appendChild(passageAuth);
-    }
-
-    return () => {
+    const loadPassage = async () => {
       if (elementRef.current) {
+        const auth = document.createElement('passage-auth');
+        auth.setAttribute('app-id', appId);
         elementRef.current.innerHTML = '';
+        elementRef.current.appendChild(auth);
       }
     };
+
+    loadPassage();
   }, [appId]);
 
   return <div ref={elementRef} />;

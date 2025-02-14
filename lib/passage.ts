@@ -1,7 +1,13 @@
 import { Passage } from '@passageidentity/passage-js';
 
-export const PassageConfig = {
-  appId: process.env.NEXT_PUBLIC_PASSAGE_APP_ID!,
-};
+const appId = process.env.NEXT_PUBLIC_PASSAGE_APP_ID;
 
-export const passage: any = new Passage(PassageConfig.appId); 
+if (!appId) {
+  throw new Error('NEXT_PUBLIC_PASSAGE_APP_ID is not defined');
+}
+
+export const passage = new Passage(appId);
+
+export const PassageConfig = {
+  appId,
+}; 
