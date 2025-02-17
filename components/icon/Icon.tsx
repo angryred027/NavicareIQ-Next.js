@@ -2,6 +2,8 @@ type IconProps = {
     name: any;
     className?: string;
     size?: number;
+    viewBox?: string;
+    color?: string;
   };
   
   const icons = {
@@ -55,18 +57,79 @@ type IconProps = {
         <path d="M18 6L6 18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         <path d="M6 6L18 18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       </>
+    ),
+    'chevron-down': (
+      <>
+        <path d="M11 1L6 6L1 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </>
+    ),
+    calendar: (
+      <>
+        <path d="M16.5 9.8335C16.5 14.9261 14.8333 16.5002 9 16.5002C3.16667 16.5002 1.5 14.9261 1.5 9.41683C1.5 3.90757 3.16667 2.3335 9 2.3335C14.8333 2.3335 16.5 3.90757 16.5 9.8335Z" stroke="#515253" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M11.5 4L11.5 1.5" stroke="#515253" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M6.5 4L6.5 1.5" stroke="#515253" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <line x1="5.58337" y1="6.5835" x2="12.4167" y2="6.5835" stroke="#515253" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </>
+    ),
+    call: (
+      <>
+        <path d="M11.9322 16.3593C6.49756 14.5282 3.58488 11.2031 1.7299 6.51555C1.26617 5.57805 1.26615 3.23429 4.04861 1.73428C4.74421 1.35928 5.43984 1.35928 6.36732 2.29679C7.29481 3.2343 6.36732 2.29679 7.29481 3.23429C8.36151 4.3125 8.248 5.25 8.0625 5.71875C7.87701 6.28125 7.01656 6.7968 7.29481 7.92181C7.57305 9.04681 8.96428 10.5468 10.0773 10.7343C11.1902 10.9218 11.8175 10.2188 12.2813 9.9375C12.745 9.65625 13.5119 9.5185 14.2509 10.2656C14.625 10.6437 14.7147 10.7343 15.6422 11.6718C16.5697 12.6093 16.6745 13.3702 16.2914 14.0156C15.0938 16.4504 13.0788 16.7457 11.9322 16.3593Z" stroke="#515253" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </>
+    ),
+    message: (
+      <>
+        <path d="M9 1.33366C14.8333 1.33366 16.5 2.0744 16.5 8.00033C16.5 13.9263 14.8333 14.667 9 14.667C3.16667 14.667 1.5 13.8337 1.5 8.00033C1.5 2.16699 3.16667 1.33366 9 1.33366Z" stroke="#515253" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M4 6.3335C6.5 8.8335 7.75 9.66683 9 9.66683C10.25 9.66683 11.5 8.8335 14 6.3335" stroke="#515253" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </>
+    ),
+    'pin-map':(
+      <>
+        <path d="M8 10.833C9.38071 10.833 10.5 9.71372 10.5 8.33301C10.5 6.9523 9.38071 5.83301 8 5.83301C6.61929 5.83301 5.5 6.9523 5.5 8.33301C5.5 9.71372 6.61929 10.833 8 10.833Z" stroke="#515253" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M8.00004 17.4998C9.66671 17.4998 14.6667 13.9813 14.6667 8.70354C14.6667 3.42576 10.5 1.6665 8.00004 1.6665C5.50004 1.6665 1.33337 3.42576 1.33337 8.70354C1.33337 13.9813 6.33337 17.4998 8.00004 17.4998Z" stroke="#515253" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </>
+    ),
+    heart: (
+      <>
+        <path d="M15.7663 2.2377C15.3753 1.84531 14.9111 1.53404 14.4002 1.32168C13.8893 1.10931 13.3417 1 12.7887 1C12.2357 1 11.6881 1.10931 11.1772 1.32168C10.6663 1.53404 10.2021 1.84531 9.81116 2.2377L8.9998 3.05166L8.18843 2.2377C7.39874 1.44548 6.32768 1.00041 5.21089 1.00041C4.09409 1.00041 3.02303 1.44548 2.23334 2.2377C1.44365 3.02993 1 4.10441 1 5.22479C1 6.34516 1.44365 7.41965 2.23334 8.21187L3.0447 9.02583L8.9998 15L14.9549 9.02583L15.7663 8.21187C16.1574 7.81967 16.4677 7.354 16.6794 6.84146C16.891 6.32893 17 5.77958 17 5.22479C17 4.67 16.891 4.12064 16.6794 3.60811C16.4677 3.09558 16.1574 2.6299 15.7663 2.2377Z" stroke="#91A3B0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </>
+    ),
+    plus: (
+      <>
+        <path d="M5.99997 12L18 12" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M12 18L12 6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </>
+    ),
+    warning: (
+      <>
+        <path d="M7 7.3335L7 4.66683" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M12.7802 9.82631C13.1724 10.4929 12.6917 11.3333 11.9183 11.3333L2.08179 11.3333C1.30837 11.3333 0.827719 10.4929 1.21986 9.82631L6.13811 1.46529C6.52476 0.807983 7.47532 0.807982 7.86198 1.46529L12.7802 9.82631Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M7.00008 9.66667C7.18418 9.66667 7.33341 9.51743 7.33341 9.33333C7.33341 9.14924 7.18418 9 7.00008 9C6.81599 9 6.66675 9.14924 6.66675 9.33333C6.66675 9.51743 6.81599 9.66667 7.00008 9.66667Z" fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"/>
+      </>
+    ),
+    download: (
+      <>
+        <path d="M17 10C17 16 16.1111 19 9 19C1.88889 19 1 16 1 10C1 4 2 1 9 1C16 1 17 4 17 10Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M6 2C6 2 6.60457 4.39543 5.5 5.5C4.39543 6.60457 2 6 2 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M9 8L9 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M6 12L9 15L12 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </>
+    ),
+    mail: (
+      <>
+        <path d="M11.6 16.6C10.8 16.9 9.9 17 9 17C4.6 17 1 13.4 1 9C1 4.6 4.6 1 9 1C13.4 1 17 4.6 17 9C17 9.3 17 9.5 17 9.8M13.2 6.3C12.1 9.5 11.4 11.1 12.5 12.2C13.7 13.4 16.2 13.2 16.9 9.9M10.0539 5.33156C11.7871 6.05394 12.4859 8.33383 11.6148 10.4238C10.7437 12.5139 8.63255 13.6225 6.89937 12.9002C5.16619 12.1778 4.46734 9.89789 5.33844 7.80788C6.20954 5.71787 8.32073 4.60918 10.0539 5.33156Z" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+      </>
     )
   };
   
-  export default function Icon({ name, className, size = 24 }: IconProps) {
+  export default function Icon({ name, className, size = 24, viewBox = '0 0 24 24', color }: IconProps) {
     return (
       <svg 
         className={className}
         width={size} 
         height={size}
-        viewBox="0 0 24 24" 
+        viewBox={viewBox} 
         fill="none"
-        stroke="currentColor"
+        stroke={color || "currentColor"}
       >
         {icons[name as keyof typeof icons]}
       </svg>

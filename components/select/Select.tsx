@@ -40,7 +40,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     },
     ref
   ) => {
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
     const [isFocused, setIsFocused] = useState(false);
     const selectRef = useRef<HTMLDivElement>(null);
     
