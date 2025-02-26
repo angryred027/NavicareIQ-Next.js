@@ -23,4 +23,4 @@ export default function PassageAuthElement({ appId }: PassageAuthElementProps) {
   }, [appId]);
 
   return <div ref={elementRef} />;
-} 
+}

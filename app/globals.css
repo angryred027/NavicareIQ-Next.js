@@ -24,3 +24,63 @@ body {
   color: var(--foreground);
   background: var(--background);
 }
+
+passage-auth {
+  --passage-header-font-family: var(--font-inter);
+  --passage-header-font-size: 24px;
+  --passage-header-font-weight: 700;
+  --passage-header-text-color: #000005;
+
+  --passage-body-font-family: var(--font-inter);
+  --passage-body-font-size: 14px;
+  --passage-body-font-weight: 400;
+  --passage-body-text-color: #757B80;
+
+  --passage-input-text-color: #000005;
+  --passage-control-border-radius: 16px;
+  --passage-control-border-color: #BFCFDA;
+  --passage-control-border-active-color: #273E69;
+  --passage-control-border-hover-color: #273E69;
+
+  --passage-input-box-background-color: #fff;
+  --passage-input-box-border-radius: 16px;
+
+  /* Checkbox Styles */
+  --passage-checkbox-background-color: #000;
+  --passage-checkbox-text-color: #fff;
+
+  /* Button Styles */
+  --passage-button-font-size: 14px;
+  --passage-button-font-weight: 600;
+  --passage-button-width: 50%;
+
+  --passage-primary-button-background-color: #4167AF;
+  --passage-primary-button-text-color: #fff;
+
+  --passage-primary-button-border-radius: 16px;
+  --passage-primary-button-border-color: #4167AF;
+  --passage-primary-button-border-width: 0px;
+
+  --passage-primary-button-text-hover-color: #fff;
+  --passage-primary-button-background-hover-color: #34528C;
+  --passage-primary-button-border-hover-color: #34528C;
+
+  --passage-primary-button-text-active-color: #fff;
+  --passage-primary-button-background-active-color: #273E69;
+  --passage-primary-button-border-active-color: #273E69;
+
+  --passage-secondary-button-background-color: #fff;
+  --passage-secondary-button-text-color: #4167AF;
+
+  --passage-secondary-button-border-radius: 5px;
+  --passage-secondary-button-border-color: #000;
+  --passage-secondary-button-border-width: 1px;
+
+  --passage-secondary-button-text-hover-color: #34528C;
+  --passage-secondary-button-background-hover-color: #d7d7d7;
+  --passage-secondary-button-border-hover-color: #4d4d4d;
+
+  --passage-secondary-button-text-active-color: #000;
+  --passage-secondary-button-background-active-color: #e0e0e0;
+  --passage-secondary-button-border-active-color: #6b6b6b;
+}
