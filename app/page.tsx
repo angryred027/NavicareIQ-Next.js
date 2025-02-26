@@ -1,10 +1,10 @@
-import Image from "next/image";
+import PatientsList from '@/components/patients/PatientsList';
 
 export default function Home() {
   return (
     <div>
       <main>
-        Content
+        <PatientsList />
       </main>
     </div>
   );
