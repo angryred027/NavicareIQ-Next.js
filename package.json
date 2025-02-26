@@ -12,6 +12,7 @@
     "@passageidentity/passage-elements": "^2.0.9",
     "@passageidentity/passage-js": "^4.1.2",
     "@reduxjs/toolkit": "^2.5.1",
+    "clsx": "^2.1.1",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.3",
     "next": "15.1.7",
