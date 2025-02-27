@@ -13,69 +13,65 @@ type MenuItem = {
 };
 
 const menuItems: MenuItem[] = [
-  { 
-    icon: 'flask', 
-    path: '/laboratory'
+  {
+    icon: 'flask',
+    path: '/laboratory',
   },
-  { 
-    icon: 'location', 
-    path: '/locations'
-  },  
-  { 
-    icon: 'users', 
-    path: '/'
+  {
+    icon: 'location',
+    path: '/locations',
   },
-  { 
-    icon: 'paper', 
-    path: '/paper'
+  {
+    icon: 'users',
+    path: '/users',
+  },
+  {
+    icon: 'paper',
+    path: '/paper',
   },
 ];
+
+const helpMenuItem: MenuItem = {
+  icon: 'info-romb',
+  path: '/'
+}
 
 export const Sidebar = () => {
   const pathname = usePathname();
 
+  const RenderMenu = ({item}: {item: MenuItem}) => (
+    <Link
+      href={item.path}
+      className={`px-6 py-3 ${pathname === item.path ? 'border-r-2 border-[#4167AF]' : ''}`}
+    >
+      <div className="w-6 h-6 rounded-[12px] flex items-center justify-center cursor-pointer transition-colors hover:bg-[#EDF2F6]">
+        <Icon
+          name={item.icon}
+          className={`transition-colors ${pathname === item.path ? 'text-[#4167AF]' : 'text-[#757B80]'}`}
+        />
+      </div>
+    </Link>
+  );
+
   return (
-    <aside className="h-screen bg-[#F6F9FA] border-r border-[#EDF2F6] flex flex-col justify-between items-center pb-3" suppressHydrationWarning>
+    <aside
+      className="h-screen bg-[#F6F9FA] border-r border-[#EDF2F6] flex flex-col justify-between items-center pb-3"
+      suppressHydrationWarning
+    >
       <div className="flex flex-col">
         <div className="flex items-center gap-4 px-6 py-7 mb-5">
-          <Image 
-            src={MenuIcon} 
-            alt="menu" 
-            width={24} 
-            height={24} 
-            className="cursor-pointer hover:opacity-80"
-          />
+          <Image src={MenuIcon} alt="menu" width={24} height={24} className="cursor-pointer hover:opacity-80" />
         </div>
 
         <div className="flex flex-col gap-5">
           {menuItems.map((item, index) => (
-            <Link 
-              key={index} 
-              href={item.path}
-              className={`px-6 py-3 ${pathname === item.path ? 'border-r-2 border-[#4167AF]' : ''}`}
-            >
-              <div 
-                className="w-6 h-6 rounded-[12px] flex items-center justify-center cursor-pointer transition-colors hover:bg-[#EDF2F6]"
-              >
-                <Icon 
-                  name={item.icon} 
-                  className={`transition-colors ${
-                    pathname === item.path 
-                      ? 'text-[#4167AF]' 
-                      : 'text-[#757B80]'
-                  }`}
-                />
-              </div>
-            </Link>
+            <RenderMenu key={index} item={item} />
           ))}
         </div>
       </div>
 
-
       <div className="flex flex-col items-center gap-10">
-        <div className="w-6 h-6 flex items-center justify-center cursor-pointer transition-colors">
-          <Icon name="info-romb" className="text-[#757B80] hover:text-[#4167AF]" />
-        </div>
+        <RenderMenu item={helpMenuItem} />
 
         <div>
           <Image src={AvatarIcon} alt="info" width={48} height={48} />

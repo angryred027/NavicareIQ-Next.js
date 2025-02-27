@@ -41,12 +41,13 @@ export default function RootLayout({
           router.push('/'); // Redirect authenticated users away from login
         }
       } catch {
+        console.log(pathname)
         setIsAuthenticated(false);
         if (pathname !== '/login') router.push('/login');
       }
     };
 
-    checkAuth();
+    // checkAuth();
   }, [pathname, router]);
 
   return (
@@ -57,11 +58,12 @@ export default function RootLayout({
           strategy="beforeInteractive"
         />
         <ReduxProvider>
-          {isAuthenticated && pathname !== '/login' ? (
+          {/* {isAuthenticated && pathname !== '/login' ? (
             <Layout>{children}</Layout>
           ) : (
             children
-          )}
+          )} */}
+          <Layout>{children}</Layout>
         </ReduxProvider>
       </body>
     </html>
