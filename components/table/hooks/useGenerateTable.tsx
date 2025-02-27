@@ -11,13 +11,13 @@ import {
   getPaginationRowModel,
   type PaginationState,
 } from '@tanstack/react-table';
-import { TableProps, TableTData, TChangePage } from '../table.type';
+import { TableProps, TableTData, TChangePage, TRows } from '../table.type';
 import clsx from 'clsx';
 
 const useGenerateTable = <T extends TableTData>({ data }: TableProps<T>) => {
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
-    pageSize: 7,
+    pageSize: 10,
   });
   const columnHelper = createColumnHelper<T>();
 
@@ -67,37 +67,39 @@ const useGenerateTable = <T extends TableTData>({ data }: TableProps<T>) => {
     },
   });
 
-  const cols = useMemo(() => {
-    return table.getHeaderGroups().map((headerGroup) => {
-      const columnData = {
-        id: headerGroup.id,
-        headers: headerGroup.headers.map((header) => ({
-          id: header.id,
-          label: header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext()),
-        })),
-      };
+  const cols = table.getHeaderGroups().map((headerGroup) => {
+    const columnData = {
+      id: headerGroup.id,
+      headers: headerGroup.headers.map((header) => ({
+        id: header.id,
+        label: header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext()),
+      })),
+    };
 
-      return columnData;
-    });
-  }, [table]);
-
+    return columnData;
+  });
   const colsTotal = useMemo(() => cols.map((col) => col.headers.length).reduce((acc, cur) => acc + cur, 0), [cols]);
 
-  const rows = useMemo(() => {
-    return table.getRowModel().rows.map((row) => {
-      const rowData = {
-        id: row.id,
-        cells: row.getVisibleCells().map((cell) => ({
-          id: cell.column.id,
-          value: flexRender(cell.column.columnDef.cell, cell.getContext()),
-        })),
-      };
-      return rowData;
-    });
-  }, [table]);
+  const rows = table.getRowModel().rows.map((row) => {
+    const rowData: TRows = {
+      id: row.id,
+      cells: row.getVisibleCells().map((cell) => ({
+        id: cell.column.id,
+        value: flexRender(cell.column.columnDef.cell, cell.getContext()),
+      })),
+    };
+    return rowData;
+  });
+  const totalRows = table.getRowCount().toLocaleString();
+  const rowsPerPage = table.getRowModel().rows.length.toLocaleString();
 
-  const totalRows = useMemo(() => table.getRowCount().toLocaleString(), [table]);
-  const rowsPerPage = useMemo(() => table.getRowModel().rows.length.toLocaleString(), [table]);
+  const currentPage = (table.getState().pagination.pageIndex + 1).toLocaleString();
+  const pageSize = table.getState().pagination.pageSize;
+  const totalPages = table.getPageCount().toLocaleString();
+  const rowsOnPage = useMemo(() => {
+    const calculatedRows = pageSize * parseInt(currentPage, pageSize);
+    return Math.min(calculatedRows, parseInt(totalRows, pageSize));
+  }, [pageSize, currentPage, totalRows]);
 
   const handlePageChange = (newPage: TChangePage) => {
     switch (newPage) {
@@ -128,6 +130,10 @@ const useGenerateTable = <T extends TableTData>({ data }: TableProps<T>) => {
     changeRowsPerPage,
     rowsPerPage,
     colsTotal,
+    currentPage,
+    pageSize,
+    rowsOnPage,
+    totalPages,
   };
 };
 

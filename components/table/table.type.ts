@@ -9,3 +9,11 @@ export type TableProps<T extends TableTData> = {
 };
 
 export type TChangePage = 'next' | 'prev' | 'first' | 'last' | number;
+
+export type TRows = {
+  id: string;
+  cells: {
+    id: string;
+    value: ReactNode;
+  }[];
+};

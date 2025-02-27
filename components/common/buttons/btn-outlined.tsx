@@ -16,7 +16,9 @@ const ButtonOutlined: FC<TButtons> = ({ label, onClick, className, children, sta
     'text-[14px]',
     'font-semibold',
     'leading-[20px]',
-    'gap-[8px]'
+    'gap-[8px]',
+    'hover:bg-gray-200',
+    'transition'
   );
 
   return (
