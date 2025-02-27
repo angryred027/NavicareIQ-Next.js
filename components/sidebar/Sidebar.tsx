@@ -14,19 +14,19 @@ type MenuItem = {
 
 const menuItems: MenuItem[] = [
   { 
-    icon: 'icon-flask', 
+    icon: 'flask', 
     path: '/laboratory'
   },
   { 
-    icon: 'icon-location', 
+    icon: 'location', 
     path: '/locations'
   },  
   { 
-    icon: 'icon-users', 
+    icon: 'users', 
     path: '/'
   },
   { 
-    icon: 'icon-paper', 
+    icon: 'paper', 
     path: '/paper'
   },
 ];
@@ -58,9 +58,7 @@ export const Sidebar = () => {
                 className="w-6 h-6 rounded-[12px] flex items-center justify-center cursor-pointer transition-colors hover:bg-[#EDF2F6]"
               >
                 <Icon 
-                  id={item.icon} 
-                  width={24} 
-                  height={24} 
+                  name={item.icon} 
                   className={`transition-colors ${
                     pathname === item.path 
                       ? 'text-[#4167AF]' 
@@ -76,7 +74,7 @@ export const Sidebar = () => {
 
       <div className="flex flex-col items-center gap-10">
         <div className="w-6 h-6 flex items-center justify-center cursor-pointer transition-colors">
-          <Icon id="icon-info-romb" width={24} height={24} className="text-[#757B80]" />
+          <Icon name="info-romb" className="text-[#757B80] hover:text-[#4167AF]" />
         </div>
 
         <div>

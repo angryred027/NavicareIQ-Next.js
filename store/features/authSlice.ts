@@ -25,12 +25,12 @@ export const getCurrentUser = createAsyncThunk(
   'auth/getCurrentUser',
   async (_, { rejectWithValue }) => {
     try {
-      const isAuth = await passage.isAuthenticated();
+      const isAuth = passage.currentUser;
       if (!isAuth) {
         return null;
       }
 
-      const userInfo = await passage.getCurrentUser();
+      const userInfo = await passage.currentUser.userInfo();
       return {
         id: userInfo.id,
         email: userInfo.email,
@@ -49,7 +49,7 @@ export const authSlice = createSlice({
     logout: (state) => {
       state.user = null;
       state.isAuthenticated = false;
-      passage.signOut();
+      passage.session.signOut();
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
