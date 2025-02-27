@@ -9,7 +9,7 @@ type Props<T extends TableTData> = {
 };
 
 export const Table = <T extends TableTData>({ data }: Props<T>) => {
-  const { cols, rows } = useGenerateTable({ data });
+  const { cols, rows, totalRows, colsTotal } = useGenerateTable({ data });
 
   return (
     <table
@@ -29,6 +29,7 @@ export const Table = <T extends TableTData>({ data }: Props<T>) => {
                         'leading-[16px]',
                         'py-[12px]',
                         'px-[16px]',
+                        'text-left',
                         'capitalize'
                       )}
                     >
@@ -56,6 +57,16 @@ export const Table = <T extends TableTData>({ data }: Props<T>) => {
           );
         })}
       </tbody>
+      <tfoot>
+        <tr>
+          <td colSpan={colsTotal}>
+            <div className="w-full flex justify-end gap-[12px]">
+              <span>Rows per page:</span>
+              <span>1-10 of {totalRows}</span>
+            </div>
+          </td>
+        </tr>
+      </tfoot>
     </table>
   );
 };

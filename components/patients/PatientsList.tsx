@@ -1,10 +1,108 @@
 import React, { FC } from 'react';
 import { TableHeaderFilters, Table } from '../table';
+import { TableTData } from '../table/table.type';
 
 const PatientsList: FC = () => {
-  const rows = [
-    { id: 1, name: 'John Doe', age: 30 },
-    { id: 2, name: 'Jane Doe', age: 25 },
+  const rows: TableTData[] = [
+    {
+      name: {
+        value: "Byron D'Amore",
+        subvalue: '1234567890',
+      },
+      DOB: {
+        value: '01/01/2000',
+        subvalue: '22 years',
+      },
+      email: 'damore@gmail.com',
+    },
+    {
+      name: {
+        value: "Byron D'Amore",
+        subvalue: '1234567890',
+      },
+      DOB: {
+        value: '01/01/2000',
+        subvalue: '22 years',
+      },
+      email: 'damore@gmail.com',
+    },
+    {
+      name: {
+        value: "Byron D'Amore",
+        subvalue: '1234567890',
+      },
+      DOB: {
+        value: '01/01/2000',
+        subvalue: '22 years',
+      },
+      email: 'damore@gmail.com',
+    },
+    {
+      name: {
+        value: "Byron D'Amore",
+        subvalue: '1234567890',
+      },
+      DOB: {
+        value: '01/01/2000',
+        subvalue: '22 years',
+      },
+      email: 'damore@gmail.com',
+    },
+    {
+      name: {
+        value: "Byron D'Amore",
+        subvalue: '1234567890',
+      },
+      DOB: {
+        value: '01/01/2000',
+        subvalue: '22 years',
+      },
+      email: 'damore@gmail.com',
+    },
+    {
+      name: {
+        value: "Byron D'Amore",
+        subvalue: '1234567890',
+      },
+      DOB: {
+        value: '01/01/2000',
+        subvalue: '22 years',
+      },
+      email: 'damore@gmail.com',
+    },
+    {
+      name: {
+        value: "Byron D'Amore",
+        subvalue: '1234567890',
+      },
+      DOB: {
+        value: '01/01/2000',
+        subvalue: '22 years',
+      },
+      email: 'damore@gmail.com',
+    },
+    {
+      name: {
+        value: "Byron D'Amore",
+        subvalue: '1234567890',
+      },
+      DOB: {
+        value: '01/01/2000',
+        subvalue: '22 years',
+      },
+      email: 'damore@gmail.com',
+    },
+    {
+      name: {
+        value: "Byron D'Amore",
+        subvalue: '1234567890',
+      },
+      DOB: {
+        value: '01/01/2000',
+        subvalue: '22 years',
+      },
+      email: 'damore@gmail.com',
+    },
   ];
 
   return (
