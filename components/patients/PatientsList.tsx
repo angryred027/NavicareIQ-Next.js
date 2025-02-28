@@ -1,9 +1,12 @@
 'use client';
 import React, { FC } from 'react';
+import { useRouter } from 'next/navigation';
 import { TableHeaderFilters, Table } from '../table';
-import { TableTData } from '../table/table.type';
+import { TableTData, TRows } from '../table/table.type';
 
 const PatientsList: FC = () => {
+  const router = useRouter();
+
   const rows: TableTData[] = [
     {
       name: {
@@ -161,11 +164,15 @@ const PatientsList: FC = () => {
     },
   ];
 
+  const handleRowClick = (row: TRows) => {
+    router.push(`/patients/${row.id}`);
+  };
+
   return (
     <div className="font-sans">
       <TableHeaderFilters />
       <div className="mt-[15px]">
-        <Table data={rows} onRowClick={(row) => console.log('Row clicked', row)} />
+        <Table data={rows} onRowClick={handleRowClick} />
       </div>
     </div>
   );
