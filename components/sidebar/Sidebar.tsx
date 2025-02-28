@@ -33,7 +33,7 @@ const menuItems: MenuItem[] = [
 
 const helpMenuItem: MenuItem = {
   icon: 'info-romb',
-  path: '/'
+  path: '/help'
 }
 
 export const Sidebar = () => {

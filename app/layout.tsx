@@ -9,6 +9,7 @@ import "./globals.css";
 import { useEffect, useState } from 'react';
 import { passage } from '@/lib/passage';
 import { usePathname, useRouter } from 'next/navigation';
+import { NoAuthRoutes } from "@/config/routes";
 
 const inter = Inter({
   subsets: ['latin'],
@@ -41,13 +42,13 @@ export default function RootLayout({
           router.push('/'); // Redirect authenticated users away from login
         }
       } catch {
-        console.log(pathname)
         setIsAuthenticated(false);
         if (pathname !== '/login') router.push('/login');
       }
     };
 
-    // checkAuth();
+    if (!NoAuthRoutes.includes(pathname))
+      checkAuth();
   }, [pathname, router]);
 
   return (
@@ -58,12 +59,12 @@ export default function RootLayout({
           strategy="beforeInteractive"
         />
         <ReduxProvider>
-          {/* {isAuthenticated && pathname !== '/login' ? (
+          {isAuthenticated && pathname !== '/login' ? (
             <Layout>{children}</Layout>
           ) : (
             children
-          )} */}
-          <Layout>{children}</Layout>
+          )}
+          {/* <Layout>{children}</Layout> */}
         </ReduxProvider>
       </body>
     </html>

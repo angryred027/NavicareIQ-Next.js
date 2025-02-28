@@ -1,6 +1,10 @@
+import Layout from '@/components/layout/Layout';
+import HelpView from '@/modules/help';
 
-export default function ProtectedPage() {
+export default function HelpPage() {
   return (
-      <div>Help Content</div>
+    <Layout>
+      <HelpView />
+    </Layout>
   );
-} 
+}

@@ -2,6 +2,7 @@ type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 type ButtonSize = 'sm' | 'md' | 'lg';
 
 type ButtonProps = {
+  type?: "button" | "submit" | "reset" | undefined
   children: React.ReactNode;
   variant?: ButtonVariant;
   size?: ButtonSize;
@@ -11,6 +12,7 @@ type ButtonProps = {
 };
 
 export default function Button({ 
+  type = 'button',
   children, 
   variant = 'primary',
   size = 'md',
@@ -78,7 +80,7 @@ export default function Button({
 
   return (
     <button 
-      type="button"
+      type={type}
       disabled={disabled}
       onClick={onClick}
       className={`
