@@ -1,8 +1,11 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { passage } from '@/lib/passage';
+import { NoAuthRoutes } from './config/routes';
 
 export async function middleware(request: NextRequest) {
+
+  if (NoAuthRoutes.includes(request.nextUrl.pathname)) return;
 
   if (request.nextUrl.pathname === '/') {
     return NextResponse.next();

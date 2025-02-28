@@ -9,6 +9,7 @@ import "./globals.css";
 import { useEffect, useState } from 'react';
 import { passage } from '@/lib/passage';
 import { usePathname, useRouter } from 'next/navigation';
+import { NoAuthRoutes } from "@/config/routes";
 
 const inter = Inter({
   subsets: ['latin'],
@@ -46,7 +47,8 @@ export default function RootLayout({
       }
     };
 
-    checkAuth();
+    if (!NoAuthRoutes.includes(pathname))
+      checkAuth();
   }, [pathname, router]);
 
   return (
@@ -62,6 +64,7 @@ export default function RootLayout({
           ) : (
             children
           )}
+          {/* <Layout>{children}</Layout> */}
         </ReduxProvider>
       </body>
     </html>
