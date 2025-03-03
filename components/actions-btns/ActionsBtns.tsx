@@ -8,14 +8,16 @@ export const ActionsBtns = () => {
   return (
     <div className="flex items-center gap-5">
       <div className="flex items-center gap-2 relative">
-        <div className="absolute top-[-4px] right-[-4px] bg-[#F16666] text-white rounded-full w-4 h-4 flex items-center justify-center text-[10px]">3</div>
+        <div className="absolute top-[-4px] right-[-4px] bg-[#F16666] text-white rounded-full w-4 h-4 flex items-center justify-center text-[10px]">
+          3
+        </div>
         <Image src={FlagIcon} alt="flag" width={24} height={24} />
       </div>
 
       <div className="w-[1px] h-6 bg-[#E6F0F8]" />
 
       <Button>
-        <div className="flex items-center gap-2 px-2"> 
+        <div className="flex items-center gap-2 px-2">
           <Image src={AddIcon} alt="add" width={12} height={12} />
           New Patient
         </div>

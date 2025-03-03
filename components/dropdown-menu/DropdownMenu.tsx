@@ -35,10 +35,10 @@ export default function DropdownMenu() {
       <path
         d="M17 10L12 15L7 10"
         stroke="#515253"
-        stroke-width="1.5"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

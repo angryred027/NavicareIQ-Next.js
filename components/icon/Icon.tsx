@@ -291,6 +291,7 @@ const icons = {
   download: (
     <>
       <path
+        transform="translate(7, 3)"
         d="M17 10C17 16 16.1111 19 9 19C1.88889 19 1 16 1 10C1 4 2 1 9 1C16 1 17 4 17 10Z"
         stroke="currentColor"
         strokeWidth="1.5"
@@ -298,14 +299,29 @@ const icons = {
         strokeLinejoin="round"
       />
       <path
+        transform="translate(7, 3)"
         d="M6 2C6 2 6.60457 4.39543 5.5 5.5C4.39543 6.60457 2 6 2 6"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <path d="M9 8L9 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M6 12L9 15L12 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        transform="translate(7, 3)"
+        d="M9 8L9 14"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        transform="translate(7, 3)"
+        d="M6 12L9 15L12 12"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </>
   ),
   mail: (
@@ -544,13 +560,34 @@ const icons = {
       <path
         d="M17 10L12 15L7 10"
         stroke="#515253"
-        stroke-width="1.5"
+        strokeWidth="1.5"
         stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </>
   ),
+
+  // download: (
+  //   <>
+  //     <path
+  //       d="M20 12C20 18 19.1111 21 12 21C4.88889 21 4 18 4 12C4 6 5 3 12 3C19 3 20 6 20 12Z"
+  //       stroke="#515253"
+  //       strokeWidth="1.5"
+  //       strokeLinecap="round"
+  //       strokeLinejoin="round"
+  //     />
+  //     <path
+  //       d="M9 4C9 4 9.60457 6.39543 8.5 7.5C7.39543 8.60457 5 8 5 8"
+  //       stroke="#515253"
+  //       strokeWidth="1.5"
+  //       strokeLinecap="round"
+  //       strokeLinejoin="round"
+  //     />
+  //     <path d="M12 10L12 16" stroke="#515253" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  //     <path d="M9 14L12 17L15 14" stroke="#515253" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  //   </>
+  // ),
 };
 
 export default function Icon({ name, className, size = 24, viewBox = '0 0 24 24', color }: IconProps) {
