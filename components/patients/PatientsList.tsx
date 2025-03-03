@@ -1,8 +1,13 @@
 'use client';
 import React, { FC } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import InsuranceIcon from '@/assets/icons/insurance.svg';
+import MaleIcon from '@/assets/icons/male.svg';
+import FemaleIcon from '@/assets/icons/female.svg';
 import { TableHeaderFilters, Table } from '../table';
 import { TableTData, TRows } from '../table/table.type';
+import { Badge } from '../common';
 
 const PatientsList: FC = () => {
   const router = useRouter();
@@ -11,156 +16,63 @@ const PatientsList: FC = () => {
     {
       name: {
         value: "Byron D'Amore",
-        subvalue: '1234567890',
+        subvalue: (
+          <div className="flex items-center gap-[2px]">
+            Male <Image src={MaleIcon} alt="Male icon" width={16} height={16} />
+          </div>
+        ),
       },
       DOB: {
-        value: '01/01/2000',
-        subvalue: '22 years',
+        value: 'Feb 12, 1995',
+        subvalue: '29 years',
       },
       email: 'damore@gmail.com',
+      'Phone number': '(197) 260-7456',
+      address: '1234 Main St, Anytown, USA',
+      'Patient Since': 'Jan 1, 2022',
+      Insurance: 'Aetna',
+      'Reports No.': '3',
     },
     {
       name: {
-        value: "Byron D'Amore",
-        subvalue: '1234567890',
+        value: 'Jane Doe',
+        subvalue: (
+          <div className="flex items-center gap-[2px]">
+            Female <Image src={FemaleIcon} alt="female icon" width={16} height={16} />
+          </div>
+        ),
       },
       DOB: {
-        value: '01/01/2000',
-        subvalue: '22 years',
+        value: 'Jan 1, 2000',
+        subvalue: '25 years',
       },
-      email: 'damore@gmail.com',
-    },
-    {
-      name: {
-        value: "Byron D'Amore",
-        subvalue: '1234567890',
+      email: 'jane.doe@gmail.com',
+      'Phone number': '(123) 456-7890',
+      address: {
+        value: '1234 Main St, Anytown, USA',
+        subvalue: 'Apt. 123',
       },
-      DOB: {
-        value: '01/01/2000',
-        subvalue: '22 years',
+      'Patient Since': {
+        value: 'Jan 1, 2022',
+        subvalue: '3 months',
       },
-      email: 'damore@gmail.com',
-    },
-    {
-      name: {
-        value: "Byron D'Amore",
-        subvalue: '1234567890',
+      Insurance: {
+        value: 'Aetna',
+        subvalue: (
+          <div className="flex items-center gap-[6px]">
+            W2113 69935
+            <Image src={InsuranceIcon} alt="Insurance" width={16} height={16} />
+          </div>
+        ),
       },
-      DOB: {
-        value: '01/01/2000',
-        subvalue: '22 years',
+      'Reports No.': {
+        value: (
+          <div className="flex items-center gap-[8px]">
+            6 <Badge label="+3" />
+          </div>
+        ),
+        subvalue: null,
       },
-      email: 'damore@gmail.com',
-    },
-    {
-      name: {
-        value: "Byron D'Amore",
-        subvalue: '1234567890',
-      },
-      DOB: {
-        value: '01/01/2000',
-        subvalue: '22 years',
-      },
-      email: 'damore@gmail.com',
-    },
-    {
-      name: {
-        value: "Byron D'Amore",
-        subvalue: '1234567890',
-      },
-      DOB: {
-        value: '01/01/2000',
-        subvalue: '22 years',
-      },
-      email: 'damore@gmail.com',
-    },
-    {
-      name: {
-        value: "Byron D'Amore",
-        subvalue: '1234567890',
-      },
-      DOB: {
-        value: '01/01/2000',
-        subvalue: '22 years',
-      },
-      email: 'damore@gmail.com',
-    },
-    {
-      name: {
-        value: "Byron D'Amore",
-        subvalue: '1234567890',
-      },
-      DOB: {
-        value: '01/01/2000',
-        subvalue: '22 years',
-      },
-      email: 'damore@gmail.com',
-    },
-    {
-      name: {
-        value: "Byron D'Amore",
-        subvalue: '1234567890',
-      },
-      DOB: {
-        value: '01/01/2000',
-        subvalue: '22 years',
-      },
-      email: 'damore@gmail.com',
-    },
-    {
-      name: {
-        value: "Byron D'Amore",
-        subvalue: '1234567890',
-      },
-      DOB: {
-        value: '01/01/2000',
-        subvalue: '22 years',
-      },
-      email: 'damore@gmail.com',
-    },
-    {
-      name: {
-        value: "Byron D'Amore",
-        subvalue: '1234567890',
-      },
-      DOB: {
-        value: '01/01/2000',
-        subvalue: '22 years',
-      },
-      email: 'damore@gmail.com',
-    },
-    {
-      name: {
-        value: "Byron D'Amore",
-        subvalue: '1234567890',
-      },
-      DOB: {
-        value: '01/01/2000',
-        subvalue: '22 years',
-      },
-      email: 'damore@gmail.com',
-    },
-    {
-      name: {
-        value: "Byron D'Amore",
-        subvalue: '1234567890',
-      },
-      DOB: {
-        value: '01/01/2000',
-        subvalue: '22 years',
-      },
-      email: 'damore@gmail.com',
-    },
-    {
-      name: {
-        value: "Byron D'Amore",
-        subvalue: '1234567890',
-      },
-      DOB: {
-        value: '01/01/2000',
-        subvalue: '22 years',
-      },
-      email: 'damore@gmail.com',
     },
   ];
 
