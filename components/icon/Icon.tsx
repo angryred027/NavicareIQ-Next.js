@@ -231,6 +231,7 @@ const icons = {
   heart: (
     <>
       <path
+        transform="translate(3, 3)"
         d="M15.7663 2.2377C15.3753 1.84531 14.9111 1.53404 14.4002 1.32168C13.8893 1.10931 13.3417 1 12.7887 1C12.2357 1 11.6881 1.10931 11.1772 1.32168C10.6663 1.53404 10.2021 1.84531 9.81116 2.2377L8.9998 3.05166L8.18843 2.2377C7.39874 1.44548 6.32768 1.00041 5.21089 1.00041C4.09409 1.00041 3.02303 1.44548 2.23334 2.2377C1.44365 3.02993 1 4.10441 1 5.22479C1 6.34516 1.44365 7.41965 2.23334 8.21187L3.0447 9.02583L8.9998 15L14.9549 9.02583L15.7663 8.21187C16.1574 7.81967 16.4677 7.354 16.6794 6.84146C16.891 6.32893 17 5.77958 17 5.22479C17 4.67 16.891 4.12064 16.6794 3.60811C16.4677 3.09558 16.1574 2.6299 15.7663 2.2377Z"
         stroke="#91A3B0"
         strokeWidth="2"
@@ -241,7 +242,14 @@ const icons = {
   ),
   plus: (
     <>
-      <path id="stroke" d="M1 7H13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        id="stroke"
+        d="M1 7H13"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
       <path
         id="stroke_2"
         d="M7 13L7 1"
@@ -255,6 +263,7 @@ const icons = {
   warning: (
     <>
       <path
+        transform="translate(5, 5)"
         d="M7 7.3335L7 4.66683"
         stroke="currentColor"
         strokeWidth="1.5"
@@ -262,6 +271,7 @@ const icons = {
         strokeLinejoin="round"
       />
       <path
+        transform="translate(5, 5)"
         d="M12.7802 9.82631C13.1724 10.4929 12.6917 11.3333 11.9183 11.3333L2.08179 11.3333C1.30837 11.3333 0.827719 10.4929 1.21986 9.82631L6.13811 1.46529C6.52476 0.807983 7.47532 0.807982 7.86198 1.46529L12.7802 9.82631Z"
         stroke="currentColor"
         strokeWidth="1.5"
@@ -269,6 +279,7 @@ const icons = {
         strokeLinejoin="round"
       />
       <path
+        transform="translate(5, 5)"
         d="M7.00008 9.66667C7.18418 9.66667 7.33341 9.51743 7.33341 9.33333C7.33341 9.14924 7.18418 9 7.00008 9C6.81599 9 6.66675 9.14924 6.66675 9.33333C6.66675 9.51743 6.81599 9.66667 7.00008 9.66667Z"
         fill="currentColor"
         stroke="currentColor"
@@ -307,6 +318,224 @@ const icons = {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
+    </>
+  ),
+  flask1: (
+    <>
+      <path
+        transform="translate(4, 3)"
+        d="M11.18 0.995117H4.81"
+        stroke="#91A3B0"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        transform="translate(4, 3)"
+        d="M1.59998 12.5952H14.39"
+        stroke="#91A3B0"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        transform="translate(4, 3)"
+        d="M6.22998 0.995117V3.70512C6.22998 5.18512 5.47997 6.53511 4.27997 7.39511C2.65997 8.55511 1.59998 10.4551 1.59998 12.6051C1.59998 16.1351 4.45998 19.0051 7.99998 19.0051C11.54 19.0051 14.4 16.1351 14.4 12.6051C14.4 10.4551 13.34 8.55511 11.72 7.39511C10.52 6.53511 9.76998 5.18512 9.76998 3.70512V0.995117"
+        stroke="#91A3B0"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </>
+  ),
+  injector: (
+    <>
+      <path
+        d="M15.29 8.90002L17.65 5.27002"
+        stroke="#91A3B0"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M19.55 6.50979L15.74 4.02979"
+        stroke="#91A3B0"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M8.84999 18.8096L6.79999 21.9696"
+        stroke="#91A3B0"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M11.4 6.36963L19.18 11.4196"
+        stroke="#91A3B0"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M11.02 10.1899L13 11.4699"
+        stroke="#91A3B0"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9.17999 13.0396L11.15 14.3195"
+        stroke="#91A3B0"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12.8876 7.33057L17.71 10.4622L12.8355 17.9683C11.9695 19.3018 10.1905 19.6727 8.86537 18.8122C7.53189 17.9462 7.16098 16.1672 8.0215 14.8421L12.896 7.33601L12.8876 7.33057Z"
+        stroke="#91A3B0"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </>
+  ),
+  bottle: (
+    <>
+      <path
+        d="M16.29 8.68506H9.71003C8.12497 8.68506 6.84003 9.97 6.84003 11.5551V18.1351C6.84003 19.7201 8.12497 21.0051 9.71003 21.0051H16.29C17.8751 21.0051 19.16 19.7201 19.16 18.1351V11.5551C19.16 9.97 17.8751 8.68506 16.29 8.68506Z"
+        stroke="#91A3B0"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9.22015 4.99512H16.7701"
+        stroke="#91A3B0"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M10.61 14.835H15.38" stroke="#91A3B0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M12.9999 12.4551V17.2251"
+        stroke="#91A3B0"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </>
+  ),
+  waterDrop: (
+    <>
+      <path
+        d="M19.22 14.7749C19.22 18.2049 16.44 20.9949 13 20.9949C9.56003 20.9949 6.78003 18.2149 6.78003 14.7749C6.78003 11.3349 13 5.00488 13 5.00488C13 5.00488 19.22 11.3449 19.22 14.7749Z"
+        stroke="#91A3B0"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M15.8601 14.9448C15.5501 16.4348 14.2301 17.5648 12.6501 17.5648C12.2001 17.5648 11.7701 17.4748 11.3801 17.3048"
+        stroke="#91A3B0"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </>
+  ),
+  microscope: (
+    <>
+      <path
+        d="M14.91 11C15.89 11.02 16.78 11.43 17.42 12.07C18.08 12.74 18.49 13.65 18.49 14.66C18.49 16.68 16.85 18.32 14.82 18.32H8.94"
+        stroke="#91A3B0"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M18.5 22H7.5" stroke="#91A3B0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M14.51 6.55012C13.55 6.22012 12.51 6.73012 12.18 7.69012L10.36 12.9801C10.03 13.9401 10.54 14.9801 11.5 15.3101C12.46 15.6401 13.5 15.1301 13.83 14.1701L15.65 8.88012C15.98 7.92012 15.47 6.88012 14.51 6.55012Z"
+        stroke="#91A3B0"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M14.51 6.55L15.39 4" stroke="#91A3B0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M15.39 18.3198L16.65 21.9998"
+        stroke="#91A3B0"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </>
+  ),
+  pipette: (
+    <>
+      <path d="M17.23 4H8.77002" stroke="#91A3B0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M15.89 4V19.11C15.89 20.71 14.6 22 13 22C11.4 22 10.11 20.71 10.11 19.11V4"
+        stroke="#91A3B0"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M10.11 15.4702H15.89" stroke="#91A3B0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </>
+  ),
+
+  capsule: (
+    <>
+      <g clipPath="url(#clip0_353_6330)">
+        <path
+          d="M20.4224 8.28556C20.6962 9.57128 20.4819 10.9879 19.7081 12.1784L17.3391 15.8094L8.66052 10.1903L11.0296 6.54747C12.5891 4.15461 15.7796 3.47604 18.1843 5.02366C19.3748 5.79747 20.1486 6.99985 20.4224 8.28556Z"
+          stroke="#91A3B0"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M17.3392 15.8097L14.9701 19.4525C13.4106 21.8454 10.2201 22.5239 7.82725 20.9644C6.63678 20.1787 5.86297 19.0001 5.58916 17.7025C5.31535 16.4049 5.54154 15.012 6.31535 13.8097L8.67249 10.1787L17.3392 15.7978V15.8097Z"
+          stroke="#91A3B0"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_353_6330">
+          <rect width="17.4405" height="20" fill="white" transform="translate(4.27966 3)" />
+        </clipPath>
+      </defs>
+    </>
+  ),
+
+  healthcare: (
+    <>
+      <path
+        d="M21.995 12.9901V13.0101C21.995 15.0001 20.385 16.6101 18.395 16.6101H7.605C5.615 16.6101 3.995 15.0001 3.995 13.0001C3.995 11.0101 5.605 9.39014 7.605 9.39014H18.405C20.395 9.39014 22.005 11.0001 22.005 12.9901H21.995Z"
+        stroke="#91A3B0"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M16.5949 7.6V9.39H9.3949V7.6C9.3949 5.61 11.0049 4 12.9949 4C14.9849 4 16.5949 5.61 16.5949 7.6Z"
+        stroke="#91A3B0"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9.39489 16.6001H16.5949V18.3901C16.5949 20.3801 14.9849 22.0001 12.9849 22.0001C10.9949 22.0001 9.38489 20.3901 9.38489 18.4001V16.6001H9.39489Z"
+        stroke="#91A3B0"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M11.795 13H14.195" stroke="#91A3B0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
   ),
 };
