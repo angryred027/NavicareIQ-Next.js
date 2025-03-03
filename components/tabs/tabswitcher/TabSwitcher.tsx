@@ -28,7 +28,7 @@ const TabSwitcher: React.FC<TabSwitcherProps> = ({ tabs }) => {
             key={index}
             onClick={() => handleTabClick(index)}
             className={`flex-1 px-4 py-2 font-inter rounded-[0.5rem] border border-[#E6E9EA] text-[0.75rem] leading-[1rem] 
-                ${activeTab === index ? 'font-semibold text-[#757B80] bg-[#E6E9EA]' : 'bg-white shadow-md hover:text-blue-500'}`}
+                ${activeTab !== index ? 'font-semibold text-[#757B80] bg-[#E6E9EA]' : 'bg-white shadow-md hover:text-blue-500'}`}
           >
             {tab}
           </button>
