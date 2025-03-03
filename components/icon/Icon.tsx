@@ -538,6 +538,19 @@ const icons = {
       <path d="M11.795 13H14.195" stroke="#91A3B0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
   ),
+
+  arrorDown: (
+    <>
+      <path
+        d="M17 10L12 15L7 10"
+        stroke="#515253"
+        stroke-width="1.5"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </>
+  ),
 };
 
 export default function Icon({ name, className, size = 24, viewBox = '0 0 24 24', color }: IconProps) {
