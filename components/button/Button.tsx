@@ -2,7 +2,7 @@ type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 type ButtonSize = 'sm' | 'md' | 'lg';
 
 type ButtonProps = {
-  type?: "button" | "submit" | "reset" | undefined
+  type?: 'button' | 'submit' | 'reset' | undefined;
   children: React.ReactNode;
   variant?: ButtonVariant;
   size?: ButtonSize;
@@ -11,14 +11,14 @@ type ButtonProps = {
   onClick?: () => void;
 };
 
-export default function Button({ 
+export default function Button({
   type = 'button',
-  children, 
+  children,
   variant = 'primary',
   size = 'md',
   disabled = false,
   className = '',
-  onClick
+  onClick,
 }: ButtonProps) {
   const sizes = {
     sm: 'px-3 py-1.5 text-caption-bold',
@@ -36,7 +36,7 @@ export default function Button({
     justify-center
     ${sizes[size]}
   `;
-  
+
   const variants = {
     // poppy
     primary: `
@@ -46,7 +46,7 @@ export default function Button({
       disabled:bg-poppy-100 disabled:cursor-not-allowed 
       disabled:hover:bg-poppy-100 disabled:active:transform-none
     `,
-    
+
     // midnight
     secondary: `
       bg-midnight-500 text-white
@@ -55,7 +55,7 @@ export default function Button({
       disabled:bg-midnight-100 disabled:cursor-not-allowed 
       disabled:hover:bg-midnight-100 disabled:active:transform-none
     `,
-    
+
     // transparent
     ghost: `
       bg-transparent 
@@ -79,7 +79,7 @@ export default function Button({
   };
 
   return (
-    <button 
+    <button
       type={type}
       disabled={disabled}
       onClick={onClick}

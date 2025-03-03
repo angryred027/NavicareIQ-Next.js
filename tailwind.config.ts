@@ -2,16 +2,16 @@ import type { Config } from 'tailwindcss';
 
 export default {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./modules/**/*.{js,ts,jsx,tsx,mdx}",
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './modules/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
 
         poppy: {
           100: '#B3C2DF',
@@ -69,7 +69,7 @@ export default {
           error: {
             200: '#FDEDED',
             300: '#FADDDD',
-            600: '#F16666', 
+            600: '#F16666',
           },
           warning: {
             200: '#FDF7ED',
@@ -81,7 +81,7 @@ export default {
             300: '#A2E8C4',
             600: '#3DBD7B',
           },
-        }
+        },
       },
 
       fontFamily: {
@@ -90,58 +90,106 @@ export default {
       },
 
       fontSize: {
-        'h1': ['2rem', {        // 32px
-          lineHeight: '2.75rem', // 44px
-          fontWeight: '700'
-        }],
-        'h2': ['1.5rem', {      // 24px
-          lineHeight: '2.25rem', // 36px
-          fontWeight: '700'
-        }],
-        'h3': ['1.25rem', {     // 20px
-          lineHeight: '2rem',    // 32px
-          fontWeight: '700'
-        }],
-        'h4': ['1.125rem', {    // 18px
-          lineHeight: '1.75rem', // 28px
-          fontWeight: '700'
-        }],
-        'h5': ['1rem', {        // 16px
-          lineHeight: '1.5rem',  // 24px
-          fontWeight: '700'
-        }],
+        h1: [
+          '2rem',
+          {
+            // 32px
+            lineHeight: '2.75rem', // 44px
+            fontWeight: '700',
+          },
+        ],
+        h2: [
+          '1.5rem',
+          {
+            // 24px
+            lineHeight: '2.25rem', // 36px
+            fontWeight: '700',
+          },
+        ],
+        h3: [
+          '1.25rem',
+          {
+            // 20px
+            lineHeight: '2rem', // 32px
+            fontWeight: '700',
+          },
+        ],
+        h4: [
+          '1.125rem',
+          {
+            // 18px
+            lineHeight: '1.75rem', // 28px
+            fontWeight: '700',
+          },
+        ],
+        h5: [
+          '1rem',
+          {
+            // 16px
+            lineHeight: '1.5rem', // 24px
+            fontWeight: '700',
+          },
+        ],
 
-        'body': ['0.875rem', {   // 14px
-          lineHeight: '1.25rem',  // 20px
-          fontWeight: '400'
-        }],
-        'body-medium': ['0.875rem', { // 14px
-          lineHeight: '1.25rem',     // 20px
-          fontWeight: '600'
-        }],
-        'body-bold': ['0.875rem', { // 14px
-          lineHeight: '1.25rem',     // 20px
-          fontWeight: '700'
-        }],
+        body: [
+          '0.875rem',
+          {
+            // 14px
+            lineHeight: '1.25rem', // 20px
+            fontWeight: '400',
+          },
+        ],
+        'body-medium': [
+          '0.875rem',
+          {
+            // 14px
+            lineHeight: '1.25rem', // 20px
+            fontWeight: '600',
+          },
+        ],
+        'body-bold': [
+          '0.875rem',
+          {
+            // 14px
+            lineHeight: '1.25rem', // 20px
+            fontWeight: '700',
+          },
+        ],
 
-        'caption': ['0.75rem', {     // 12px
-          lineHeight: '1rem',        // 16px
-          fontWeight: '400'
-        }],
-        'caption-bold': ['0.75rem', { // 12px
-          lineHeight: '1rem',         // 16px
-          fontWeight: '600'
-        }],
+        caption: [
+          '0.75rem',
+          {
+            // 12px
+            lineHeight: '1rem', // 16px
+            fontWeight: '400',
+          },
+        ],
+        'caption-bold': [
+          '0.75rem',
+          {
+            // 12px
+            lineHeight: '1rem', // 16px
+            fontWeight: '600',
+          },
+        ],
 
-        'supportive': ['0.625rem', {    // 10px
-          lineHeight: '1rem',           // 16px
-          fontWeight: '400'
-        }],
-        'supportive-bold': ['0.625rem', { // 10px
-          lineHeight: '1rem',             // 16px
-          fontWeight: '600'
-        }],
-      }
+        supportive: [
+          '0.625rem',
+          {
+            // 10px
+            lineHeight: '1rem', // 16px
+            fontWeight: '400',
+          },
+        ],
+        'supportive-bold': [
+          '0.625rem',
+          {
+            // 10px
+            lineHeight: '1rem', // 16px
+            fontWeight: '600',
+          },
+        ],
+      },
     },
   },
   plugins: [],
