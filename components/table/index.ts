@@ -1,2 +1,2 @@
 export * from './TableHeaderFilters';
-export * from './TableC';
+export { default as Table } from './table';

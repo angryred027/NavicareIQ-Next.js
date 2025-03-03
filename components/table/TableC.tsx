@@ -1,22 +1,15 @@
 'use client';
-import React from 'react';
+import React, { type FC } from 'react';
 
 import GoToFirts from '@/assets/icons/go-to-first.svg';
 import GoToLast from '@/assets/icons/go-to-last.svg';
 import GoToNext from '@/assets/icons/next.svg';
 import GoToPrev from '@/assets/icons/previous.svg';
-
-import useGenerateTable from './hooks/useGenerateTable';
-import { TableTData, TRows } from './table.type';
 import clsx from 'clsx';
 import { IconButton } from '../common';
+import { useTableContext } from './context';
 
-type Props<T extends TableTData> = {
-  data: T[];
-  onRowClick?: (row: TRows) => void;
-};
-
-export const Table = <T extends TableTData>({ data, onRowClick }: Props<T>) => {
+export const Table: FC = () => {
   const {
     cols,
     rows,
@@ -28,7 +21,8 @@ export const Table = <T extends TableTData>({ data, onRowClick }: Props<T>) => {
     handlePageChange,
     rowsOnPage,
     totalPages,
-  } = useGenerateTable({ data });
+    onRowClick,
+  } = useTableContext();
 
   return (
     <table

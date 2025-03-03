@@ -11,10 +11,10 @@ import {
   getPaginationRowModel,
   type PaginationState,
 } from '@tanstack/react-table';
-import { TableProps, TableTData, TChangePage, TRows } from '../table.type';
+import { TTableProps, TableTData, TChangePage, TCol, TRows } from '../table.type';
 import clsx from 'clsx';
 
-const useGenerateTable = <T extends TableTData>({ data }: TableProps<T>) => {
+const useGenerateTable = <T extends TableTData>({ data, ...rest }: TTableProps<T>) => {
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 10,
@@ -67,7 +67,7 @@ const useGenerateTable = <T extends TableTData>({ data }: TableProps<T>) => {
     },
   });
 
-  const cols = table.getHeaderGroups().map((headerGroup) => {
+  const cols: TCol[] = table.getHeaderGroups().map((headerGroup) => {
     const columnData = {
       id: headerGroup.id,
       headers: headerGroup.headers.map((header) => ({
@@ -78,6 +78,7 @@ const useGenerateTable = <T extends TableTData>({ data }: TableProps<T>) => {
 
     return columnData;
   });
+
   const colsTotal = useMemo(() => cols.map((col) => col.headers.length).reduce((acc, cur) => acc + cur, 0), [cols]);
 
   const rows = table.getRowModel().rows.map((row) => {
@@ -134,6 +135,7 @@ const useGenerateTable = <T extends TableTData>({ data }: TableProps<T>) => {
     pageSize,
     rowsOnPage,
     totalPages,
+    ...rest,
   };
 };
 

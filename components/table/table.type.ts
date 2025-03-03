@@ -4,8 +4,9 @@ export type TableTData = Record<
   string | number | boolean | { value: string | ReactNode; subvalue: string | ReactNode }
 >;
 
-export type TableProps<T extends TableTData> = {
+export type TTableProps<T extends TableTData> = {
   data: T[];
+  onRowClick?: (row: TRows) => void;
 };
 
 export type TChangePage = 'next' | 'prev' | 'first' | 'last' | number;
@@ -16,4 +17,30 @@ export type TRows = {
     id: string;
     value: ReactNode;
   }[];
+};
+
+export type TCol = {
+  id: string;
+  headers: {
+    id: string;
+    label: React.ReactNode;
+  }[];
+};
+
+export type TTableContext = {
+  cols: TCol[];
+  rows: TRows[];
+  totalRows: string;
+  colsTotal: number;
+  currentPage: string;
+  pageSize: number;
+  changeRowsPerPage: (value: number) => void;
+  handlePageChange: (value: TChangePage) => void;
+  rowsOnPage: number;
+  totalPages: string;
+} & Omit<TTableProps<TableTData>, 'data'>;
+
+export type TableProps<T extends TableTData> = {
+  data: T[];
+  onRowClick?: (row: TRows) => void;
 };
