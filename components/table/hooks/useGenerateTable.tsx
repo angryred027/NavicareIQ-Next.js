@@ -12,7 +12,7 @@ import {
   type PaginationState,
   SortingState,
 } from '@tanstack/react-table';
-import { TTableProps, TableTData, TChangePage, TCol, TRows } from '../table.type';
+import { TTableProps, TableTData, TChangePage, TCol, TRows, SorttedType } from '../table.type';
 import clsx from 'clsx';
 
 const useGenerateTable = <T extends TableTData>({ data, ...rest }: TTableProps<T>) => {
@@ -75,7 +75,7 @@ const useGenerateTable = <T extends TableTData>({ data, ...rest }: TTableProps<T
     const columnData = {
       id: headerGroup.id,
       headers: headerGroup.headers.map((header) => {
-        const sorted = header.column.getCanSort()
+        const sorted: SorttedType = header.column.getCanSort()
           ? header.column.getNextSortingOrder() === 'asc'
             ? 'Sort ascending'
             : header.column.getNextSortingOrder() === 'desc'
@@ -138,7 +138,10 @@ const useGenerateTable = <T extends TableTData>({ data, ...rest }: TTableProps<T
     table.setPageSize(newPageSize);
   };
 
-  const onSort = (column: string) => {};
+  const onSort = (column: string) => {
+    const findedCol = cols.find((col) => col.id === column);
+    console.log(findedCol);
+  };
 
   return {
     table,
@@ -153,6 +156,7 @@ const useGenerateTable = <T extends TableTData>({ data, ...rest }: TTableProps<T
     pageSize,
     rowsOnPage,
     totalPages,
+    onSort,
     ...rest,
   };
 };

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import InsuranceIcon from '@/assets/icons/insurance.svg';
 import MaleIcon from '@/assets/icons/male.svg';
 import FemaleIcon from '@/assets/icons/female.svg';
-import { TableHeaderFilters, Table } from '../table';
+import { Table } from '../table';
 import { TableTData, TRows } from '../table/table.type';
 import { Badge } from '../common';
 
@@ -82,7 +82,6 @@ const PatientsList: FC = () => {
 
   return (
     <div className="font-sans">
-      <TableHeaderFilters />
       <div className="mt-[15px]">
         <Table data={rows} onRowClick={handleRowClick} />
       </div>

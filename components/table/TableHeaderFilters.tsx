@@ -1,9 +1,11 @@
 import React, { type FC } from 'react';
 import clsx from 'clsx';
+
 import Image from 'next/image';
 import FilterIcon from '@/assets/icons/filter.svg';
 import SortIcon from '@/assets/icons/sort.svg';
 import { Button } from '../common';
+import { DropDown } from '../common/dropdown';
 
 export const TableHeaderFilters: FC = () => {
   return (
@@ -36,6 +38,7 @@ export const TableHeaderFilters: FC = () => {
             </div>
           }
         />
+
         <Button
           label="Sort By"
           variant="outlined"
@@ -45,6 +48,25 @@ export const TableHeaderFilters: FC = () => {
               <Image src={SortIcon} alt="sort" width={24} height={24} />
             </div>
           }
+        />
+
+        <DropDown
+          btnLabel="Sort By"
+          className="w-[145px]"
+          startSlot={
+            <div>
+              <Image src={SortIcon} alt="sort" width={24} height={24} />
+            </div>
+          }
+          items={[
+            {
+              value: 'My account',
+              divider: true,
+            },
+            {
+              value: 'Log out',
+            },
+          ]}
         />
       </div>
     </div>

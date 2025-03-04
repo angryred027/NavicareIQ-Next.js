@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
 export type TButtons = {
-  label: string;
+  label: string | ReactNode;
   onClick?: () => void;
   className?: string;
   children?: ReactNode;

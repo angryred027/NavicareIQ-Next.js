@@ -19,12 +19,14 @@ export type TRows = {
   }[];
 };
 
+export type SorttedType = 'Sort ascending' | 'Sort descending' | 'Clear sort' | undefined;
+
 export type TCol = {
   id: string;
   headers: {
     id: string;
     label: ReactNode;
-    sorted: 'Sort ascending' | 'Sort descending' | 'Clear sort' | undefined;
+    sorted: SorttedType;
     sort: () => ((event: unknown) => void) | undefined;
   }[];
 };
