@@ -47,8 +47,8 @@ export default function RootLayout({
       }
     };
 
-    if (!NoAuthRoutes.includes(pathname))
-      checkAuth();
+    // if (!NoAuthRoutes.includes(pathname))
+    //   checkAuth();
   }, [pathname, router]);
 
   return (
@@ -59,12 +59,12 @@ export default function RootLayout({
           strategy="beforeInteractive"
         />
         <ReduxProvider>
-          {isAuthenticated && pathname !== '/login' ? (
+          {/* {isAuthenticated && pathname !== '/login' ? (
             <Layout>{children}</Layout>
           ) : (
             children
-          )}
-          {/* <Layout>{children}</Layout> */}
+          )} */}
+          <Layout>{children}</Layout>
         </ReduxProvider>
       </body>
     </html>
