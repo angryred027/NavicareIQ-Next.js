@@ -1,10 +1,9 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { passage } from '@/lib/passage';
+import { passageServer } from '@/lib/passageServer';
 import { NoAuthRoutes } from './config/routes';
 
 export async function middleware(request: NextRequest) {
-
   if (NoAuthRoutes.includes(request.nextUrl.pathname)) return;
 
   if (request.nextUrl.pathname === '/') {
@@ -18,8 +17,11 @@ export async function middleware(request: NextRequest) {
   }
 
   try {
-    const isValid = await passage.validAuthToken(authToken.value);
-    if (!isValid) {
+    const userId: string = await passageServer.auth.validateJwt(authToken.value);
+
+    if (userId) return NextResponse.next();
+
+    if (!userId) {
       return NextResponse.redirect(new URL('/login', request.url));
     }
   } catch (error) {
@@ -37,4 +39,4 @@ export const config = {
 
     '/((?!login|api|_next/static|_next/image|favicon.ico).*)',
   ],
-}; 
+};

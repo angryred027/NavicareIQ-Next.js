@@ -561,33 +561,73 @@ const icons = {
         d="M17 10L12 15L7 10"
         stroke="#515253"
         strokeWidth="1.5"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
     </>
   ),
 
-  // download: (
-  //   <>
-  //     <path
-  //       d="M20 12C20 18 19.1111 21 12 21C4.88889 21 4 18 4 12C4 6 5 3 12 3C19 3 20 6 20 12Z"
-  //       stroke="#515253"
-  //       strokeWidth="1.5"
-  //       strokeLinecap="round"
-  //       strokeLinejoin="round"
-  //     />
-  //     <path
-  //       d="M9 4C9 4 9.60457 6.39543 8.5 7.5C7.39543 8.60457 5 8 5 8"
-  //       stroke="#515253"
-  //       strokeWidth="1.5"
-  //       strokeLinecap="round"
-  //       strokeLinejoin="round"
-  //     />
-  //     <path d="M12 10L12 16" stroke="#515253" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-  //     <path d="M9 14L12 17L15 14" stroke="#515253" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-  //   </>
-  // ),
+  threeDot: (
+    <>
+      <circle cx="6" cy="12" r="2" fill="currentColor" />
+      <circle cx="12" cy="12" r="2" fill="currentColor" />
+      <circle cx="18" cy="12" r="2" fill="currentColor" />
+    </>
+  ),
+
+  search: (
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      d="M21 21l-4.35-4.35M16 10a6 6 0 1 0-12 0 6 6 0 0 0 12 0z"
+    />
+  ),
+
+  filter: (
+    <>
+      <path d="M14 7L21 7" stroke="#515253" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M3 7L6 7" stroke="#515253" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M10 17L3 17" stroke="#515253" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M21 17L18 17" stroke="#515253" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M15 20C14 20 13 20 13 17C13 14 14 14 15 14C16.1046 14 17 14 17 17C17 20 16.1046 20 15 20Z"
+        stroke="#515253"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9 10C8 10 7 10 7 7C7 4 8 4 9 4C10.1046 4 11 4 11 7C11 10 10.1046 10 9 10Z"
+        stroke="#515253"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </>
+  ),
+
+  sort: (
+    <>
+      <path
+        d="M3 9.68293L6.5 6M6.5 6L10 9.68293M6.5 6L6.5 18"
+        stroke="#515253"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M21 14.3171L17.5 18M17.5 18L14 14.3171M17.5 18L17.5 6"
+        stroke="#515253"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </>
+  ),
 };
 
 export default function Icon({ name, className, size = 24, viewBox = '0 0 24 24', color }: IconProps) {
