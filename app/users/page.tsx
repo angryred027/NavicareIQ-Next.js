@@ -17,7 +17,7 @@ import { useSelector } from 'react-redux';
 import type { RootState } from '@/store/store';
 import { toggle } from '@/store/features/toggleSlice';
 
-export default function Users() {
+export default function UsersPage() {
   const toggled = useSelector((state: RootState) => state.toggle.toggled);
 
   const summaryData = [
