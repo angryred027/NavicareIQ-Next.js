@@ -10,6 +10,7 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   type PaginationState,
+  SortingState,
 } from '@tanstack/react-table';
 import { TTableProps, TableTData, TChangePage, TCol, TRows } from '../table.type';
 import clsx from 'clsx';
@@ -20,6 +21,7 @@ const useGenerateTable = <T extends TableTData>({ data, ...rest }: TTableProps<T
     pageSize: 10,
   });
   const columnHelper = createColumnHelper<T>();
+  const [sorting, setSorting] = useState<SortingState>([]);
 
   const createColumn = useCallback(
     (column: keyof T) => {
@@ -62,18 +64,32 @@ const useGenerateTable = <T extends TableTData>({ data, ...rest }: TTableProps<T
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
+    onSortingChange: setSorting,
     state: {
       pagination,
+      sorting,
     },
   });
 
   const cols: TCol[] = table.getHeaderGroups().map((headerGroup) => {
     const columnData = {
       id: headerGroup.id,
-      headers: headerGroup.headers.map((header) => ({
-        id: header.id,
-        label: header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext()),
-      })),
+      headers: headerGroup.headers.map((header) => {
+        const sorted = header.column.getCanSort()
+          ? header.column.getNextSortingOrder() === 'asc'
+            ? 'Sort ascending'
+            : header.column.getNextSortingOrder() === 'desc'
+              ? 'Sort descending'
+              : 'Clear sort'
+          : undefined;
+
+        return {
+          id: header.id,
+          label: header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext()),
+          sorted,
+          sort: () => header.column.getToggleSortingHandler(),
+        };
+      }),
     };
 
     return columnData;
@@ -121,6 +137,8 @@ const useGenerateTable = <T extends TableTData>({ data, ...rest }: TTableProps<T
   const changeRowsPerPage = (newPageSize: number) => {
     table.setPageSize(newPageSize);
   };
+
+  const onSort = (column: string) => {};
 
   return {
     table,

@@ -23,7 +23,9 @@ export type TCol = {
   id: string;
   headers: {
     id: string;
-    label: React.ReactNode;
+    label: ReactNode;
+    sorted: 'Sort ascending' | 'Sort descending' | 'Clear sort' | undefined;
+    sort: () => ((event: unknown) => void) | undefined;
   }[];
 };
 

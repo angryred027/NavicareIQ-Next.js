@@ -1,5 +1,5 @@
 'use client';
-import React, { createContext, FC, useContext, type ReactNode } from 'react';
+import React, { createContext, useContext, type ReactNode } from 'react';
 import { TableTData, TTableContext, TTableProps } from '../table.type';
 import useGenerateTable from '../hooks/useGenerateTable';
 
@@ -18,8 +18,8 @@ export const useTableContext = () => {
   return context;
 };
 
-export const TableProvider = <T extends TableTData>({ children, data }: TableProviderProps<T>) => {
-  const value = useGenerateTable({ data });
+export const TableProvider = <T extends TableTData>({ children, ...rest }: TableProviderProps<T>) => {
+  const value = useGenerateTable({ ...rest });
 
   return <TableContext.Provider value={value}>{children}</TableContext.Provider>;
 };
