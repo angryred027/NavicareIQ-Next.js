@@ -15,9 +15,9 @@ import Icon from '@/components/icon/Icon';
 import HistoryButton from '@/components/history-btn/HistoryButton';
 import { useSelector } from 'react-redux';
 import type { RootState } from '@/store/store';
-import { toggle } from '@/store/features/toggleSlice';
+import { PatientInfo } from '@/modules/reports/patient-info/PatientInfo';
 
-export default function UsersPage() {
+export default function Users() {
   const toggled = useSelector((state: RootState) => state.toggle.toggled);
 
   const summaryData = [
@@ -165,49 +165,68 @@ export default function UsersPage() {
     <>
       <div className="grid grid-cols-4 gap-4 p-2">
         {/* Left Column */}
-        <div className="flex flex-col space-y-4 col-span-1 h-full">
-          <div className=" bg-[#F6F9FA] rounded-md border  border-[#E6F0F8]">
-            <DropdownMenu />
+        <div className="flex flex-col space-y-4 col-span-1 ">
+          <div className="relative sm:flex-none bg-[#F6F9FA] rounded-md border  border-[#E6F0F8]">
+            <PatientInfo />
           </div>
-          <div className="flex-1 bg-[#F6F9FA] rounded-md border overflow-hidden overflow-y-clip border-[#E6F0F8] p-2">
+          <div className="flex-1 bg-[#F6F9FA] rounded-md border  border-[#E6F0F8] p-2">
             <TabSwitcher tabs={['Past Report', 'Past Prescription']} />
-            {toggled
-              ? reportData.map((item, index) => <HistoryButton key={index} label={item.label} date={item.date} />)
-              : presubscriptionData.map((item, index) => (
-                  <HistoryButton key={index} label={item.label} date={item.date} />
-                ))}
+            <div className="h-screen overflow-y-auto [&::-webkit-scrollbar]:hidden">
+              {toggled
+                ? reportData.map((item, index) => <HistoryButton key={index} label={item.label} date={item.date} />)
+                : presubscriptionData.map((item, index) => (
+                    <HistoryButton key={index} label={item.label} date={item.date} />
+                  ))}
+              {toggled
+                ? reportData.map((item, index) => <HistoryButton key={index} label={item.label} date={item.date} />)
+                : presubscriptionData.map((item, index) => (
+                    <HistoryButton key={index} label={item.label} date={item.date} />
+                  ))}
+            </div>
           </div>
         </div>
         {/* Right Content */}
         <div className="col-span-3 bg-[#F6F9FA] rounded-md border">
           <div className="grid gap-4 p-4">
             <div className="row-span-1 pb-0">
-              <div className="grid grid-cols-1 gap-2 px-2 bg-[#F6F9FA]  rounded-md">
-                <div className="flex items-center h-20 bg-[#E6F0F8] rounded-md border  border-[#E6F0F8]">
-                  <div className="mx-5 h-[4rem] bg-[#4167AF] rounded-lg w-2"></div>
+              <div className="grid grid-cols-1 gap-2 px-2 bg-[#F6F9FA] rounded-md">
+                <div className="row-span-1 pb-0">
+                  <div className="grid grid-cols-1 gap-2 px-2 bg-[#F6F9FA] rounded-md">
+                    <div className="flex items-center justify-between h-20 bg-[#E6F0F8] rounded-md border border-[#E6F0F8] p-3 md:p-4">
+                      <div className="h-16 w-2 bg-[#4167AF] rounded-lg mx-2 md:mx-3"></div>
 
-                  <div className="flex-1">
-                    <h2 className="font-inter font-bold text-base leading-6 text-[#000005]">
-                      {toggled ? 'Lab Report #PLJ22113' : 'Lab Lab Presubscription #PLJ22113'}
-                    </h2>
-                    <p className="font-inter font-medium text-sm leading-5 text-[#757B80] ">Jan 28, 2025</p>
-                  </div>
-                  <div className="flex flex-row gap-3 mr-2">
-                    <div className="w-10 h-10 items-center justify-center content-center border border-[#BFCFDA] rounded-[12px] box-border">
-                      <Icon name="download" />
+                      <div className="flex-1 min-w-0 flex flex-col justify-center">
+                        <h2 className="font-inter font-bold text-sm md:text-base leading-6 text-[#000005] truncate">
+                          {toggled ? 'Lab Report #PLJ22113' : 'Lab Lab Presubscription #PLJ22113'}
+                        </h2>
+                        <p className="font-inter font-medium text-xs md:text-sm leading-5 text-[#757B80]">
+                          Jan 28, 2025
+                        </p>
+                      </div>
+
+                      <div className="flex flex-row gap-2 md:gap-3 mr-2 items-center">
+                        <div className="w-9 h-9 flex items-center justify-center border border-[#BFCFDA] rounded-lg">
+                          <Icon name="download" className="w-5 h-5" />
+                        </div>
+                        <Button
+                          className="border border-[#BFCFDA] px-3 py-1 text-xs md:text-sm flex items-center"
+                          variant="ghost"
+                          onClick={() => alert('Welcome!')}
+                        >
+                          <div className="flex items-center gap-1 md:gap-2">@ Share</div>
+                        </Button>
+                      </div>
                     </div>
-                    <Button className="border border-[#BFCFDA]" variant="ghost" onClick={() => alert('Welcome!')}>
-                      <div className="flex items-center gap-2 px-2">@ Share</div>
-                    </Button>
                   </div>
                 </div>
               </div>
             </div>
+
             {/* <div className="row-span-2"> */}
             <span className="pt-0 pl-4 font-inter font-semibold text-xs leading-4 tracking-[0.08em] uppercase text-[#000005]">
               Summary
             </span>
-            <div className="grid grid-cols-3 gap-2 p-2 bg-[#F6F9FA]  rounded-md">
+            <div className="grid max-w-7xl min-w-[30rem] sm:grid-cols-1 md: grid-cols-2 lg:grid-cols-3 gap-2 p-2 bg-[#F6F9FA]  rounded-md">
               {summaryData.map((item, index) => (
                 <SummaryCard key={item.id} level={item.level} label={item.label} icon={item.icon} />
               ))}
@@ -229,12 +248,10 @@ export default function UsersPage() {
                 </div>
                 <div className="flex-1"></div>
 
-                <div className="flex h-10">
+                <div className="flex items-center gap-2 px-3 py-2">
                   <Button onClick={() => alert('Welcome!')}>
-                    <div className="flex items-center gap-2 px-2">
-                      <Image src={AddIcon} alt="add" width={12} height={12} />
-                      Add to Order
-                    </div>
+                    <Image src={AddIcon} alt="add" width={16} height={16} className="w-4 h-4" />
+                    <span className="text-sm font-medium">Add to Order</span>
                   </Button>
                 </div>
               </div>
@@ -257,12 +274,10 @@ export default function UsersPage() {
                 </div>
                 <div className="flex-1"></div>
 
-                <div className="flex h-10">
+                <div className="flex items-center gap-2 px-3 py-2">
                   <Button onClick={() => alert('Welcome!')}>
-                    <div className="flex items-center gap-2 px-2">
-                      <Image src={AddIcon} alt="add" width={12} height={12} />
-                      Add to Order
-                    </div>
+                    <Image src={AddIcon} alt="add" width={16} height={16} className="w-4 h-4" />
+                    <span className="text-sm font-medium">Add to Order</span>
                   </Button>
                 </div>
               </div>
