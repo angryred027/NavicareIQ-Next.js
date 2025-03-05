@@ -27,6 +27,7 @@ const useGenerateTable = <T extends TableTData>({ data, ...rest }: TTableProps<T
     (column: keyof T) => {
       return columnHelper.accessor(column as unknown as AccessorFn<T>, {
         id: column as string,
+        header: () => column,
         cell: ({ row }) => {
           const rowValue = row.original[column];
           if (typeof rowValue === 'object') {
@@ -42,6 +43,21 @@ const useGenerateTable = <T extends TableTData>({ data, ...rest }: TTableProps<T
           return <div>{rowValue}</div>;
         },
         footer: (info) => info.column.id,
+        sortingFn: (rowA, rowB) => {
+          const valueA =
+            typeof rowA.original[column] === 'object'
+              ? (rowA.original[column]?.value ?? '')
+              : (rowA.original[column] ?? '');
+
+          const valueB =
+            typeof rowB.original[column] === 'object'
+              ? (rowB.original[column]?.value ?? '')
+              : (rowB.original[column] ?? '');
+
+          if (valueA < valueB) return -1;
+          if (valueA > valueB) return 1;
+          return 0;
+        },
       });
     },
     [columnHelper]
@@ -75,19 +91,21 @@ const useGenerateTable = <T extends TableTData>({ data, ...rest }: TTableProps<T
     const columnData = {
       id: headerGroup.id,
       headers: headerGroup.headers.map((header) => {
+        const isSorting = sorting.some((sort) => sort.id === header.id);
         const sorted: SorttedType = header.column.getCanSort()
           ? header.column.getNextSortingOrder() === 'asc'
-            ? 'Sort ascending'
+            ? 'asc'
             : header.column.getNextSortingOrder() === 'desc'
-              ? 'Sort descending'
-              : 'Clear sort'
-          : undefined;
+              ? 'desc'
+              : false
+          : false;
 
         return {
           id: header.id,
           label: header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext()),
-          sorted,
-          sort: () => header.column.getToggleSortingHandler(),
+          sorted: isSorting ? sorted : false,
+          handleSort: () => onSort(header.id),
+          sortFn: header.column.getToggleSortingHandler(),
         };
       }),
     };
@@ -96,6 +114,7 @@ const useGenerateTable = <T extends TableTData>({ data, ...rest }: TTableProps<T
   });
 
   const colsTotal = useMemo(() => cols.map((col) => col.headers.length).reduce((acc, cur) => acc + cur, 0), [cols]);
+  const colsToRender = cols[0] ?? [];
 
   const rows = table.getRowModel().rows.map((row) => {
     const rowData: TRows = {
@@ -139,13 +158,17 @@ const useGenerateTable = <T extends TableTData>({ data, ...rest }: TTableProps<T
   };
 
   const onSort = (column: string) => {
-    const findedCol = cols.find((col) => col.id === column);
-    console.log(findedCol);
+    return table.getHeaderGroups().forEach((header) => {
+      if (header.headers.some((h) => h.id === column)) {
+        const col = header.headers.find((h) => h.id === column);
+        col?.column.toggleSorting();
+      }
+    });
   };
 
   return {
     table,
-    cols,
+    cols: colsToRender,
     rows,
     totalRows,
     handlePageChange,
@@ -157,6 +180,7 @@ const useGenerateTable = <T extends TableTData>({ data, ...rest }: TTableProps<T
     rowsOnPage,
     totalPages,
     onSort,
+    sorting,
     ...rest,
   };
 };

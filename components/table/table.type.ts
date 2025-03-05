@@ -1,3 +1,4 @@
+import { SortDirection, SortingState } from '@tanstack/react-table';
 import type { ReactNode } from 'react';
 export type TableTData = Record<
   string,
@@ -19,7 +20,7 @@ export type TRows = {
   }[];
 };
 
-export type SorttedType = 'Sort ascending' | 'Sort descending' | 'Clear sort' | undefined;
+export type SorttedType = SortDirection | false;
 
 export type TCol = {
   id: string;
@@ -27,12 +28,13 @@ export type TCol = {
     id: string;
     label: ReactNode;
     sorted: SorttedType;
-    sort: () => ((event: unknown) => void) | undefined;
+    handleSort: () => void;
+    sortFn: ((event: unknown) => void) | undefined;
   }[];
 };
 
 export type TTableContext = {
-  cols: TCol[];
+  cols: TCol;
   rows: TRows[];
   totalRows: string;
   colsTotal: number;
@@ -42,6 +44,7 @@ export type TTableContext = {
   handlePageChange: (value: TChangePage) => void;
   rowsOnPage: number;
   totalPages: string;
+  sorting: SortingState;
 } & Omit<TTableProps<TableTData>, 'data'>;
 
 export type TableProps<T extends TableTData> = {

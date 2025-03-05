@@ -14,11 +14,13 @@ type Props = {
     endSlot?: ReactNode;
     divider?: boolean;
     disabled?: boolean;
+    onClick?: () => void;
   }[];
 };
 
 export const DropDown: FC<Props> = ({ btnLabel, items, startSlot, endSlot, className }) => {
-  const menuButtonClasses = clsx('flex', 'flex-start', 'gap-[8px]');
+  const menuButtonClasses = clsx('flex', 'flex-start', 'gap-[8px]', 'capitalize');
+
   return (
     <Menu>
       <MenuButton className={twMerge(btnOutlinedClassesName, menuButtonClasses, className)}>
@@ -48,16 +50,18 @@ export const DropDown: FC<Props> = ({ btnLabel, items, startSlot, endSlot, class
           'cursor-pointer'
         )}
       >
-        {items.map(({ value, divider, startSlot, endSlot }, index) => (
+        {items.map(({ value, divider, startSlot, endSlot, onClick }, index) => (
           <Fragment key={index}>
             <MenuItem key={index}>
               <div
+                onClick={onClick}
                 className={clsx(
                   'p-2',
                   'data-[focus]:bg-[#E6F0F8]',
                   'rounded-xl',
                   'flex items-center',
                   'gap-2',
+                  'capitalize',
                   startSlot && 'justify-start',
                   endSlot && 'justify-between'
                 )}

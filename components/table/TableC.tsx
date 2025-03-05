@@ -31,43 +31,39 @@ export const Table: FC = () => {
       cellPadding={0}
     >
       <thead>
-        {cols.map((col) => {
-          return (
-            <tr key={col.id}>
-              {col.headers.map((header) => {
-                return (
-                  <th
-                    className={clsx(
-                      'bg-[#F6F9FA]',
-                      'border-b-[1px]',
-                      'border-r-[1px]',
-                      'border-t-[1px]',
-                      'border-[#E6F0F8]',
-                      'first:border-l-[1px]',
-                      'first:rounded-tl-[8px]',
-                      'last:rounded-tr-[8px]'
-                    )}
-                    key={header.id}
-                  >
-                    <div
-                      className={clsx(
-                        'font-semibold',
-                        'text-[#91A3B0]',
-                        'leading-[16px]',
-                        'py-[12px]',
-                        'px-[16px]',
-                        'text-left',
-                        'capitalize'
-                      )}
-                    >
-                      {header.label}
-                    </div>
-                  </th>
-                );
-              })}
-            </tr>
-          );
-        })}
+        <tr>
+          {cols.headers.map((header) => {
+            return (
+              <th
+                className={clsx(
+                  'bg-[#F6F9FA]',
+                  'border-b-[1px]',
+                  'border-r-[1px]',
+                  'border-t-[1px]',
+                  'border-[#E6F0F8]',
+                  'first:border-l-[1px]',
+                  'first:rounded-tl-[8px]',
+                  'last:rounded-tr-[8px]'
+                )}
+                key={header.id}
+              >
+                <div
+                  className={clsx(
+                    'font-semibold',
+                    'text-[#91A3B0]',
+                    'leading-[16px]',
+                    'py-[12px]',
+                    'px-[16px]',
+                    'text-left',
+                    'capitalize'
+                  )}
+                >
+                  {header.label}
+                </div>
+              </th>
+            );
+          })}
+        </tr>
       </thead>
       <tbody>
         {rows.map((row) => {
