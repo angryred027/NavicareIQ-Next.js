@@ -10,23 +10,23 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const authToken = request.cookies.get('psg_auth_token');
+  // const authToken = request.cookies.get('psg_auth_token');
 
-  if (!authToken) {
-    return NextResponse.redirect(new URL('/', request.url));
-  }
+  // if (!authToken) {
+  //   return NextResponse.redirect(new URL('/', request.url));
+  // }
 
-  try {
-    const userId: string = await passageServer.auth.validateJwt(authToken.value);
+  // try {
+  //   const userId: string = await passageServer.auth.validateJwt(authToken.value);
 
-    if (userId) return NextResponse.next();
+  //   if (userId) return NextResponse.next();
 
-    if (!userId) {
-      return NextResponse.redirect(new URL('/login', request.url));
-    }
-  } catch (error) {
-    return NextResponse.redirect(new URL('/login', request.url));
-  }
+  //   if (!userId) {
+  //     return NextResponse.redirect(new URL('/login', request.url));
+  //   }
+  // } catch (error) {
+  //   return NextResponse.redirect(new URL('/login', request.url));
+  // }
 
   return NextResponse.next();
 }

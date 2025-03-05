@@ -628,6 +628,33 @@ const icons = {
       />
     </>
   ),
+
+  favourite: (
+    <path
+      d="M15 9.16666C15 12.9167 15 17.5 14.2308 17.5C13.4615 17.5 10.7692 15 10 15C9.23076 15 6.53846 17.5 5.76923 17.5C5 17.5 5 12.9167 5 9.16666C5 2.5 5.38461 2.5 10 2.5C14.6154 2.5 15 2.5 15 9.16666Z"
+      fill="#4167AF"
+      stroke="#4167AF"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  ),
+
+  roundPlus: (
+    <>
+      <circle
+        cx="9.99997"
+        cy="10"
+        r="9"
+        stroke="#515253"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M5.99997 10L14 10" stroke="#515253" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M9.99997 14L9.99997 6" stroke="#515253" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </>
+  ),
 };
 
 export default function Icon({ name, className, size = 24, viewBox = '0 0 24 24', color }: IconProps) {

@@ -1,4 +1,1 @@
-export const NoAuthRoutes = [
-    '/users',
-    '/help'
-]
+export const NoAuthRoutes = ['/users', 'orders', '/help'];
