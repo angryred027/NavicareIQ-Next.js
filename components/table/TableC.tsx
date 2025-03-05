@@ -46,10 +46,10 @@ export const Table = <T extends TableTData>({ data, onRowClick }: Props<T>) => {
                     className={clsx(
                       'bg-[#F6F9FA]',
                       'border-b-[1px]',
-                      'border-r-[1px]',
+                      // 'border-r-[1px]',
                       'border-t-[1px]',
                       'border-[#E6F0F8]',
-                      'first:border-l-[1px]',
+                      // 'first:border-l-[1px]',
                       'first:rounded-tl-[8px]',
                       'last:rounded-tr-[8px]'
                     )}
@@ -90,10 +90,7 @@ export const Table = <T extends TableTData>({ data, onRowClick }: Props<T>) => {
             >
               {row.cells.map((cell) => {
                 return (
-                  <td
-                    key={cell.id}
-                    className={clsx('border-b-[1px]', 'border-r-[1px]', 'border-b-[#E6F0F8]', 'first:border-l-[1px]')}
-                  >
+                  <td key={cell.id} className={clsx('border-b-[1px]', 'border-b-[#E6F0F8]')}>
                     <div className={clsx('p-[16px]', 'font-normal', 'leading-[20px]', 'text-[14px]')}>{cell.value}</div>
                   </td>
                 );
