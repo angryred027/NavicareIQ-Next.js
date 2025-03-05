@@ -1,5 +1,5 @@
 'use client';
-import React, { FC } from 'react';
+import React, { type FC, useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import InsuranceIcon from '@/assets/icons/insurance.svg';
@@ -8,9 +8,13 @@ import FemaleIcon from '@/assets/icons/female.svg';
 import { Table } from '../table';
 import { TableTData, TRows } from '../table/table.type';
 import { Badge } from '../common';
+import { getPatients } from '@/lib/api/patient';
+import { Patient } from '@/types/patient.type';
+import { ApiResponse } from '@/lib';
 
 const PatientsList: FC = () => {
   const router = useRouter();
+  const [patients, setPatients] = useState<ApiResponse<Patient[]>>([]);
 
   const rows: TableTData[] = [
     {
@@ -75,6 +79,15 @@ const PatientsList: FC = () => {
       },
     },
   ];
+
+  const fetchPatients = useCallback(async () => {
+    const response = await getPatients(1);
+    setPatients(response);
+  }, []);
+
+  useEffect(() => {
+    fetchPatients();
+  }, [fetchPatients]);
 
   const handleRowClick = (row: TRows) => {
     router.push(`/patients/${row.id}`);
