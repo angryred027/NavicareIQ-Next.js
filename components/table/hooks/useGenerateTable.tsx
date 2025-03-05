@@ -141,6 +141,7 @@ const useGenerateTable = <T extends TableTData>({ data, loading: loadingProp, ..
     const calculatedRows = pageSize * parseInt(currentPage, pageSize);
     return Math.min(calculatedRows, parseInt(totalRows, pageSize));
   }, [pageSize, currentPage, totalRows]);
+  const isEmpty = useMemo(() => rows.length === 0, [rows.length]);
 
   const handlePageChange = (newPage: TChangePage) => {
     switch (newPage) {
@@ -188,6 +189,7 @@ const useGenerateTable = <T extends TableTData>({ data, loading: loadingProp, ..
     sorting,
     isLoading,
     setIsLoading,
+    isEmpty,
     ...rest,
   };
 };

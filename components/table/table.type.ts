@@ -48,6 +48,7 @@ export type TTableContext = {
   sorting: SortingState;
   isLoading: boolean;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
+  isEmpty: boolean;
 } & Omit<TTableProps<TableTData>, 'data'>;
 
 export type TableProps<T extends TableTData> = {

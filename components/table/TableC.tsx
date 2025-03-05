@@ -24,6 +24,7 @@ export const Table: FC = () => {
     totalPages,
     onRowClick,
     isLoading,
+    isEmpty,
   } = useTableContext();
 
   return (
@@ -102,6 +103,13 @@ export const Table: FC = () => {
               <div className="flex justify-center items-center h-full w-full">
                 <Loader />
               </div>
+            </td>
+          </tr>
+        )}
+        {isEmpty && !isLoading && (
+          <tr>
+            <td colSpan={colsTotal} className="h-[200px]">
+              <div className="flex justify-center items-center text-[18px] h-full w-full">No data</div>
             </td>
           </tr>
         )}
