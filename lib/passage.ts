@@ -10,4 +10,4 @@ export const passage = new Passage(appId);
 
 export const PassageConfig = {
   appId,
-}; 
+};

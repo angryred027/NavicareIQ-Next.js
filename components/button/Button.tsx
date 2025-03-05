@@ -1,4 +1,4 @@
-type ButtonVariant = 'primary' | 'secondary' | 'ghost';
+type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'gray';
 type ButtonSize = 'sm' | 'md' | 'lg';
 
 type ButtonProps = {
@@ -75,6 +75,20 @@ export default function Button({
       disabled:cursor-not-allowed 
       disabled:hover:bg-transparent 
       disabled:active:transform-none
+    `,
+
+    gray: `
+    bg-transparent
+    border
+    border-[#BFCFDA]
+    rounded-[0.75rem]
+    p-2
+    font-inter
+    font-semibold
+    text-[0.875rem]
+    leading-[1.25rem]
+    text-center
+    text-[#515253]
     `,
   };
 
