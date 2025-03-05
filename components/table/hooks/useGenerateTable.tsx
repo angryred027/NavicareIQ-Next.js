@@ -1,5 +1,5 @@
 'use client';
-import { useMemo, useCallback, useState } from 'react';
+import { useMemo, useCallback, useState, useEffect } from 'react';
 import {
   AccessorFn,
   createColumnHelper,
@@ -15,13 +15,18 @@ import {
 import { TTableProps, TableTData, TChangePage, TCol, TRows, SorttedType } from '../table.type';
 import clsx from 'clsx';
 
-const useGenerateTable = <T extends TableTData>({ data, ...rest }: TTableProps<T>) => {
+const useGenerateTable = <T extends TableTData>({ data, loading: loadingProp, ...rest }: TTableProps<T>) => {
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 10,
   });
   const columnHelper = createColumnHelper<T>();
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(loadingProp ?? false);
+  }, [loadingProp]);
 
   const createColumn = useCallback(
     (column: keyof T) => {
@@ -181,6 +186,8 @@ const useGenerateTable = <T extends TableTData>({ data, ...rest }: TTableProps<T
     totalPages,
     onSort,
     sorting,
+    isLoading,
+    setIsLoading,
     ...rest,
   };
 };

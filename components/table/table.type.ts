@@ -1,5 +1,5 @@
 import { SortDirection, SortingState } from '@tanstack/react-table';
-import type { ReactNode } from 'react';
+import type { Dispatch, ReactNode, SetStateAction } from 'react';
 export type TableTData = Record<
   string,
   string | number | boolean | { value: string | ReactNode; subvalue: string | ReactNode }
@@ -8,6 +8,7 @@ export type TableTData = Record<
 export type TTableProps<T extends TableTData> = {
   data: T[];
   onRowClick?: (row: TRows) => void;
+  loading?: boolean;
 };
 
 export type TChangePage = 'next' | 'prev' | 'first' | 'last' | number;
@@ -45,6 +46,8 @@ export type TTableContext = {
   rowsOnPage: number;
   totalPages: string;
   sorting: SortingState;
+  isLoading: boolean;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
 } & Omit<TTableProps<TableTData>, 'data'>;
 
 export type TableProps<T extends TableTData> = {

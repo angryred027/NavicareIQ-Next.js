@@ -8,6 +8,7 @@ import clsx from 'clsx';
 type Props<T extends TableTData> = {
   data: T[];
   onRowClick?: (row: TRows) => void;
+  loading?: boolean;
 };
 
 const TableV1 = <T extends TableTData>(props: Props<T>) => {

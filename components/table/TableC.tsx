@@ -8,6 +8,7 @@ import GoToPrev from '@/assets/icons/previous.svg';
 import clsx from 'clsx';
 import { IconButton } from '../common';
 import { useTableContext } from './context';
+import { Loader } from '../common';
 
 export const Table: FC = () => {
   const {
@@ -22,6 +23,7 @@ export const Table: FC = () => {
     rowsOnPage,
     totalPages,
     onRowClick,
+    isLoading,
   } = useTableContext();
 
   return (
@@ -66,31 +68,43 @@ export const Table: FC = () => {
         </tr>
       </thead>
       <tbody>
-        {rows.map((row) => {
-          return (
-            <tr
-              key={row.id}
-              className={clsx(
-                'hover:bg-[#F6F9FA]',
-                'hover:shadow-[0px_4px_4px_#0000000A]',
-                'transition',
-                'cursor-pointer'
-              )}
-              onClick={() => onRowClick && onRowClick(row)}
-            >
-              {row.cells.map((cell) => {
-                return (
-                  <td
-                    key={cell.id}
-                    className={clsx('border-b-[1px]', 'border-r-[1px]', 'border-b-[#E6F0F8]', 'first:border-l-[1px]')}
-                  >
-                    <div className={clsx('p-[16px]', 'font-normal', 'leading-[20px]', 'text-[14px]')}>{cell.value}</div>
-                  </td>
-                );
-              })}
-            </tr>
-          );
-        })}
+        {!isLoading &&
+          rows.map((row) => {
+            return (
+              <tr
+                key={row.id}
+                className={clsx(
+                  'hover:bg-[#F6F9FA]',
+                  'hover:shadow-[0px_4px_4px_#0000000A]',
+                  'transition',
+                  'cursor-pointer'
+                )}
+                onClick={() => onRowClick && onRowClick(row)}
+              >
+                {row.cells.map((cell) => {
+                  return (
+                    <td
+                      key={cell.id}
+                      className={clsx('border-b-[1px]', 'border-r-[1px]', 'border-b-[#E6F0F8]', 'first:border-l-[1px]')}
+                    >
+                      <div className={clsx('p-[16px]', 'font-normal', 'leading-[20px]', 'text-[14px]')}>
+                        {cell.value}
+                      </div>
+                    </td>
+                  );
+                })}
+              </tr>
+            );
+          })}
+        {isLoading && (
+          <tr>
+            <td colSpan={colsTotal} className="h-[200px]">
+              <div className="flex justify-center items-center h-full w-full">
+                <Loader />
+              </div>
+            </td>
+          </tr>
+        )}
       </tbody>
       <tfoot>
         <tr>
