@@ -3,7 +3,7 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import FilterIcon from '@/assets/icons/filter.svg';
 import { Button } from '../common';
-import { TableSortBtn } from './table-filters';
+import { TableSortBtn, TableFiltersBtn } from './table-filters';
 import { useTableContext } from './context';
 
 export const TableHeaderFilters: FC = () => {
@@ -30,16 +30,7 @@ export const TableHeaderFilters: FC = () => {
         </div>
       </div>
       <div className="w-full flex justify-end gap-[12px]">
-        <Button
-          label="Filter"
-          variant="outlined"
-          className="gap-[16px] w-[145px]"
-          startIcon={
-            <div>
-              <Image src={FilterIcon} alt="filter" width={24} height={24} />
-            </div>
-          }
-        />
+        <TableFiltersBtn />
         <TableSortBtn />
       </div>
     </div>

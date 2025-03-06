@@ -36,7 +36,10 @@ export const TableSortBtn: FC = () => {
   const colsOptions = cols.headers.map((header) => {
     return {
       value: header.label,
-      onClick: () => {
+      onClick: (e?: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        e?.preventDefault();
+        e?.stopPropagation();
+
         header.handleSort();
       },
     };

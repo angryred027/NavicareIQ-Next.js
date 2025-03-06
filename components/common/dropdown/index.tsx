@@ -14,7 +14,7 @@ type Props = {
     endSlot?: ReactNode;
     divider?: boolean;
     disabled?: boolean;
-    onClick?: () => void;
+    onClick?: (e?: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   }[];
 };
 

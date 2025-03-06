@@ -85,9 +85,9 @@ const PatientsList: FC = () => {
     setPatients(response);
   }, []);
 
-  useEffect(() => {
-    fetchPatients();
-  }, [fetchPatients]);
+  // useEffect(() => {
+  //   fetchPatients();
+  // }, [fetchPatients]);
 
   const handleRowClick = (row: TRows) => {
     router.push(`/patients/${row.id}`);

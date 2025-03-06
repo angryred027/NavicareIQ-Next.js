@@ -9,8 +9,12 @@ import {
   getSortedRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
+  getFacetedMinMaxValues,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
   type PaginationState,
   SortingState,
+  ColumnFiltersState,
 } from '@tanstack/react-table';
 import { TTableProps, TableTData, TChangePage, TCol, TRows, SorttedType } from '../table.type';
 import clsx from 'clsx';
@@ -22,6 +26,7 @@ const useGenerateTable = <T extends TableTData>({ data, loading: loadingProp, ..
   });
   const columnHelper = createColumnHelper<T>();
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -80,15 +85,20 @@ const useGenerateTable = <T extends TableTData>({ data, loading: loadingProp, ..
   const table = useReactTable({
     data,
     columns,
+    onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
     onSortingChange: setSorting,
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
+    getFacetedMinMaxValues: getFacetedMinMaxValues(),
     state: {
       pagination,
       sorting,
+      columnFilters,
     },
   });
 
