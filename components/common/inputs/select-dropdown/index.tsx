@@ -24,6 +24,13 @@ export const SelectDropDown: FC<SelectProps> = ({ label, value, onChange, option
     }
   }, [selected, onChange]);
 
+  useEffect(() => {
+    if (value) {
+      const option = options.find((option) => option.id === value);
+      option && setSelected(option);
+    }
+  }, [options, value]);
+
   return (
     <div className="w-full max-w-md px-4">
       <Listbox value={selected} onChange={setSelected}>
