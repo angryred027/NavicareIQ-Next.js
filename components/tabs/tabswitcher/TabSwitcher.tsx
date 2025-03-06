@@ -3,20 +3,20 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '@/store/store';
-import { toggle } from '@/store/features/toggleSlice';
+import { setToggle } from '@/store/features/pageSlice';
 interface TabSwitcherProps {
   tabs: string[];
 }
 
 const TabSwitcher: React.FC<TabSwitcherProps> = ({ tabs }) => {
-  const toggled = useSelector((state: RootState) => state.toggle.toggled);
+  const toggled = useSelector((state: RootState) => state.page.toggled);
 
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState(0);
 
   const handleTabClick = (index: number) => {
-    if (index) dispatch(toggle(false));
-    else dispatch(toggle(true));
+    if (index) dispatch(setToggle(false));
+    else dispatch(setToggle(true));
     setActiveTab(index);
   };
 

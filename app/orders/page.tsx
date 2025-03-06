@@ -1,9 +1,14 @@
-import Button from '@/components/button/Button';
+'use client';
+import { useState, useEffect } from 'react';
+import { useDispatch, UseDispatch, useSelector } from 'react-redux';
+import { RootState, AppDispatch } from '@/store/store';
+import { setLoading, setError, setFilters, setSort } from '@/store/features/pageSlice';
+
 import Icon from '@/components/icon/Icon';
+import Button from '@/components/button/Button';
 import { Table } from '@/components/table/TableC';
-import FavoutiteCard from '@/modules/orders/favoutite-card/FavoutiteCard';
 import OrderCard from '@/modules/orders/order-card/OrderCard';
-import { name } from 'eslint-plugin-prettier/recommended';
+import FavoutiteCard from '@/modules/orders/favoutite-card/FavoutiteCard';
 
 const favouriteData = [
   {
@@ -117,6 +122,16 @@ const labsData = [
 ];
 
 export default function OrderPage() {
+  // const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const { loading, error, filters, sort } = useSelector((state: RootState) => state.page);
+
+  useEffect(() => {
+    dispatch(setLoading(true));
+    //
+    dispatch(setLoading(false));
+  }, []);
+
   return (
     <>
       <div className="flex h-screen gap-4">

@@ -15,10 +15,10 @@ import Icon from '@/components/icon/Icon';
 import HistoryButton from '@/components/history-btn/HistoryButton';
 import { useSelector } from 'react-redux';
 import type { RootState } from '@/store/store';
-import { toggle } from '@/store/features/toggleSlice';
+import { setError, setLoading, setToggle, setFilters, setSort } from '@/store/features/pageSlice';
 
 export default function UsersPage() {
-  const toggled = useSelector((state: RootState) => state.toggle.toggled);
+  const toggled = useSelector((state: RootState) => state.page.toggled);
 
   const summaryData = [
     {
