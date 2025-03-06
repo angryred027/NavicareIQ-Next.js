@@ -4,6 +4,7 @@ import { TButtons } from './buttons-type';
 
 type Props = TButtons & {
   variant: 'primary' | 'secondary' | 'outlined';
+  disabled?: boolean;
 };
 export const Button: FC<Props> = ({ variant, ...rest }) => {
   switch (variant) {
