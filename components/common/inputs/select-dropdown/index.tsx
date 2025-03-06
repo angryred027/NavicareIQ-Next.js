@@ -11,8 +11,8 @@ type SelectProps = {
 };
 
 type SelectOption = {
-  id: string;
-  name: ReactNode;
+  value: string;
+  label: ReactNode;
 };
 
 export const SelectDropDown: FC<SelectProps> = ({ label, value, onChange, options }) => {
@@ -20,19 +20,19 @@ export const SelectDropDown: FC<SelectProps> = ({ label, value, onChange, option
 
   useEffect(() => {
     if (selected) {
-      onChange?.(selected.id);
+      onChange?.(selected.value);
     }
   }, [selected, onChange]);
 
   useEffect(() => {
     if (value) {
-      const option = options.find((option) => option.id === value);
+      const option = options.find((option) => option.value === value);
       option && setSelected(option);
     }
   }, [options, value]);
 
   return (
-    <div className="w-full max-w-md px-4">
+    <div className="w-full max-w-md">
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative">
           <ListboxButton
@@ -42,13 +42,14 @@ export const SelectDropDown: FC<SelectProps> = ({ label, value, onChange, option
               'border-[2px] bg-white',
               'text-left text-sm',
               'font-medium text-gray-900',
-              'shadow-sm flex',
+              'shadow-sm flex px-[14px]',
               'items-center justify-between',
               'border-[#BFCFDA] focus:outline-none',
               'focus:ring-2 focus:ring-[#273E69]',
+              'whitespace-nowrap overflow-hidden overflow-ellipsis',
               {
-                'p-[8px]': selected,
-                'p-[16px]': !selected,
+                'py-[6px]': selected,
+                'py-[16px]': !selected,
               }
             )}
           >
@@ -63,7 +64,7 @@ export const SelectDropDown: FC<SelectProps> = ({ label, value, onChange, option
                   'text-[16px] text-[#757B80]': !selected,
                 })}
               >
-                {selected ? selected?.name : label}
+                {selected ? selected?.label : label}
               </div>
             </div>
             <ChevronDownIcon className="size-5 text-[#273E69]" />
@@ -75,7 +76,7 @@ export const SelectDropDown: FC<SelectProps> = ({ label, value, onChange, option
           >
             {options.map((option) => (
               <ListboxOption
-                key={option.id}
+                key={option.value}
                 value={option}
                 className={clsx(
                   'cursor-pointer select-none py-[6px] px-[19px] text-sm',
@@ -85,7 +86,7 @@ export const SelectDropDown: FC<SelectProps> = ({ label, value, onChange, option
                 )}
               >
                 <div className="group-data-[selected]:text-[#273E69] group-data-[selected]:font-bold capitalize">
-                  {option.name}
+                  {option.label}
                 </div>
                 <CheckIcon className="invisible size-4 fill-[#273E69] group-data-[selected]:visible" />
               </ListboxOption>

@@ -6,7 +6,7 @@ import InsuranceIcon from '@/assets/icons/insurance.svg';
 import MaleIcon from '@/assets/icons/male.svg';
 import FemaleIcon from '@/assets/icons/female.svg';
 import { Table } from '../table';
-import { TableTData, TRows } from '../table/table.type';
+import { ColFilter, TableTData, TRows } from '../table/table.type';
 import { Badge } from '../common';
 import { getPatients } from '@/lib/api/patient';
 import { Patient } from '@/types/patient.type';
@@ -80,6 +80,41 @@ const PatientsList: FC = () => {
     },
   ];
 
+  const colsFilters: ColFilter[] = [
+    {
+      id: 'name',
+      filterType: 'text',
+    },
+    {
+      id: 'DOB',
+      filterType: 'date',
+    },
+    {
+      id: 'email',
+      filterType: 'text',
+    },
+    {
+      id: 'Phone number',
+      filterType: 'text',
+    },
+    {
+      id: 'address',
+      filterType: 'text',
+    },
+    {
+      id: 'Patient Since',
+      filterType: 'date',
+    },
+    {
+      id: 'Insurance',
+      filterType: 'text',
+    },
+    {
+      id: 'Reports No.',
+      filterType: 'range',
+    },
+  ];
+
   const fetchPatients = useCallback(async () => {
     const response = await getPatients(1);
     setPatients(response);
@@ -96,7 +131,7 @@ const PatientsList: FC = () => {
   return (
     <div className="font-sans">
       <div className="mt-[15px]">
-        <Table data={rows} onRowClick={handleRowClick} />
+        <Table data={rows} onRowClick={handleRowClick} colsFilters={colsFilters} />
       </div>
     </div>
   );

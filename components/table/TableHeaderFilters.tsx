@@ -1,8 +1,5 @@
 import React, { type FC } from 'react';
-import Image from 'next/image';
 import clsx from 'clsx';
-import FilterIcon from '@/assets/icons/filter.svg';
-import { Button } from '../common';
 import { TableSortBtn, TableFiltersBtn } from './table-filters';
 import { useTableContext } from './context';
 

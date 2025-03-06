@@ -16,10 +16,15 @@ import {
   SortingState,
   ColumnFiltersState,
 } from '@tanstack/react-table';
-import { TTableProps, TableTData, TChangePage, TCol, TRows, SorttedType } from '../table.type';
+import { TTableProps, TableTData, TChangePage, TCol, TRows, SorttedType, FilterType } from '../table.type';
 import clsx from 'clsx';
 
-const useGenerateTable = <T extends TableTData>({ data, loading: loadingProp, ...rest }: TTableProps<T>) => {
+const useGenerateTable = <T extends TableTData>({
+  data,
+  loading: loadingProp,
+  colsFilters,
+  ...rest
+}: TTableProps<T>) => {
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 10,
@@ -34,7 +39,7 @@ const useGenerateTable = <T extends TableTData>({ data, loading: loadingProp, ..
   }, [loadingProp]);
 
   const createColumn = useCallback(
-    (column: keyof T) => {
+    (column: keyof T, filterVariant?: FilterType) => {
       return columnHelper.accessor(column as unknown as AccessorFn<T>, {
         id: column as string,
         header: () => column,
@@ -68,6 +73,9 @@ const useGenerateTable = <T extends TableTData>({ data, loading: loadingProp, ..
           if (valueA > valueB) return 1;
           return 0;
         },
+        meta: {
+          filterType: filterVariant,
+        },
       });
     },
     [columnHelper]
@@ -78,9 +86,12 @@ const useGenerateTable = <T extends TableTData>({ data, loading: loadingProp, ..
     else {
       const firstColumn = data[0];
       const keys = Object.keys(firstColumn);
-      return keys.map((key) => createColumn(key));
+      return keys.map((key) => {
+        const filterType = colsFilters?.find((filter) => filter.id === key)?.filterType;
+        return createColumn(key, filterType);
+      });
     }
-  }, [createColumn, data]);
+  }, [colsFilters, createColumn, data]);
 
   const table = useReactTable({
     data,
@@ -114,13 +125,14 @@ const useGenerateTable = <T extends TableTData>({ data, loading: loadingProp, ..
               ? 'desc'
               : false
           : false;
-
         return {
           id: header.id,
           label: header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext()),
           sorted: isSorting ? sorted : false,
           handleSort: () => onSort(header.id),
           sortFn: header.column.getToggleSortingHandler(),
+          filterType: header.column.columnDef.meta?.filterType,
+          handleFilter: (value: string | number) => onFilter(header.id, value),
         };
       }),
     };
@@ -180,6 +192,11 @@ const useGenerateTable = <T extends TableTData>({ data, loading: loadingProp, ..
         col?.column.toggleSorting();
       }
     });
+  };
+
+  const onFilter = (column: string, value: string | number) => {
+    console.log('column', column);
+    console.log('value', value);
   };
 
   return {
