@@ -63,7 +63,8 @@ export const Table = <T extends TableTData>({ data, onRowClick }: Props<T>) => {
                         'py-[12px]',
                         'px-[16px]',
                         'text-left',
-                        'capitalize'
+                        'capitalize',
+                        header.id === 'price' ? 'text-center' : 'text-left'
                       )}
                     >
                       {header.label}

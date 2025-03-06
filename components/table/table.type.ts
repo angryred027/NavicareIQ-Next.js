@@ -1,7 +1,15 @@
 import type { ReactNode } from 'react';
 export type TableTData = Record<
   string,
-  string | number | boolean | { value: string | ReactNode; subvalue: string | ReactNode }
+  | string
+  | number
+  | boolean
+  | {
+      value: string | ReactNode;
+      subValue: string | ReactNode;
+      recommended: boolean | ReactNode;
+      icon: string | ReactNode;
+    }
 >;
 
 export type TableProps<T extends TableTData> = {
