@@ -22,7 +22,16 @@ export const btnOutlinedClassesName = clsx(
 
 const ButtonOutlined: FC<TButtons> = ({ label, onClick, className, children, startIcon, endIcon }) => {
   return (
-    <button type="button" className={twMerge(btnOutlinedClassesName, className)} onClick={onClick}>
+    <button
+      type="button"
+      className={twMerge(
+        clsx(btnOutlinedClassesName, {
+          'justify-center': !startIcon && !endIcon,
+        }),
+        className
+      )}
+      onClick={onClick}
+    >
       {startIcon && <span className="start-icon">{startIcon}</span>}
       {children}
       {label && <span className="label">{label}</span>}

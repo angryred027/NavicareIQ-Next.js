@@ -38,11 +38,11 @@ export const SelectDropDown: FC<SelectProps> = ({ label, value, onChange, option
           <ListboxButton
             className={clsx(
               'relative w-full',
-              'cursor-pointer rounded-lg',
+              'cursor-pointer rounded-[16px]',
               'border-[2px] bg-white',
               'text-left text-sm',
               'font-medium text-gray-900',
-              'shadow-sm flex px-[14px]',
+              'flex px-[14px]',
               'items-center justify-between',
               'border-[#BFCFDA] focus:outline-none',
               'focus:ring-2 focus:ring-[#273E69]',

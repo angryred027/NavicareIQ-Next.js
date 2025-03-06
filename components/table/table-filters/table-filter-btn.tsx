@@ -8,9 +8,13 @@ import { useTableContext } from '../context';
 import { btnOutlinedClassesName } from '@/components/common/buttons/btn-outlined';
 import { SelectDropDown } from '@/components/common/inputs';
 import { stringOperators, numberOperators, dateOperators } from './helpers';
+import { Button } from '@/components/common';
+import { DebouncedInput } from './FilterInput';
 
 export const TableFiltersBtn: FC = () => {
   const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
+  const [selectedOperator, setSelectedOperator] = useState<string | null>(null);
+  const [value, setValue] = useState<string | number>('');
   const { cols } = useTableContext();
   const menuButtonClasses = clsx('flex', 'flex-start', 'gap-[8px]', 'capitalize', 'w-[145px]');
 
@@ -35,6 +39,14 @@ export const TableFiltersBtn: FC = () => {
 
   const handleFilterChange = (value: string) => {
     setSelectedFilter(value);
+  };
+
+  const handleOperatorChange = (value: string) => {
+    setSelectedOperator(value);
+  };
+
+  const handleValueChange = (value: string | number) => {
+    setValue(value);
   };
 
   return (
@@ -73,13 +85,29 @@ export const TableFiltersBtn: FC = () => {
               e.preventDefault();
             }}
           >
-            <div className={clsx('grid grid-cols-3', 'gap-[16px]')}>
-              <SelectDropDown label="Filter by" onChange={handleFilterChange} options={colsOptions} />
+            <div className="flex flex-col gap-[16px]">
+              <div className={clsx('grid grid-cols-3', 'gap-[16px]')}>
+                <SelectDropDown label="Filter by" onChange={handleFilterChange} options={colsOptions} />
 
-              {selectedFilter && (
-                <SelectDropDown label="Operator" onChange={(value) => console.log(value)} options={operators} />
-              )}
-              <SelectDropDown label="Filter by" onChange={handleFilterChange} options={colsOptions} />
+                {selectedFilter && (
+                  <SelectDropDown label="Operator" onChange={handleOperatorChange} options={operators} />
+                )}
+                {selectedOperator && <DebouncedInput onChange={handleValueChange} value={value} />}
+              </div>
+              <div className="flex justify-end gap-[16px]">
+                <Button
+                  variant="outlined"
+                  label="Cancel"
+                  className={clsx(
+                    'bg-status-error-600',
+                    'text-[#ffffff]',
+                    'hover:bg-status-error-300',
+                    'hover:text-[#515253]'
+                  )}
+                />
+                <Button variant="outlined" label="Apply" />
+                <Button variant="outlined" label="Clear" />
+              </div>
             </div>
           </div>
         </MenuItem>
