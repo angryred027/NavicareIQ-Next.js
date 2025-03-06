@@ -1,14 +1,14 @@
 import Icon from '@/components/icon/Icon';
 
-interface FavoutiteCardProps {
+interface FavouriteCardProps {
   title: string;
   category: string;
   price: number;
 }
 
-export default function FavoutiteCard({ title, category, price }: FavoutiteCardProps) {
+export default function FavouriteCard({ title, category, price }: FavouriteCardProps) {
   return (
-    <div className="w-[10rem] flex flex-col justify-between max-w-xs p-4 m-1 bg-white rounded-2xl shadow-md border">
+    <div className="flex flex-col w-full items-top justify-between max-w-xs h-full p-4 m-1 rounded-2xl ">
       <div>
         <div className="flex justify-between items-start">
           <div className="break-words text-[0.875rem] leading-[1.25rem] font-inter font-normal text-[#000005] ">
@@ -22,7 +22,7 @@ export default function FavoutiteCard({ title, category, price }: FavoutiteCardP
           {category}
         </div>
       </div>
-      <div className="flex justify-between items-center mt-4">
+      <div className=" flex justify-between items-center mt-4">
         <div className="text-[0.875rem] leading-[1.25rem] font-inter font-normal text-[#000005]">${price}</div>
         <div className="flex justify-center items-center w-8 h-8">
           <Icon name="roundPlus" />

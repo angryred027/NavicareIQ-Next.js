@@ -32,7 +32,15 @@ export const Table = <T extends TableTData>({ data, onRowClick }: Props<T>) => {
 
   return (
     <table
-      className={clsx('w-full', 'bg-[#FFFFFF]', 'text-[12px]', 'border-separate', 'border-spacing-[0px]')}
+      className={clsx(
+        'w-full',
+        'bg-[#FFFFFF]',
+        'text-[12px]',
+        'border',
+        'border-separate',
+        'border-[#E6F0F8]',
+        'rounded-xl'
+      )}
       cellSpacing={0}
       cellPadding={0}
     >

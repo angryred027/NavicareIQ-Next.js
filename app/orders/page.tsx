@@ -8,7 +8,7 @@ import Icon from '@/components/icon/Icon';
 import Button from '@/components/button/Button';
 import { Table } from '@/components/table/TableC';
 import OrderCard from '@/modules/orders/order-card/OrderCard';
-import FavoutiteCard from '@/modules/orders/favoutite-card/FavoutiteCard';
+import FavouriteCard from '@/modules/orders/favourite-card/FavouriteCard';
 
 const favouriteData = [
   {
@@ -134,81 +134,71 @@ export default function OrderPage() {
 
   return (
     <>
-      <div className="flex h-screen gap-4">
+      <div className="flex flex-col md:flex-row h-screen gap-4 p-4">
         {/* Left Column (Fixed & Scrollable) */}
-        <div className="w-1/3 md:w-1/3 sm:w-1/2 h-screen p-4 bg-[#F6F9FA] border border-[#E6F0F8] rounded-xl box-border flex flex-col">
-          <span className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-inter font-bold text-[#000005]">
-            Previous Orders
-          </span>
+        <div className="w-full md:w-1/3 h-[50vh] md:h-screen p-4 bg-[#F6F9FA] border border-[#E6F0F8] rounded-xl flex flex-col">
+          <span className="text-lg md:text-xl font-bold text-[#000005]">Previous Orders</span>
 
-          <div className="relative w-full my-2 sm:mb-0">
+          <div className="relative w-full my-2">
             <input
               type="text"
               placeholder="Search..."
-              className="w-full pl-10 pr-4 py-2 border border-[#BFCFDA] rounded-[0.75rem] focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full pl-10 pr-4 py-2 border border-[#BFCFDA] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <Icon name="search" className="absolute left-3 top-2 text-gray-400" />
           </div>
 
-          {/* Scrollable Order List */}
           <div className="w-full overflow-y-auto flex-1 [&::-webkit-scrollbar]:hidden">
             {ordersData.map((item, index) => (
-              <OrderCard key={index} category={item.category} name={item.name} date={item.date} />
+              <OrderCard key={index} {...item} />
             ))}
           </div>
         </div>
 
         {/* Right Column */}
-        <div className="w-2/3 md:w-2/3 sm:w-1/2 gap-2 flex flex-col">
-          <div className="flex justify-between overflow-hidden p-4 bg-[#F6F9FA] border border-[#E6F0F8] rounded-xl box-border">
-            <div className="block mr-2 mb-4 sm:mb-0 flex-1 sm:flex-none">
-              <span className="block font-inter font-bold text-[1rem] leading-[1.5rem] text-[#000005]">Labs</span>
-              <span className="font-inter font-medium text-[0.75rem] leading-[1.25rem] text-[#757B80]">
-                Displaying: 124
-              </span>
+        <div className="flex-1 flex flex-col gap-4">
+          <div className="p-4 bg-[#F6F9FA] border border-[#E6F0F8] rounded-xl flex flex-col sm:flex-row justify-between items-center">
+            <div className="mb-4 sm:mb-0">
+              <span className="block font-bold text-lg text-[#000005]">Labs</span>
+              <span className="text-sm text-[#757B80]">Displaying: 124</span>
             </div>
 
-            <div className="flex flex-col sm:flex-row sm:justify-between items-center w-full sm:w-auto">
-              <div className="relative flex-1 sm:flex-none w-full sm:w-[15rem] mb-4 sm:mb-0">
+            <div className="flex flex-col sm:flex-row items-center w-full sm:w-auto gap-2">
+              <div className="relative w-full sm:w-60">
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="w-full pl-10 pr-4 py-2 border border-[#BFCFDA] rounded-[0.75rem] focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full pl-10 pr-4 py-2 border border-[#BFCFDA] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <Icon name="search" className="absolute left-3 top-2 text-gray-400" />
               </div>
-
-              <div className="flex flex-col sm:flex-row sm:ml-4 sm:space-x-4 w-full sm:w-auto">
-                <Button variant="gray" className="mb-4 sm:mb-0">
-                  <Icon name="filter" className="mr-4" /> Filter
-                </Button>
-                <Button variant="gray">
-                  <Icon name="sort" className="mr-2" /> Sort By
-                </Button>
-              </div>
+              <Button variant="gray" className="flex items-center">
+                <Icon name="filter" className="mr-2" /> Filter
+              </Button>
+              <Button variant="gray" className="flex items-center">
+                <Icon name="sort" className="mr-2" /> Sort By
+              </Button>
             </div>
           </div>
 
-          <div className="p-2 bg-[#F6F9FA] border border-[#E6F0F8] rounded-xl box-border">
-            <span className="m-2 text-[0.75rem] leading-[1rem] font-inter font-semibold text-[#91A3B0]">
-              Favourites
-            </span>
-
-            <div className="grid grid-cols-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="p-4 bg-[#F6F9FA] border border-[#E6F0F8] rounded-xl">
+            <span className="text-sm font-semibold text-[#91A3B0]">Favourites</span>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-2">
               {favouriteData.map((item, index) => (
-                <FavoutiteCard key={index} title={item.title} category={item.category} price={item.price} />
-              ))}
-              <div className="flex w-[10rem] justify-center items-center max-w-xs p-4 m-1 bg-white rounded-2xl shadow-md border">
-                <div>
-                  <Icon name="roundPlus" />
+                <div
+                  key={index}
+                  className="w-full h-36 flex items-center justify-center bg-white rounded-2xl shadow-md border"
+                >
+                  <FavouriteCard {...item} />
                 </div>
+              ))}
+              <div className="w-full h-36 flex items-center justify-center bg-white rounded-2xl shadow-md border">
+                <Icon name="roundPlus" />
               </div>
             </div>
           </div>
 
-          <div className="bg-[#F6F9FA] border border-[#E6F0F8] rounded-xl box-border">
-            <Table data={labsData} />
-          </div>
+          <Table data={labsData} />
         </div>
       </div>
     </>
