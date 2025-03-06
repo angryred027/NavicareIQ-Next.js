@@ -7,4 +7,5 @@ export type TButtons = {
   children?: ReactNode;
   startIcon?: ReactNode;
   endIcon?: ReactNode;
+  disabled?: boolean;
 };

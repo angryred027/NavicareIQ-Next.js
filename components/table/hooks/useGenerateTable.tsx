@@ -195,8 +195,20 @@ const useGenerateTable = <T extends TableTData>({
   };
 
   const onFilter = (column: string, value: string | number) => {
-    console.log('column', column);
-    console.log('value', value);
+    return table.getHeaderGroups().forEach((header) => {
+      if (header.headers.some((h) => h.id === column)) {
+        const col = header.headers.find((h) => h.id === column);
+        if (col) {
+          col.column.setFilterValue(value);
+        }
+      }
+    });
+  };
+
+  const handleResetFilters = () => {
+    table.getAllColumns().forEach((col) => {
+      col.setFilterValue('');
+    });
   };
 
   return {
@@ -217,6 +229,7 @@ const useGenerateTable = <T extends TableTData>({
     isLoading,
     setIsLoading,
     isEmpty,
+    handleResetFilters,
     ...rest,
   };
 };

@@ -38,6 +38,7 @@ export type TCol = {
     label: ReactNode;
     sorted: SorttedType;
     handleSort: () => void;
+    handleFilter: (val: string | number) => void;
     sortFn: ((event: unknown) => void) | undefined;
     filterType?: FilterType;
   }[];
@@ -58,6 +59,7 @@ export type TTableContext = {
   isLoading: boolean;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   isEmpty: boolean;
+  handleResetFilters: () => void;
 } & Omit<TTableProps<TableTData>, 'data'>;
 
 export type TableProps<T extends TableTData> = {

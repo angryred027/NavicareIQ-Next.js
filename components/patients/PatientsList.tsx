@@ -94,10 +94,6 @@ const PatientsList: FC = () => {
       filterType: 'text',
     },
     {
-      id: 'Phone number',
-      filterType: 'text',
-    },
-    {
       id: 'address',
       filterType: 'text',
     },

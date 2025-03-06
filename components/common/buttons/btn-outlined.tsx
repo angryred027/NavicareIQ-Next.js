@@ -17,10 +17,11 @@ export const btnOutlinedClassesName = clsx(
   'leading-[20px]',
   'gap-[8px]',
   'hover:bg-gray-200',
-  'transition'
+  'transition',
+  'disabled:opacity-[30%]'
 );
 
-const ButtonOutlined: FC<TButtons> = ({ label, onClick, className, children, startIcon, endIcon }) => {
+const ButtonOutlined: FC<TButtons> = ({ label, onClick, className, children, startIcon, endIcon, disabled }) => {
   return (
     <button
       type="button"
@@ -31,6 +32,7 @@ const ButtonOutlined: FC<TButtons> = ({ label, onClick, className, children, sta
         className
       )}
       onClick={onClick}
+      disabled={disabled}
     >
       {startIcon && <span className="start-icon">{startIcon}</span>}
       {children}

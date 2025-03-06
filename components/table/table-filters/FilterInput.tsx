@@ -42,10 +42,7 @@ export const DebouncedInput = ({
           'border-[#BFCFDA] focus:outline-none',
           'focus:ring-2 focus:ring-[#273E69]',
           'whitespace-nowrap overflow-hidden overflow-ellipsis',
-          {
-            'py-[6px]': value,
-            'py-[16px]': !value,
-          }
+          'py-[14px]'
         )}
         {...props}
         value={value}

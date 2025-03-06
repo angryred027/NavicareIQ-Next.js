@@ -1,4 +1,4 @@
-import React, { type FC, useState, useMemo } from 'react';
+import React, { type FC, useState, useMemo, useRef } from 'react';
 import Image from 'next/image';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import clsx from 'clsx';
@@ -15,16 +15,18 @@ export const TableFiltersBtn: FC = () => {
   const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
   const [selectedOperator, setSelectedOperator] = useState<string | null>(null);
   const [value, setValue] = useState<string | number>('');
-  const { cols } = useTableContext();
+  const { cols, handleResetFilters } = useTableContext();
   const menuButtonClasses = clsx('flex', 'flex-start', 'gap-[8px]', 'capitalize', 'w-[145px]');
+  const divRef = useRef<HTMLDivElement>(null);
 
-  const colsOptions = cols.headers.map((header) => {
-    return {
-      label: header.label,
-      value: header.id,
-    };
-  });
-
+  const colsOptions = cols.headers
+    .filter((header) => header.filterType)
+    .map((header) => {
+      return {
+        label: header.label,
+        value: header.id,
+      };
+    });
   const operators = useMemo(() => {
     if (!selectedFilter) return [];
     const col = cols.headers.find((header) => header.id === selectedFilter);
@@ -34,8 +36,6 @@ export const TableFiltersBtn: FC = () => {
     if (col.filterType === 'date') return dateOperators;
     return [];
   }, [selectedFilter, cols.headers]);
-
-  console.log('selectedFilter', selectedFilter);
 
   const handleFilterChange = (value: string) => {
     setSelectedFilter(value);
@@ -47,6 +47,27 @@ export const TableFiltersBtn: FC = () => {
 
   const handleValueChange = (value: string | number) => {
     setValue(value);
+  };
+
+  const handleApply = () => {
+    const findCol = cols.headers.find((header) => header.id === selectedFilter);
+    if (findCol) {
+      findCol.handleFilter(value);
+    }
+  };
+
+  const handleClear = () => {
+    setSelectedFilter(null);
+    setSelectedOperator(null);
+    setValue('');
+    handleResetFilters();
+  };
+
+  const handleCancel = () => {
+    setSelectedFilter(null);
+    setSelectedOperator(null);
+    setValue('');
+    divRef.current?.click();
   };
 
   return (
@@ -80,12 +101,13 @@ export const TableFiltersBtn: FC = () => {
         )}
       >
         <MenuItem>
-          <div
-            onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-              e.preventDefault();
-            }}
-          >
-            <div className="flex flex-col gap-[16px]">
+          <div ref={divRef}>
+            <div
+              className="flex flex-col gap-[16px]"
+              onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+                e.preventDefault();
+              }}
+            >
               <div className={clsx('grid grid-cols-3', 'gap-[16px]')}>
                 <SelectDropDown label="Filter by" onChange={handleFilterChange} options={colsOptions} />
 
@@ -98,6 +120,7 @@ export const TableFiltersBtn: FC = () => {
                 <Button
                   variant="outlined"
                   label="Cancel"
+                  onClick={handleCancel}
                   className={clsx(
                     'bg-status-error-600',
                     'text-[#ffffff]',
@@ -105,8 +128,8 @@ export const TableFiltersBtn: FC = () => {
                     'hover:text-[#515253]'
                   )}
                 />
-                <Button variant="outlined" label="Apply" />
-                <Button variant="outlined" label="Clear" />
+                <Button variant="outlined" label="Apply" disabled={!value} onClick={handleApply} />
+                <Button variant="outlined" label="Clear" onClick={handleClear} />
               </div>
             </div>
           </div>
