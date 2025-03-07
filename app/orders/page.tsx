@@ -197,7 +197,6 @@ export default function OrderPage() {
               </div>
             </div>
           </div>
-
           <Table data={labsData} />
         </div>
       </div>

@@ -15,9 +15,8 @@ const TabSwitcher: React.FC<TabSwitcherProps> = ({ tabs }) => {
   const [activeTab, setActiveTab] = useState(0);
 
   const handleTabClick = (index: number) => {
-
-    if (index === 0) dispatch(toggle(true));
-    else dispatch(toggle(false));
+    if (index === 0) dispatch(setToggle(true));
+    else dispatch(setToggle(false));
 
     setActiveTab(index);
   };

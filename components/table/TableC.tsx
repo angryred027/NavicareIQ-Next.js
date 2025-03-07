@@ -42,8 +42,6 @@ export const Table: FC = () => {
       cellPadding={0}
     >
       <thead>
-        {cols.map((col) => {
-          return (
         <tr>
           {cols.headers.map((header) => {
             return (
