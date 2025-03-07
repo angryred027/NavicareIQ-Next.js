@@ -5,3 +5,6 @@ export * from './dropdown';
 export * from './loader';
 export * from './grid';
 export * from './card';
+export * from './avatar';
+export * from './patient-card';
+export * from './divider';
