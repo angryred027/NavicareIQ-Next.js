@@ -21,26 +21,23 @@ const initialState: AuthState = {
   error: null,
 };
 
-export const getCurrentUser = createAsyncThunk(
-  'auth/getCurrentUser',
-  async (_, { rejectWithValue }) => {
-    try {
-      const isAuth = passage.currentUser;
-      if (!isAuth) {
-        return null;
-      }
-
-      const userInfo = await passage.currentUser.userInfo();
-      return {
-        id: userInfo.id,
-        email: userInfo.email,
-        name: userInfo.email?.split('@')[0] || 'User',
-      };
-    } catch (error) {
-      return rejectWithValue('Failed to get user');
+export const getCurrentUser = createAsyncThunk('auth/getCurrentUser', async (_, { rejectWithValue }) => {
+  try {
+    const isAuth = passage.currentUser;
+    if (!isAuth) {
+      return null;
     }
+
+    const userInfo = await passage.currentUser.userInfo();
+    return {
+      id: userInfo.id,
+      email: userInfo.email,
+      name: userInfo.email?.split('@')[0] || 'User',
+    };
+  } catch (error) {
+    return rejectWithValue('Failed to get user');
   }
-);
+});
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -81,4 +78,4 @@ export const authSlice = createSlice({
 });
 
 export const { logout, setLoading } = authSlice.actions;
-export default authSlice.reducer; 
+export default authSlice.reducer;

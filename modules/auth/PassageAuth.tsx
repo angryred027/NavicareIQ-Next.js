@@ -17,7 +17,6 @@ export default function PassageAuth() {
 
   useEffect(() => {
     const authSuccessHandler = () => {
-      console.log('auth success');
       router.push('/'); // Redirect to the home page or any protected route
     };
 
@@ -40,9 +39,7 @@ export default function PassageAuth() {
 
   return (
     <div className="w-full max-w-md mx-auto">
-      {!isAuthenticated && (
-        <PassageAuthElement appId={process.env.NEXT_PUBLIC_PASSAGE_APP_ID!} />
-      )}
+      {!isAuthenticated && <PassageAuthElement appId={process.env.NEXT_PUBLIC_PASSAGE_APP_ID!} />}
     </div>
   );
 }
