@@ -11,7 +11,7 @@ interface CollapseProps {
 }
 
 const Collapse = ({ title, children, defaultOpen = false }: CollapseProps) => {
-  const [isOpen, setIsOpen] = useState(defaultOpen);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className={'border-b border-system-light-200 overflow-hidden '}>
