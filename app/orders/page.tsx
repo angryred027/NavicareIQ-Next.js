@@ -7,6 +7,7 @@ import { setLoading, setError, setFilters, setSort } from '@/store/features/page
 import Icon from '@/components/icon/Icon';
 import Button from '@/components/button/Button';
 import { Table } from '@/components/table/TableC';
+import { TableProvider } from '@/components/table/context';
 import OrderCard from '@/modules/orders/order-card/OrderCard';
 import FavouriteCard from '@/modules/orders/favourite-card/FavouriteCard';
 
@@ -197,7 +198,9 @@ export default function OrderPage() {
               </div>
             </div>
           </div>
-          <Table data={labsData} />
+          <TableProvider data={labsData}>
+            <Table />
+          </TableProvider>
         </div>
       </div>
     </>

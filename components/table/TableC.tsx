@@ -64,7 +64,8 @@ export const Table: FC = () => {
                     'py-[12px]',
                     'px-[16px]',
                     'text-left',
-                    'capitalize'
+                    'capitalize',
+                    header.id === 'price' ? 'text-center' : 'text-left'
                   )}
                 >
                   {header.label}
@@ -90,10 +91,7 @@ export const Table: FC = () => {
               >
                 {row.cells.map((cell) => {
                   return (
-                    <td
-                      key={cell.id}
-                      className={clsx('border-b-[1px]', 'border-r-[1px]', 'border-b-[#E6F0F8]', 'first:border-l-[1px]')}
-                    >
+                    <td key={cell.id} className={clsx('border-b-[1px]', 'border-b-[#E6F0F8]', 'first:border-l-[1px]')}>
                       <div className={clsx('p-[16px]', 'font-normal', 'leading-[20px]', 'text-[14px]')}>
                         {cell.value}
                       </div>
