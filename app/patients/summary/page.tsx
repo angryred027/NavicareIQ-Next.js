@@ -1,4 +1,4 @@
-import PatientsList from '@/components/patients/PatientsList';
+import PatientsList from '@/modules/patients/PatientsList';
 
 export default function PatientsListPage() {
   return (
