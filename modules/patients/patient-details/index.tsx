@@ -5,17 +5,17 @@ import PatientInformation from './patient-information';
 const PatientDetail: FC = () => {
   return (
     <Grid gap="16px" className="h-full">
-      <GridItem col={3} className="h-full">
+      <GridItem col={2} className="h-full">
         <Card className="h-full">
           <PatientInformation />
         </Card>
       </GridItem>
-      <GridItem col={3} className="h-full">
+      <GridItem col={2} className="h-full">
         <Card className="h-full">
           <div>Detail</div>
         </Card>
       </GridItem>
-      <GridItem col={6}>
+      <GridItem col={8}>
         <Card>
           <div>Detail</div>
         </Card>
