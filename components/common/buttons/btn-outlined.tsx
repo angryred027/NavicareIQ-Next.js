@@ -3,26 +3,37 @@ import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { TButtons } from './buttons-type';
 
-const ButtonOutlined: FC<TButtons> = ({ label, onClick, className, children, startIcon, endIcon }) => {
-  const btnClassesName = clsx(
-    'px-[16px]',
-    'py-[8px]',
-    'rounded-[12px]',
-    'border-[1px]',
-    'border-[#BFCFDA]',
-    'flex',
-    'items-center',
-    'text-[#515253]',
-    'text-[14px]',
-    'font-semibold',
-    'leading-[20px]',
-    'gap-[8px]',
-    'hover:bg-gray-200',
-    'transition'
-  );
+export const btnOutlinedClassesName = clsx(
+  'px-[16px]',
+  'py-[8px]',
+  'rounded-[12px]',
+  'border-[1px]',
+  'border-[#BFCFDA]',
+  'flex',
+  'items-center',
+  'text-[#515253]',
+  'text-[14px]',
+  'font-semibold',
+  'leading-[20px]',
+  'gap-[8px]',
+  'hover:bg-gray-200',
+  'transition',
+  'disabled:opacity-[30%]'
+);
 
+const ButtonOutlined: FC<TButtons> = ({ label, onClick, className, children, startIcon, endIcon, disabled }) => {
   return (
-    <button type="button" className={twMerge(btnClassesName, className)} onClick={onClick}>
+    <button
+      type="button"
+      className={twMerge(
+        clsx(btnOutlinedClassesName, {
+          'justify-center': !startIcon && !endIcon,
+        }),
+        className
+      )}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {startIcon && <span className="start-icon">{startIcon}</span>}
       {children}
       {label && <span className="label">{label}</span>}

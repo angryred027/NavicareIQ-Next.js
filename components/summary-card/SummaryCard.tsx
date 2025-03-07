@@ -11,7 +11,7 @@ interface SummaryCardProps {
 
 const SummaryCard = ({ level, label, className = '', icon = '' }: SummaryCardProps) => {
   return (
-    <div className="block items-center p-2 bg-white border border-[#E6F0F8] rounded-lg">
+    <div className="block p-2 bg-white border border-[#E6F0F8] rounded-lg">
       <div className="flex p-1">
         <div className="flex justify-center items-center w-6 h-6 left-1  bg-[#F6F9FA] border border-[#E6F0F8] rounded-md">
           <Icon name={icon} />
