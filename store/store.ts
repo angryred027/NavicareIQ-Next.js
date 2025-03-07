@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './features/authSlice';
-import toggleReducer from './features/toggleSlice';
+import pageReducer from './features/pageSlice';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-    toggle: toggleReducer,
+    page: pageReducer,
   },
 });
 

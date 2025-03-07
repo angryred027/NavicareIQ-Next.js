@@ -629,6 +629,32 @@ const icons = {
     </>
   ),
 
+  favourite: (
+    <path
+      d="M15 9.16666C15 12.9167 15 17.5 14.2308 17.5C13.4615 17.5 10.7692 15 10 15C9.23076 15 6.53846 17.5 5.76923 17.5C5 17.5 5 12.9167 5 9.16666C5 2.5 5.38461 2.5 10 2.5C14.6154 2.5 15 2.5 15 9.16666Z"
+      fill="#4167AF"
+      stroke="#4167AF"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  ),
+
+  roundPlus: (
+    <>
+      <circle
+        cx="9.99997"
+        cy="10"
+        r="9"
+        stroke="#515253"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M5.99997 10L14 10" stroke="#515253" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M9.99997 14L9.99997 6" stroke="#515253" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+     </>
+  ), 
   copy: (
     <>
       <path
@@ -688,12 +714,7 @@ const icons = {
         strokeLinejoin="round"
       />
       <path
-        d="M5.83325 12.5C7.33325 10.3571 7.86249 9.16226 8.90143 9.44444C9.66848 9.65278 9.73365 10.6556 10.606 10.8333C11.7748 11.0714 12.2083 9.28571 13.3333 7.5"
-        stroke="#515253"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+        d="M5.83325 12.5C7.33325 10.3571 7.86249 9.16226 8.90143 9.44444C9.66848 9.65278 9.73365 10.6556 10.606 10.8333C11.7748 11.0714 12.2083 9.28571 13.3333 7.5" />
     </>
   ),
 };

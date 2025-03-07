@@ -4,21 +4,20 @@ type RiskLevel = 'Low Risk' | 'Moderate' | 'High Risk';
 
 import SummaryCard from '@/components/summary-card/SummaryCard';
 import Badge from '@/components/badge/Badge';
-import { IconButton } from '@/components/common';
 import Button from '@/components/button/Button';
 import Image from 'next/image';
 import AddIcon from '@/assets/icons/plus.svg';
-import DropdownMenu from '@/components/dropdown-menu/DropdownMenu';
 import TabSwitcher from '@/components/tabs/tabswitcher/TabSwitcher';
 
 import Icon from '@/components/icon/Icon';
 import HistoryButton from '@/components/history-btn/HistoryButton';
 import { useSelector } from 'react-redux';
 import type { RootState } from '@/store/store';
-import { PatientInfo } from '@/modules/reports/patient-info/PatientInfo';
 
-export default function Users() {
-  const toggled = useSelector((state: RootState) => state.toggle.toggled);
+import { setError, setLoading, setToggle, setFilters, setSort } from '@/store/features/pageSlice';
+import { PatientInfo } from '@/modules/reports/patient-info/PatientInfo';
+export default function UsersPage() {
+  const toggled = useSelector((state: RootState) => state.page.toggled);
 
   const summaryData = [
     {

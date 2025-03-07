@@ -29,7 +29,15 @@ export const Table: FC = () => {
 
   return (
     <table
-      className={clsx('w-full', 'bg-[#FFFFFF]', 'text-[12px]', 'border-separate', 'border-spacing-[0px]')}
+      className={clsx(
+        'w-full',
+        'bg-[#FFFFFF]',
+        'text-[12px]',
+        'border',
+        'border-separate',
+        'border-[#E6F0F8]',
+        'rounded-xl'
+      )}
       cellSpacing={0}
       cellPadding={0}
     >
@@ -41,10 +49,8 @@ export const Table: FC = () => {
                 className={clsx(
                   'bg-[#F6F9FA]',
                   'border-b-[1px]',
-                  'border-r-[1px]',
                   'border-t-[1px]',
                   'border-[#E6F0F8]',
-                  'first:border-l-[1px]',
                   'first:rounded-tl-[8px]',
                   'last:rounded-tr-[8px]'
                 )}
@@ -58,7 +64,8 @@ export const Table: FC = () => {
                     'py-[12px]',
                     'px-[16px]',
                     'text-left',
-                    'capitalize'
+                    'capitalize',
+                    header.id === 'price' ? 'text-center' : 'text-left'
                   )}
                 >
                   {header.label}
@@ -84,10 +91,7 @@ export const Table: FC = () => {
               >
                 {row.cells.map((cell) => {
                   return (
-                    <td
-                      key={cell.id}
-                      className={clsx('border-b-[1px]', 'border-r-[1px]', 'border-b-[#E6F0F8]', 'first:border-l-[1px]')}
-                    >
+                    <td key={cell.id} className={clsx('border-b-[1px]', 'border-b-[#E6F0F8]', 'first:border-l-[1px]')}>
                       <div className={clsx('p-[16px]', 'font-normal', 'leading-[20px]', 'text-[14px]')}>
                         {cell.value}
                       </div>

@@ -18,6 +18,9 @@ import {
 } from '@tanstack/react-table';
 import { TTableProps, TableTData, TChangePage, TCol, TRows, SorttedType, FilterType } from '../table.type';
 import clsx from 'clsx';
+import Badge from '@/components/badge/Badge';
+import Button from '@/components/button/Button';
+import Icon from '@/components/icon/Icon';
 
 const useGenerateTable = <T extends TableTData>({
   data,
@@ -45,17 +48,38 @@ const useGenerateTable = <T extends TableTData>({
         header: () => column,
         cell: ({ row }) => {
           const rowValue = row.original[column];
-          if (typeof rowValue === 'object') {
+          if (typeof rowValue === 'object' && rowValue !== null) {
             return (
-              <div>
-                <div>{rowValue.value}</div>
-                <div className={clsx('text-[#91A3B0]', 'text-[12px]', 'leading-[16px]', 'font-normal', 'mt-[2px]')}>
-                  {rowValue.subvalue}
+              <div className="flex items-center space-x-2 py-4 pr-2 bg-transparent rounded-lg">
+                <div className="flex flex-col mr-2">
+                  <span className={clsx('font-inter font-normal text-[0.875rem] leading-[1.25rem] text-[#000005]')}>
+                    {rowValue.value}
+                  </span>
+                  <span className="font-inter font-normal text-[0.75rem] leading-[1rem] text-[#91A3B0]">
+                    {rowValue?.subValue}
+                  </span>
                 </div>
+                {rowValue.recommended && (
+                  <Badge
+                    label="Recommmended"
+                    className="flex items-center justify-center p-2 gap-[0.625rem]
+                    font font-inter font-semibold bg-[rgba(85,126,251,0.12)] border border-[#D0DBFE] rounded-md text-[#4167AF]"
+                  />
+                )}
+                <Icon name={rowValue?.icon} />
               </div>
             );
           }
-          return <div>{rowValue}</div>;
+          return (
+            <>
+              <div className="flex flex-row flex- justify-end">
+                <div className="py-2 px-4 mx-4">${rowValue}</div>
+                <Button onClick={() => alert('Welcome!')}>
+                  <div className="flex items-center gap-2 px-2">+ Add to Order</div>
+                </Button>
+              </div>
+            </>
+          );
         },
         footer: (info) => info.column.id,
         sortingFn: (rowA, rowB) => {
@@ -85,7 +109,8 @@ const useGenerateTable = <T extends TableTData>({
     if (data && data.length === 0) return [];
     else {
       const firstColumn = data[0];
-      const keys = Object.keys(firstColumn);
+
+      const keys = Object.keys(firstColumn) as Array<keyof T>;
       return keys.map((key) => {
         const filterType = colsFilters?.find((filter) => filter.id === key)?.filterType;
         return createColumn(key, filterType);
