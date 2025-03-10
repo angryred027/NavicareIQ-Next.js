@@ -13,13 +13,15 @@ export async function middleware(request: NextRequest) {
   const authToken = request.cookies.get('psg_auth_token');
 
   if (!authToken) {
-    return NextResponse.redirect(new URL('/', request.url));
+    return NextResponse.redirect(new URL('/login', request.url));
   }
 
   try {
     const userId: string = await passageServer.auth.validateJwt(authToken.value);
 
-    if (userId) return NextResponse.next();
+    if (userId) {
+      return NextResponse.next();
+    }
 
     if (!userId) {
       return NextResponse.redirect(new URL('/login', request.url));

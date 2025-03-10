@@ -2,7 +2,16 @@ import { SortDirection, SortingState } from '@tanstack/react-table';
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
 export type TableTData = Record<
   string,
-  string | number | boolean | { value: string | ReactNode; subvalue: string | ReactNode; filterType?: FilterType }
+  | string
+  | number
+  | boolean
+  | {
+      value: string | ReactNode;
+      subValue: string | ReactNode;
+      recommended: boolean | ReactNode;
+      icon: string | ReactNode;
+      filterType?: FilterType 
+    }
 >;
 
 export type ColFilter = {

@@ -1,4 +1,4 @@
-import Collapse from '@/components/collapse/Collapse';
+import Accordion from '@/components/accordion/Accordion';
 import { IFaqItem } from '@/types/help';
 
 export function FaqContent() {
@@ -41,9 +41,9 @@ export function FaqContent() {
       <div className="mt-2 border-t border-system-light-200">
         {faqList.map((faq, index) => (
           <div key={index}>
-            <Collapse title={faq.title}>
+            <Accordion title={faq.title}>
               <p className="text-sm text-system-dark-500">{faq.description}</p>
-            </Collapse>
+            </Accordion>
           </div>
         ))}
       </div>
