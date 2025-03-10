@@ -1,5 +1,5 @@
 'use client';
-import React, { type FC, useEffect, useState, useCallback } from 'react';
+import React, { type FC, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import InsuranceIcon from '@/assets/icons/insurance.svg';
@@ -127,7 +127,7 @@ const PatientsList: FC = () => {
   return (
     <div className="font-sans">
       <div className="mt-[15px]">
-        <Table data={rows} onRowClick={handleRowClick} colsFilters={colsFilters} />
+        <Table title="Patients" data={rows} onRowClick={handleRowClick} colsFilters={colsFilters} />
       </div>
     </div>
   );

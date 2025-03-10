@@ -16,7 +16,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             { isActive: true, label: '#PLJ22113 (Jan 28, 2025)' },
           ]}
         />
-        <div className="p-6 h-full">{children}</div>
+        <div className="p-6 h-[calc(100vh_-_142px)] overflow-hidden">{children}</div>
       </div>
     </div>
   );

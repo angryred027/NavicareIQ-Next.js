@@ -1,6 +1,9 @@
+'use client';
 import React, { FC } from 'react';
 import { Grid, GridItem, Card } from '@/components/common';
 import PatientInformation from './patient-information';
+import PastReportPrescriptions from './past-report-prescriptions';
+import PatientTable from './patient-table';
 
 const PatientDetail: FC = () => {
   return (
@@ -10,15 +13,13 @@ const PatientDetail: FC = () => {
           <PatientInformation />
         </Card>
       </GridItem>
-      <GridItem col={2} className="h-full">
-        <Card className="h-full">
-          <div>Detail</div>
+      <GridItem col={3} className="h-full">
+        <Card className="h-full p-[8px]">
+          <PastReportPrescriptions />
         </Card>
       </GridItem>
-      <GridItem col={8}>
-        <Card>
-          <div>Detail</div>
-        </Card>
+      <GridItem col={7}>
+        <PatientTable />
       </GridItem>
     </Grid>
   );

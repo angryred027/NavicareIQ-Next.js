@@ -6,6 +6,7 @@ import GoToLast from '@/assets/icons/go-to-last.svg';
 import GoToNext from '@/assets/icons/next.svg';
 import GoToPrev from '@/assets/icons/previous.svg';
 import clsx from 'clsx';
+import { twMerge } from 'tailwind-merge';
 import { IconButton } from '../common';
 import { useTableContext } from './context';
 import { Loader } from '../common';
@@ -29,7 +30,12 @@ export const Table: FC = () => {
 
   return (
     <table
-      className={clsx('w-full', 'bg-[#FFFFFF]', 'text-[12px]', 'border-separate', 'border-spacing-[0px]')}
+      className={twMerge(
+        clsx('w-full', 'bg-[#FFFFFF]', 'text-[12px]', 'border-separate', 'border-spacing-[0px]'),
+        clsx({
+          'border-[1px] border-[#E6F0F8] rounded-[8px]': isEmpty,
+        })
+      )}
       cellSpacing={0}
       cellPadding={0}
     >
@@ -114,81 +120,83 @@ export const Table: FC = () => {
           </tr>
         )}
       </tbody>
-      <tfoot>
-        <tr>
-          <td
-            colSpan={colsTotal}
-            className={clsx(
-              'border-b-[1px]',
-              'border-r-[1px]',
-              'border-[#E6F0F8]',
-              'border-l-[1px]',
-              'rounded-b-[8px]',
-              'items-center'
-            )}
-          >
-            <div
+      {!isEmpty && (
+        <tfoot>
+          <tr>
+            <td
+              colSpan={colsTotal}
               className={clsx(
-                'font-semibold',
-                'text-[12px]',
-                'w-full',
-                'flex',
-                'justify-end',
-                'gap-[12px]',
-                'px-[22px]',
-                'py-[6px]',
+                'border-b-[1px]',
+                'border-r-[1px]',
+                'border-[#E6F0F8]',
+                'border-l-[1px]',
+                'rounded-b-[8px]',
                 'items-center'
               )}
             >
-              <div className={clsx('flex', 'gap-[12px]')}>
-                Rows per page:
-                <div className="flex gap-[12px] ml-[14px]">{`${rowsOnPage} - ${totalRows} of ${totalRows}`}</div>
-              </div>
-              <div>
-                <select
-                  value={pageSize}
-                  onChange={(e) => {
-                    changeRowsPerPage(Number(e.target.value));
-                  }}
-                >
-                  {[10, 20, 30, 40, 50].map((pageSize) => (
-                    <option key={pageSize} value={pageSize}>
-                      {pageSize}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className={clsx('flex', 'gap-[14px]', 'items-center', 'ml-[14px]')}>
-                <IconButton
-                  Icon={GoToFirts}
-                  onClick={() => handlePageChange('first')}
-                  disabled={Number(currentPage) === 1}
-                  alt="go-to-first"
-                />
+              <div
+                className={clsx(
+                  'font-semibold',
+                  'text-[12px]',
+                  'w-full',
+                  'flex',
+                  'justify-end',
+                  'gap-[12px]',
+                  'px-[22px]',
+                  'py-[6px]',
+                  'items-center'
+                )}
+              >
+                <div className={clsx('flex', 'gap-[12px]')}>
+                  Rows per page:
+                  <div className="flex gap-[12px] ml-[14px]">{`${rowsOnPage} - ${totalRows} of ${totalRows}`}</div>
+                </div>
+                <div>
+                  <select
+                    value={pageSize}
+                    onChange={(e) => {
+                      changeRowsPerPage(Number(e.target.value));
+                    }}
+                  >
+                    {[10, 20, 30, 40, 50].map((pageSize) => (
+                      <option key={pageSize} value={pageSize}>
+                        {pageSize}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className={clsx('flex', 'gap-[14px]', 'items-center', 'ml-[14px]')}>
+                  <IconButton
+                    Icon={GoToFirts}
+                    onClick={() => handlePageChange('first')}
+                    disabled={Number(currentPage) === 1}
+                    alt="go-to-first"
+                  />
 
-                <IconButton
-                  Icon={GoToPrev}
-                  onClick={() => handlePageChange('prev')}
-                  disabled={Number(currentPage) === 1}
-                  alt="go-to-prev"
-                />
-                <IconButton
-                  Icon={GoToNext}
-                  onClick={() => handlePageChange('next')}
-                  disabled={Number(currentPage) === Number(totalPages)}
-                  alt="go-to-next"
-                />
-                <IconButton
-                  Icon={GoToLast}
-                  onClick={() => handlePageChange('last')}
-                  alt="go-to-last"
-                  disabled={Number(currentPage) === Number(totalPages)}
-                />
+                  <IconButton
+                    Icon={GoToPrev}
+                    onClick={() => handlePageChange('prev')}
+                    disabled={Number(currentPage) === 1}
+                    alt="go-to-prev"
+                  />
+                  <IconButton
+                    Icon={GoToNext}
+                    onClick={() => handlePageChange('next')}
+                    disabled={Number(currentPage) === Number(totalPages)}
+                    alt="go-to-next"
+                  />
+                  <IconButton
+                    Icon={GoToLast}
+                    onClick={() => handlePageChange('last')}
+                    alt="go-to-last"
+                    disabled={Number(currentPage) === Number(totalPages)}
+                  />
+                </div>
               </div>
-            </div>
-          </td>
-        </tr>
-      </tfoot>
+            </td>
+          </tr>
+        </tfoot>
+      )}
     </table>
   );
 };
