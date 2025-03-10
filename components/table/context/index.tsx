@@ -2,10 +2,12 @@
 import React, { createContext, useContext, type ReactNode } from 'react';
 import { TableTData, TTableContext, TTableProps } from '../table.type';
 import useGenerateTable from '../hooks/useGenerateTable';
+import { Align } from '@/types/help';
 
 export interface TableProviderProps<T extends TableTData> extends TTableProps<T> {
   children: ReactNode;
   data: T[];
+  colsAlign?: Record<keyof T, Align>;
 }
 
 export const TableContext = createContext<TTableContext | undefined>(undefined);

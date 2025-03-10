@@ -30,16 +30,12 @@ export const Table: FC = () => {
 
   return (
     <table
-      className={clsx(
-        'w-full',
-        'bg-[#FFFFFF]',
-        'text-[12px]',
-        'border',
-        'border-separate',
-        'border-[#E6F0F8]',
-        'rounded-xl'
+      className={twMerge(
+        clsx('w-full', 'bg-[#FFFFFF]', 'text-[12px]', 'border', 'border-separate', 'border-[#E6F0F8]', 'rounded-xl'),
+        clsx({
+          'border-[1px] border-[E6F0F8] rounded-[8px]': isEmpty,
+        })
       )}
-          'border-[1px] border-[#E6F0F8] rounded-[8px]': isEmpty,
       cellSpacing={0}
       cellPadding={0}
     >
@@ -66,9 +62,9 @@ export const Table: FC = () => {
                     'py-[12px]',
                     'px-[16px]',
                     'text-left',
-                    'capitalize',
-                    header.id === 'price' ? 'text-center' : 'text-left'
+                    'capitalize'
                   )}
+                  style={{ textAlign: header.align || 'left' }}
                 >
                   {header.label}
                 </div>

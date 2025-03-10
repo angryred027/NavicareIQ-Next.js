@@ -1,5 +1,5 @@
 'use client';
-import React, { type FC, useState, useCallback } from 'react';
+import React, { type FC, useState, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import InsuranceIcon from '@/assets/icons/insurance.svg';
@@ -116,9 +116,9 @@ const PatientsList: FC = () => {
     setPatients(response);
   }, []);
 
-  // useEffect(() => {
-  //   fetchPatients();
-  // }, [fetchPatients]);
+  useEffect(() => {
+    fetchPatients();
+  }, [fetchPatients]);
 
   const handleRowClick = (row: TRows) => {
     router.push(`/patients/${row.id}`);

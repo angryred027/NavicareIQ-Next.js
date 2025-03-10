@@ -6,7 +6,7 @@ import { setLoading, setError, setFilters, setSort } from '@/store/features/page
 
 import Icon from '@/components/icon/Icon';
 import Button from '@/components/button/Button';
-import { Table } from '@/components/table/TableC';
+import { Table } from '@/components/table/table-component';
 import { TableProvider } from '@/components/table/context';
 import OrderCard from '@/modules/orders/order-card/OrderCard';
 import FavouriteCard from '@/modules/orders/favourite-card/FavouriteCard';
@@ -16,6 +16,7 @@ const favouriteData = [
     title: 'Quantitative hCG Pregnancy',
     category: 'LabCorp',
     price: 80,
+    align: 'right',
   },
   {
     title: 'Liver Health',

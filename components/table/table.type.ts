@@ -1,5 +1,7 @@
+import { Align } from '@/types/help';
 import { SortDirection, SortingState } from '@tanstack/react-table';
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
+
 export type TableTData = Record<
   string,
   | string
@@ -10,7 +12,8 @@ export type TableTData = Record<
       subValue: string | ReactNode;
       recommended: boolean | ReactNode;
       icon: string | ReactNode;
-      filterType?: FilterType 
+      filterType?: FilterType;
+      align?: 'left' | 'right' | 'center';
     }
 >;
 
@@ -26,6 +29,7 @@ export type TTableProps<T extends TableTData> = {
   onRowClick?: (row: TRows) => void;
   loading?: boolean;
   colsFilters?: ColFilter[];
+  colsAlign?: Record<keyof T, Align>;
 };
 
 export type TChangePage = 'next' | 'prev' | 'first' | 'last' | number;
@@ -50,6 +54,7 @@ export type TCol = {
     handleFilter: (val: string | number) => void;
     sortFn: ((event: unknown) => void) | undefined;
     filterType?: FilterType;
+    align?: Align;
   }[];
 };
 

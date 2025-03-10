@@ -1,30 +1,36 @@
--- THIS IS SOMETHING ONLY NEEDED TO PUSH TO MAIN -- 
+-- THIS IS SOMETHING ONLY NEEDED TO PUSH TO MAIN --
 
-Signed commits verify the authenticity of code changes through cryptographic signatures. 
+Signed commits verify the authenticity of code changes through cryptographic signatures.
 
 Required steps:
+
 1. Generate GPG key:
+
 ```bash
 gpg --full-generate-key
 ```
 
 2. Add to GitHub:
+
 - Copy GPG key: `gpg --armor --export YOUR_KEY_ID`
 - Add to GitHub Settings > SSH and GPG keys
 
 3. Configure Git:
+
 ```bash
 git config --global user.signingkey YOUR_KEY_ID
 git config --global commit.gpgsign true
 ```
 
 4. Sign commits:
+
 ```bash
 git commit -S -m "message"  # Manual signing
 # Or commits auto-sign with previous config
 ```
 
 Benefits:
+
 - Verifies commit authenticity
 - Prevents impersonation
 - Adds security audit trail
@@ -32,7 +38,7 @@ Benefits:
 
 Commits without valid signatures will be rejected if this protection is enabled.
 
- # Table Component Usage Guide
+# Table Component Usage Guide
 
 The `Table` component is a reusable table component that can be used to display tabular data. It supports pagination, row click events, and customizable rows per page.
 
@@ -49,17 +55,27 @@ Here is an example of how to use the `Table` component:
 import React from 'react';
 import { Table } from './components/table/TableC';
 
-const rows = [
+const rows: TableTData[] = [
   {
-    name: {
-      value: "Byron D'Amore",
-      subvalue: '1234567890',
+    'Lab Name': {
+      value: 'Standard Thyroid',
+      subValue: 'LabCorp',
+      recommended: true,
+      icon: null,
     },
-    DOB: {
-      value: '01/01/2000',
-      subvalue: '22 years',
+    Price: {
+      value: '80',
+      subValue: null,
+      recommended: false,
+      icon: null,
+      align: 'right',
     },
-    email: 'damore@gmail.com',
+  },
+];
+const colsFilters: ColFilter[] = [
+  {
+    id: 'Lab Name',
+    filterType: 'text',
   },
 ];
 
@@ -70,7 +86,13 @@ const App = () => {
 
   return (
     <div>
-      <Table data={rows} onRowClick={handleRowClick} />
+      <Table
+        title="Labs"
+        data={rows}
+        onRowClick={handleRowClick}
+        colsFilters={colsFilters}
+        extraContent={<FavoriteContainer />}
+      />
     </div>
   );
 };

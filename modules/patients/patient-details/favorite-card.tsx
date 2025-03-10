@@ -39,13 +39,13 @@ const FavoriteCard: FC<Props> = ({ title, subtitle, bookmarked, price, onClick, 
       </div>
       <div className="flex justify-between">
         <div className="">{price}</div>
-        <div>
-          {!hideActions && (
-            <div className="size-[24px]">
+        {!hideActions && (
+          <div className="size-[24px]">
+            <button className="size-[24px] border-none" onClick={onClick}>
               <Image src={PlusCircleIcon} width={24} height={24} alt="plus-circle" />
-            </div>
-          )}
-        </div>
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import { Table } from './table-component';
 import { TableProvider } from './context';
 import { TableHeaderFilters } from './table-header-filters';
 import clsx from 'clsx';
+import { Align } from '@/types/help';
 
 type Props<T extends TableTData> = {
   data: T[];
@@ -11,6 +12,7 @@ type Props<T extends TableTData> = {
   onRowClick?: (row: TRows) => void;
   loading?: boolean;
   colsFilters?: ColFilter[];
+  colsAlign?: Record<keyof T, Align>;
   extraContent?: ReactNode;
 };
 
