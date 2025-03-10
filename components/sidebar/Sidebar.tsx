@@ -55,7 +55,7 @@ export const Sidebar = () => {
 
   return (
     <aside
-      className="h-screen bg-[#F6F9FA] border-r border-[#EDF2F6] flex flex-col justify-between items-center pb-3"
+      className="h-screen sticky top-0 bg-[#F6F9FA] border-r border-[#EDF2F6] flex flex-col justify-between items-center pb-3"
       suppressHydrationWarning
     >
       <div className="flex flex-col">
