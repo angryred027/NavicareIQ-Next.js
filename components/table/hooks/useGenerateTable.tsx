@@ -19,7 +19,6 @@ import {
 import { TTableProps, TableTData, TChangePage, TCol, TRows, SorttedType, FilterType } from '../table.type';
 import clsx from 'clsx';
 import Badge from '@/components/badge/Badge';
-import Button from '@/components/button/Button';
 import Icon from '@/components/icon/Icon';
 import { Align } from '@/types/help';
 
@@ -49,45 +48,39 @@ const useGenerateTable = <T extends TableTData>({
         id: column as string,
         header: () => column,
         cell: ({ row }) => {
-          const rowValue = row.original[column];
-          if (typeof rowValue === 'object' && rowValue !== null) {
-            const align = rowValue.align ?? 'left';
-            const classAlign =
-              align === 'left' ? 'justify-start' : align === 'right' ? 'justify-end' : 'justify-center';
+          const cellValue = row.original[column];
+          const classAlign = align === 'left' ? 'justify-start' : align === 'right' ? 'justify-end' : 'justify-center';
+          if (typeof cellValue === 'object' && cellValue !== null) {
             return (
               <div className={clsx('flex items-center space-x-2 py-4 bg-transparent rounded-lg', classAlign)}>
                 <div className="flex flex-col mr-2">
                   <span className={clsx('font-inter font-normal text-[0.875rem] leading-[1.25rem] text-[#000005]')}>
-                    {rowValue.value}
+                    {cellValue.value}
                   </span>
                   <span className="font-inter font-normal text-[0.75rem] leading-[1rem] text-[#91A3B0]">
-                    {rowValue?.subValue}
+                    {cellValue?.subValue}
                   </span>
                 </div>
-                {rowValue.recommended && (
+                {cellValue.recommended && (
                   <Badge
                     label="Recommmended"
                     className="flex items-center justify-center p-2 gap-[0.625rem]
                     font font-inter font-semibold bg-[rgba(85,126,251,0.12)] border border-[#D0DBFE] rounded-md text-[#4167AF] self-start"
                   />
                 )}
-                {rowValue?.icon && (
+                {cellValue?.icon && (
                   <div className="self-start">
-                    <Icon name={rowValue?.icon} />
+                    <Icon name={cellValue?.icon} />
                   </div>
                 )}
               </div>
             );
           }
+
           return (
-            <>
-              <div className="flex flex-row flex- justify-end">
-                <div className="py-2 px-4 mx-4">${rowValue}</div>
-                <Button onClick={() => alert('Welcome!')}>
-                  <div className="flex items-center gap-2 px-2">+ Add to Order</div>
-                </Button>
-              </div>
-            </>
+            <div className={clsx('flex items-center space-x-2 py-4 bg-transparent rounded-lg', classAlign)}>
+              {cellValue}
+            </div>
           );
         },
         footer: (info) => info.column.id,
@@ -123,7 +116,8 @@ const useGenerateTable = <T extends TableTData>({
       const keys = Object.keys(firstColumn) as Array<keyof T>;
       return keys.map((key) => {
         const filterType = colsFilters?.find((filter) => filter.id === key)?.filterType;
-        const align = colsAlign?.[key];
+        const align = colsAlign?.[key] ?? 'left';
+
         return createColumn(key, filterType, align);
       });
     }

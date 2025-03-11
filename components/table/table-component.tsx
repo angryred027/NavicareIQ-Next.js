@@ -92,7 +92,7 @@ export const Table: FC = () => {
                     <td
                       key={cell.id}
                       className={clsx('border-b-[1px]', 'border-b-[#E6F0F8]', 'first:border-l-[1px]', {
-                        'w-[170px]': cell.isActionRow,
+                        'w-[190px]': cell.isActionRow,
                       })}
                     >
                       <div className={clsx('p-[16px]', 'font-normal', 'leading-[20px]', 'text-[14px]')}>

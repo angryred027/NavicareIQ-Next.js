@@ -56,6 +56,7 @@ const PatientTable: FC = () => {
         colsFilters={colsFilters}
         colsAlign={{
           Price: 'right',
+          btns: 'right',
         }}
         extraContent={<FavoriteContainer />}
       />
