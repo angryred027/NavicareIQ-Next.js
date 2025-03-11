@@ -30,7 +30,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             ]}
           />
         )}
-        <div className="p-6">{children}</div>
+        <div className="p-6 h-[calc(100vh_-_142px)] overflow-hidden">{children}</div>
       </div>
     </div>
   );

@@ -1,13 +1,13 @@
 'use client';
-import React, { type FC, useEffect, useState, useCallback } from 'react';
+import React, { type FC, useState, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import InsuranceIcon from '@/assets/icons/insurance.svg';
 import MaleIcon from '@/assets/icons/male.svg';
 import FemaleIcon from '@/assets/icons/female.svg';
-import { Table } from '../table';
-import { ColFilter, TableTData, TRows } from '../table/table.type';
-import { Badge } from '../common';
+import { Table } from '../../components/table';
+import { ColFilter, TableTData, TRows } from '../../components/table/table.type';
+import { Badge } from '../../components/common';
 import { getPatients } from '@/lib/api/patient';
 import { Patient } from '@/types/patient.type';
 import { ApiResponse } from '@/lib';
@@ -20,15 +20,19 @@ const PatientsList: FC = () => {
     {
       name: {
         value: "Byron D'Amore",
-        subvalue: (
+        subValue: (
           <div className="flex items-center gap-[2px]">
             Male <Image src={MaleIcon} alt="Male icon" width={16} height={16} />
           </div>
         ),
+        recommended: false,
+        icon: null,
       },
       DOB: {
         value: 'Feb 12, 1995',
-        subvalue: '29 years',
+        subValue: '29 years',
+        recommended: false,
+        icon: null,
       },
       email: 'damore@gmail.com',
       'Phone number': '(197) 260-7456',
@@ -40,34 +44,44 @@ const PatientsList: FC = () => {
     {
       name: {
         value: 'Jane Doe',
-        subvalue: (
+        subValue: (
           <div className="flex items-center gap-[2px]">
             Female <Image src={FemaleIcon} alt="female icon" width={16} height={16} />
           </div>
         ),
+        recommended: false,
+        icon: null,
       },
       DOB: {
         value: 'Jan 1, 2000',
-        subvalue: '25 years',
+        subValue: '25 years',
+        recommended: false,
+        icon: null,
       },
       email: 'jane.doe@gmail.com',
       'Phone number': '(123) 456-7890',
       address: {
         value: '1234 Main St, Anytown, USA',
-        subvalue: 'Apt. 123',
+        subValue: 'Apt. 123',
+        recommended: false,
+        icon: null,
       },
       'Patient Since': {
         value: 'Jan 1, 2022',
-        subvalue: '3 months',
+        subValue: '3 months',
+        recommended: false,
+        icon: null,
       },
       Insurance: {
         value: 'Aetna',
-        subvalue: (
+        subValue: (
           <div className="flex items-center gap-[6px]">
             W2113 69935
             <Image src={InsuranceIcon} alt="Insurance" width={16} height={16} />
           </div>
         ),
+        recommended: false,
+        icon: null,
       },
       'Reports No.': {
         value: (
@@ -75,7 +89,9 @@ const PatientsList: FC = () => {
             6 <Badge label="+3" />
           </div>
         ),
-        subvalue: null,
+        recommended: false,
+        icon: null,
+        subValue: null,
       },
     },
   ];
@@ -116,9 +132,9 @@ const PatientsList: FC = () => {
     setPatients(response);
   }, []);
 
-  // useEffect(() => {
-  //   fetchPatients();
-  // }, [fetchPatients]);
+  useEffect(() => {
+    fetchPatients();
+  }, [fetchPatients]);
 
   const handleRowClick = (row: TRows) => {
     router.push(`/patients/${row.id}`);
@@ -127,7 +143,7 @@ const PatientsList: FC = () => {
   return (
     <div className="font-sans">
       <div className="mt-[15px]">
-        <Table data={rows} onRowClick={handleRowClick} colsFilters={colsFilters} />
+        <Table title="Patients" data={rows} onRowClick={handleRowClick} colsFilters={colsFilters} />
       </div>
     </div>
   );

@@ -3,7 +3,11 @@ import clsx from 'clsx';
 import { TableSortBtn, TableFiltersBtn } from './table-filters';
 import { useTableContext } from './context';
 
-export const TableHeaderFilters: FC = () => {
+type Props = {
+  title: string;
+};
+
+export const TableHeaderFilters: FC<Props> = ({ title }) => {
   const { totalRows } = useTableContext();
   return (
     <div
@@ -21,7 +25,7 @@ export const TableHeaderFilters: FC = () => {
       )}
     >
       <div className="w-full">
-        <div className={clsx('font-bold', 'text-[##000005]', 'leading-[24px]')}>Patients</div>
+        <div className={clsx('font-bold', 'text-[##000005]', 'leading-[24px]')}>{title ?? 'Title'}</div>
         <div className={clsx('font-medium', 'text-[#757B80]', 'text-[12px]', 'leading-[20px]')}>
           Displaying: {totalRows}
         </div>

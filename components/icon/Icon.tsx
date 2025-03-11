@@ -1,5 +1,9 @@
+import type { ReactNode } from 'react';
+
+export type AvailableIcons = keyof typeof icons;
+
 type IconProps = {
-  name: any;
+  name: AvailableIcons | ReactNode;
   className?: string;
   size?: number;
   viewBox?: string;
@@ -653,8 +657,8 @@ const icons = {
       />
       <path d="M5.99997 10L14 10" stroke="#515253" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       <path d="M9.99997 14L9.99997 6" stroke="#515253" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-     </>
-  ), 
+    </>
+  ),
   copy: (
     <>
       <path
@@ -713,9 +717,27 @@ const icons = {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <path
-        d="M5.83325 12.5C7.33325 10.3571 7.86249 9.16226 8.90143 9.44444C9.66848 9.65278 9.73365 10.6556 10.606 10.8333C11.7748 11.0714 12.2083 9.28571 13.3333 7.5" />
+      <path d="M5.83325 12.5C7.33325 10.3571 7.86249 9.16226 8.90143 9.44444C9.66848 9.65278 9.73365 10.6556 10.606 10.8333C11.7748 11.0714 12.2083 9.28571 13.3333 7.5" />
     </>
+  ),
+  bookmark: (
+    <path
+      d="M11 8.16666C11 11.9167 11 16.5 10.2308 16.5C9.46153 16.5 6.76923 14 6 14C5.23076 14 2.53846 16.5 1.76923 16.5C1 16.5 1 11.9167 1 8.16666C1 1.5 1.38461 1.5 6 1.5C10.6154 1.5 11 1.5 11 8.16666Z"
+      stroke="#91A3B0"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  ),
+  bookmarked: (
+    <path
+      d="M11 8.16666C11 11.9167 11 16.5 10.2308 16.5C9.46153 16.5 6.76923 14 6 14C5.23076 14 2.53846 16.5 1.76923 16.5C1 16.5 1 11.9167 1 8.16666C1 1.5 1.38461 1.5 6 1.5C10.6154 1.5 11 1.5 11 8.16666Z"
+      fill="#4167AF"
+      stroke="#4167AF"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   ),
 };
 

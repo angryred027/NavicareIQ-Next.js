@@ -6,16 +6,18 @@ import { setLoading, setError, setFilters, setSort } from '@/store/features/page
 
 import Icon from '@/components/icon/Icon';
 import Button from '@/components/button/Button';
-import { Table } from '@/components/table/TableC';
+import { Table } from '@/components/table/table-component';
 import { TableProvider } from '@/components/table/context';
 import OrderCard from '@/modules/orders/order-card/OrderCard';
 import FavouriteCard from '@/modules/orders/favourite-card/FavouriteCard';
+import { TableTData } from '@/components/table/table.type';
 
 const favouriteData = [
   {
     title: 'Quantitative hCG Pregnancy',
     category: 'LabCorp',
     price: 80,
+    align: 'right',
   },
   {
     title: 'Liver Health',
@@ -92,7 +94,7 @@ const ordersData = [
   },
 ];
 
-const labsData = [
+const labsData: TableTData[] = [
   {
     'Lab Name': {
       value: 'Standard Thyroid',
@@ -100,7 +102,17 @@ const labsData = [
       icon: 'favourite',
       recommended: true,
     },
-    price: 50,
+    price: '$50',
+    btns: {
+      value: (
+        <Button onClick={() => alert('Welcome!')}>
+          <div className="flex items-center gap-2 px-2">+ Add to Order</div>
+        </Button>
+      ),
+      subValue: null,
+      recommended: false,
+      icon: null,
+    },
   },
   {
     'Lab Name': {
@@ -109,7 +121,17 @@ const labsData = [
       icon: 'favourite',
       recommended: false,
     },
-    price: 250,
+    price: '$250',
+    btns: {
+      value: (
+        <Button onClick={() => alert('Welcome!')}>
+          <div className="flex items-center gap-2 px-2">+ Add to Order</div>
+        </Button>
+      ),
+      subValue: null,
+      recommended: false,
+      icon: null,
+    },
   },
   {
     'Lab Name': {
@@ -118,7 +140,17 @@ const labsData = [
       icon: 'favourite',
       recommended: false,
     },
-    price: 120,
+    price: '$120',
+    btns: {
+      value: (
+        <Button onClick={() => alert('Welcome!')}>
+          <div className="flex items-center gap-2 px-2">+ Add to Order</div>
+        </Button>
+      ),
+      subValue: null,
+      recommended: false,
+      icon: null,
+    },
   },
 ];
 
@@ -198,7 +230,13 @@ export default function OrderPage() {
               </div>
             </div>
           </div>
-          <TableProvider data={labsData}>
+          <TableProvider
+            data={labsData}
+            colsAlign={{
+              price: 'right',
+              btns: 'right',
+            }}
+          >
             <Table />
           </TableProvider>
         </div>
