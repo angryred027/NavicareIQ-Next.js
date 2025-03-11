@@ -20,15 +20,19 @@ const PatientsList: FC = () => {
     {
       name: {
         value: "Byron D'Amore",
-        subvalue: (
+        subValue: (
           <div className="flex items-center gap-[2px]">
             Male <Image src={MaleIcon} alt="Male icon" width={16} height={16} />
           </div>
         ),
+        recommended: false,
+        icon: null,
       },
       DOB: {
         value: 'Feb 12, 1995',
-        subvalue: '29 years',
+        subValue: '29 years',
+        recommended: false,
+        icon: null,
       },
       email: 'damore@gmail.com',
       'Phone number': '(197) 260-7456',
@@ -40,34 +44,44 @@ const PatientsList: FC = () => {
     {
       name: {
         value: 'Jane Doe',
-        subvalue: (
+        subValue: (
           <div className="flex items-center gap-[2px]">
             Female <Image src={FemaleIcon} alt="female icon" width={16} height={16} />
           </div>
         ),
+        recommended: false,
+        icon: null,
       },
       DOB: {
         value: 'Jan 1, 2000',
-        subvalue: '25 years',
+        subValue: '25 years',
+        recommended: false,
+        icon: null,
       },
       email: 'jane.doe@gmail.com',
       'Phone number': '(123) 456-7890',
       address: {
         value: '1234 Main St, Anytown, USA',
-        subvalue: 'Apt. 123',
+        subValue: 'Apt. 123',
+        recommended: false,
+        icon: null,
       },
       'Patient Since': {
         value: 'Jan 1, 2022',
-        subvalue: '3 months',
+        subValue: '3 months',
+        recommended: false,
+        icon: null,
       },
       Insurance: {
         value: 'Aetna',
-        subvalue: (
+        subValue: (
           <div className="flex items-center gap-[6px]">
             W2113 69935
             <Image src={InsuranceIcon} alt="Insurance" width={16} height={16} />
           </div>
         ),
+        recommended: false,
+        icon: null,
       },
       'Reports No.': {
         value: (
@@ -75,7 +89,9 @@ const PatientsList: FC = () => {
             6 <Badge label="+3" />
           </div>
         ),
-        subvalue: null,
+        recommended: false,
+        icon: null,
+        subValue: null,
       },
     },
   ];

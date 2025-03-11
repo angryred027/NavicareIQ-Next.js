@@ -13,14 +13,14 @@ const PatientTable: FC = () => {
         value: 'Standard Thyroid',
         subValue: 'LabCorp',
         recommended: true,
-        icon: null,
+        icon: 'bookmark',
       },
       Price: {
         value: '80',
         subValue: null,
         recommended: false,
-        icon: null,
         align: 'right',
+        icon: 'bookmarked',
       },
       btns: {
         value: (

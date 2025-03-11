@@ -89,7 +89,12 @@ export const Table: FC = () => {
               >
                 {row.cells.map((cell) => {
                   return (
-                    <td key={cell.id} className={clsx('border-b-[1px]', 'border-b-[#E6F0F8]', 'first:border-l-[1px]')}>
+                    <td
+                      key={cell.id}
+                      className={clsx('border-b-[1px]', 'border-b-[#E6F0F8]', 'first:border-l-[1px]', {
+                        'w-[170px]': cell.isActionRow,
+                      })}
+                    >
                       <div className={clsx('p-[16px]', 'font-normal', 'leading-[20px]', 'text-[14px]')}>
                         {cell.value}
                       </div>

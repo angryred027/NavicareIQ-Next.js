@@ -1,6 +1,7 @@
 import { Align } from '@/types/help';
 import { SortDirection, SortingState } from '@tanstack/react-table';
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
+import { AvailableIcons } from '../icon/Icon';
 
 export type TableTData = Record<
   string,
@@ -11,7 +12,7 @@ export type TableTData = Record<
       value: string | ReactNode;
       subValue: string | ReactNode;
       recommended: boolean | ReactNode;
-      icon: string | ReactNode;
+      icon: string | ReactNode | AvailableIcons;
       filterType?: FilterType;
       align?: 'left' | 'right' | 'center';
     }
@@ -39,6 +40,7 @@ export type TRows = {
   cells: {
     id: string;
     value: ReactNode;
+    isActionRow: boolean;
   }[];
 };
 

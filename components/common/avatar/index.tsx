@@ -18,6 +18,7 @@ export const Avatar: FC<Props> = ({ src, alt, className, size = 44, label }) => 
       .split(' ')
       .map((word) => word[0])
       .join('');
+
     if (src) {
       return (
         <Image src={src} alt={alt ?? label} className={twMerge('rounded-full', className)} width={size} height={size} />

@@ -71,7 +71,11 @@ const useGenerateTable = <T extends TableTData>({
                     font font-inter font-semibold bg-[rgba(85,126,251,0.12)] border border-[#D0DBFE] rounded-md text-[#4167AF] self-start"
                   />
                 )}
-                {rowValue?.icon && <Icon name={rowValue?.icon} />}
+                {rowValue?.icon && (
+                  <div className="self-start">
+                    <Icon name={rowValue?.icon} />
+                  </div>
+                )}
               </div>
             );
           }
@@ -188,6 +192,7 @@ const useGenerateTable = <T extends TableTData>({
       cells: row.getVisibleCells().map((cell) => ({
         id: cell.column.id,
         value: flexRender(cell.column.columnDef.cell, cell.getContext()),
+        isActionRow: cell.column.id.includes('btns'),
       })),
     };
     return rowData;
