@@ -6,9 +6,17 @@ import { PatientInfo } from '@/modules/reports/patient-info/PatientInfo';
 import Badge from '@/components/badge/Badge';
 import { SelectDropDown } from '@/components/common/inputs/select-dropdown';
 
+type OrderData = {
+  patientId: string;
+  labId: string;
+};
 type Vendor = {
   value: string;
   label: React.ReactNode;
+};
+
+type AddOrderModalProps = {
+  orderData: OrderData;
 };
 const items = [
   {
@@ -20,7 +28,7 @@ const items = [
     label: <span>Quest Sonora</span>,
   },
 ];
-export default function AddOrderModal() {
+export default function AddOrderModal({ orderData }: AddOrderModalProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [vendors, setVendors] = useState<Vendor[]>(items);
   const [selectedVendor, setSelectedVendor] = useState<string>('');
