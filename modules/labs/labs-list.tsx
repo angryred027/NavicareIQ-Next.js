@@ -6,7 +6,8 @@ import React from 'react';
 import Image from 'next/image';
 import MaleIcon from '@/assets/icons/male.svg';
 import InsuranceIcon from '@/assets/icons/insurance.svg';
-import { BadgeStatus } from '@/components/common';
+import ThreeDotsIcon from '@/assets/icons/three-dots.svg';
+import { BadgeStatus, DropDown } from '@/components/common';
 
 const LabsList = () => {
   const router = useRouter();
@@ -48,6 +49,22 @@ const LabsList = () => {
         recommended: false,
         icon: null,
       },
+      btns: {
+        value: (
+          <DropDown
+            btnLabel={<Image src={ThreeDotsIcon} alt="Options" width={24} height={24} />}
+            className="border-none"
+            items={[
+              { value: 'Analyze', onClick: () => console.log('Edit') },
+              { value: 'Share', onClick: () => console.log('Delete') },
+              { value: 'Download', onClick: () => console.log('Delete') },
+            ]}
+          />
+        ),
+        subValue: null,
+        recommended: false,
+        icon: null,
+      },
     },
     {
       'Patient Name': {
@@ -85,6 +102,24 @@ const LabsList = () => {
         recommended: false,
         icon: null,
       },
+      btns: {
+        value: (
+          <div>
+            <DropDown
+              btnLabel={<Image src={ThreeDotsIcon} alt="Options" width={24} height={24} />}
+              className="border-none"
+              items={[
+                { value: 'Analyze', onClick: () => console.log('Edit') },
+                { value: 'Share', onClick: () => console.log('Delete') },
+                { value: 'Download', onClick: () => console.log('Delete') },
+              ]}
+            />
+          </div>
+        ),
+        subValue: null,
+        recommended: false,
+        icon: null,
+      },
     },
   ];
 
@@ -100,6 +135,9 @@ const LabsList = () => {
         canSelect
         onRowClick={handleRowClick}
         colsFilters={[]}
+        colsAlign={{
+          btns: 'right',
+        }}
         colsSort={['Patient Name', 'lab', 'email', 'Phone number', 'Completion Date', 'Insurance']}
       />
     </div>
