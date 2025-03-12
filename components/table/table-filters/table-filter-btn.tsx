@@ -27,6 +27,7 @@ export const TableFiltersBtn: FC = () => {
         value: header.id,
       };
     });
+
   const operators = useMemo(() => {
     if (!selectedFilter) return [];
     const col = cols.headers.find((header) => header.id === selectedFilter);
@@ -72,7 +73,7 @@ export const TableFiltersBtn: FC = () => {
 
   return (
     <Menu>
-      <MenuButton className={twMerge(btnOutlinedClassesName, menuButtonClasses)}>
+      <MenuButton disabled={colsOptions.length === 0} className={twMerge(btnOutlinedClassesName, menuButtonClasses)}>
         <div className="flex gap-[16px] items-center">
           <Image src={FilterIcon} alt="filter" width={24} height={24} />
           <div>Filter</div>

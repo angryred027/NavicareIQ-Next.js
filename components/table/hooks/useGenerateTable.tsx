@@ -29,6 +29,7 @@ const useGenerateTable = <T extends TableTData>({
   colsFilters,
   colsAlign,
   canSelect,
+  colsSort,
   ...rest
 }: TTableProps<T>) => {
   const [pagination, setPagination] = useState<PaginationState>({
@@ -309,6 +310,7 @@ const useGenerateTable = <T extends TableTData>({
     setIsLoading,
     isEmpty,
     handleResetFilters,
+    colsSort,
     ...rest,
   };
 };

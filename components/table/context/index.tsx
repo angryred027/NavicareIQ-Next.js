@@ -9,6 +9,7 @@ export interface TableProviderProps<T extends TableTData> extends TTableProps<T>
   data: T[];
   colsAlign?: Record<keyof T, Align>;
   canSelect?: boolean;
+  colsSort?: string[];
 }
 
 export const TableContext = createContext<TTableContext | undefined>(undefined);

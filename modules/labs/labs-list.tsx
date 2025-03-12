@@ -94,7 +94,14 @@ const LabsList = () => {
 
   return (
     <div>
-      <Table title="Labs" data={rows} canSelect onRowClick={handleRowClick} colsFilters={[]} />
+      <Table
+        title="Labs"
+        data={rows}
+        canSelect
+        onRowClick={handleRowClick}
+        colsFilters={[]}
+        colsSort={['Patient Name', 'lab', 'email', 'Phone number', 'Completion Date', 'Insurance']}
+      />
     </div>
   );
 };
