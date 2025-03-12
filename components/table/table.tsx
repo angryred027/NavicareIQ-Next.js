@@ -14,6 +14,7 @@ type Props<T extends TableTData> = {
   colsFilters?: ColFilter[];
   colsAlign?: Record<keyof T, Align>;
   extraContent?: ReactNode;
+  canSelect?: boolean;
 };
 
 const TableV1 = <T extends TableTData>({ extraContent, title, ...props }: Props<T>) => {

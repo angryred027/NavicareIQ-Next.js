@@ -94,7 +94,7 @@ const LabsList = () => {
 
   return (
     <div>
-      <Table title="Labs" data={rows} onRowClick={handleRowClick} colsFilters={[]} />
+      <Table title="Labs" data={rows} canSelect onRowClick={handleRowClick} colsFilters={[]} />
     </div>
   );
 };
