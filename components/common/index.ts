@@ -8,3 +8,4 @@ export * from './card';
 export * from './avatar';
 export * from './patient-card';
 export * from './divider';
+export * from './badge-status';
