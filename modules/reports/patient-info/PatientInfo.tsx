@@ -20,8 +20,8 @@ export const PatientInfo = () => {
   // };
 
   return (
-    <div className="space-y-4 flex justify-center align-middle gap-5 bg-transparent relative z-100">
-      <Collapse title="Angelina Perreira" defaultOpen>
+    <div className="w-full space-y-4 flex justify-center align-middle gap-5 bg-transparent relative z-100">
+      <Collapse title="Angelina Perreira" subTitle="Female, 32" defaultOpen>
         <div className="space-y-8 border-t border-system-light-200 pt-4">
           <div className="flex items-start gap-2 flex-wrap">
             <Icon name="calendar" size={18} viewBox="0 0 18 18" />
