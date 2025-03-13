@@ -39,58 +39,58 @@ const favouriteData = [
   },
 ];
 
-// const ordersData = [
-//   {
-//     category: 'Quantitative hCG Pregnancy +2',
-//     name: 'Angelina Perreira ',
-//     date: 'Jan 28, 2025',
-//   },
-//   {
-//     category: 'Quantitative hCG Pregnancy +2',
-//     name: 'Angelina Perreira ',
-//     date: 'Jan 28, 2025',
-//   },
-//   {
-//     category: 'Quantitative hCG Pregnancy +2',
-//     name: 'Angelina Perreira ',
-//     date: 'Jan 28, 2025',
-//   },
-//   {
-//     category: 'Quantitative hCG Pregnancy +2',
-//     name: 'Angelina Perreira ',
-//     date: 'Jan 28, 2025',
-//   },
-//   {
-//     category: 'Quantitative hCG Pregnancy +2',
-//     name: 'Angelina Perreira ',
-//     date: 'Jan 28, 2025',
-//   },
-//   {
-//     category: 'Quantitative hCG Pregnancy +2',
-//     name: 'Angelina Perreira ',
-//     date: 'Jan 28, 2025',
-//   },
-//   {
-//     category: 'Quantitative hCG Pregnancy +2',
-//     name: 'Angelina Perreira ',
-//     date: 'Jan 28, 2025',
-//   },
-//   {
-//     category: 'Quantitative hCG Pregnancy +2',
-//     name: 'Angelina Perreira ',
-//     date: 'Jan 28, 2025',
-//   },
-//   {
-//     category: 'Quantitative hCG Pregnancy +2',
-//     name: 'Angelina Perreira ',
-//     date: 'Jan 28, 2025',
-//   },
-//   {
-//     category: 'Quantitative hCG Pregnancy +2',
-//     name: 'Angelina Perreira ',
-//     date: 'Jan 28, 2025',
-//   },
-// ];
+const ordersData = [
+  {
+    category: 'Quantitative hCG Pregnancy +2',
+    name: 'Angelina Perreira ',
+    date: 'Jan 28, 2025',
+  },
+  {
+    category: 'Quantitative hCG Pregnancy +2',
+    name: 'Angelina Perreira ',
+    date: 'Jan 28, 2025',
+  },
+  {
+    category: 'Quantitative hCG Pregnancy +2',
+    name: 'Angelina Perreira ',
+    date: 'Jan 28, 2025',
+  },
+  {
+    category: 'Quantitative hCG Pregnancy +2',
+    name: 'Angelina Perreira ',
+    date: 'Jan 28, 2025',
+  },
+  {
+    category: 'Quantitative hCG Pregnancy +2',
+    name: 'Angelina Perreira ',
+    date: 'Jan 28, 2025',
+  },
+  {
+    category: 'Quantitative hCG Pregnancy +2',
+    name: 'Angelina Perreira ',
+    date: 'Jan 28, 2025',
+  },
+  {
+    category: 'Quantitative hCG Pregnancy +2',
+    name: 'Angelina Perreira ',
+    date: 'Jan 28, 2025',
+  },
+  {
+    category: 'Quantitative hCG Pregnancy +2',
+    name: 'Angelina Perreira ',
+    date: 'Jan 28, 2025',
+  },
+  {
+    category: 'Quantitative hCG Pregnancy +2',
+    name: 'Angelina Perreira ',
+    date: 'Jan 28, 2025',
+  },
+  {
+    category: 'Quantitative hCG Pregnancy +2',
+    name: 'Angelina Perreira ',
+    date: 'Jan 28, 2025',
+  },
+];
 
 const labsData = [
   {
