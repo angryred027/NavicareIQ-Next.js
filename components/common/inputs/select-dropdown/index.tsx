@@ -50,7 +50,8 @@ export const SelectDropDown: FC<SelectProps> = ({ label, value, onChange, option
               {
                 'py-[6px]': selected,
                 'py-[16px]': !selected,
-              }
+              },
+              'z-50'
             )}
           >
             <div className="flex relative items-center w-full">
@@ -72,7 +73,7 @@ export const SelectDropDown: FC<SelectProps> = ({ label, value, onChange, option
 
           <ListboxOptions
             anchor="bottom"
-            className="mt-2 w-[325px] rounded-lg border-[2px] border-[#273E69] bg-white py-2 shadow-lg"
+            className="mt-2 w-[325px] rounded-lg border-[2px] border-[#273E69] bg-white py-2 shadow-lg z-50"
           >
             {options.map((option) => (
               <ListboxOption
