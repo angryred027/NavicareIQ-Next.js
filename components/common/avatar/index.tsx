@@ -35,6 +35,7 @@ export const Avatar: FC<Props> = ({ src, alt, className, size = 44, label }) => 
           ),
           className
         )}
+        style={{ width: size, height: size }}
       >
         {cutLabel}
       </div>

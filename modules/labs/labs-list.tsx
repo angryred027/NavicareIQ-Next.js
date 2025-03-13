@@ -124,7 +124,7 @@ const LabsList = () => {
   ];
 
   const handleRowClick = (row: TRows) => {
-    router.push(`/patients/${row.id}`);
+    router.push(`/labs/${row.id}`);
   };
 
   return (
