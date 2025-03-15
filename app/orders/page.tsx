@@ -1,8 +1,8 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { useDispatch, UseDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '@/store/store';
-import { setLoading, setError, setFilters, setSort } from '@/store/features/pageSlice';
+import { setError, setLoading } from '@/store/features/pageSlice';
 
 import Icon from '@/components/icon/Icon';
 import Button from '@/components/button/Button';
@@ -11,6 +11,9 @@ import { TableProvider } from '@/components/table/context';
 import OrderCard from '@/modules/orders/order-card/OrderCard';
 import FavouriteCard from '@/modules/orders/favourite-card/FavouriteCard';
 import { TableTData } from '@/components/table/table.type';
+import { Loader } from '@/components/common';
+import { PatientInfo } from '@/modules/reports/patient-info/PatientInfo';
+import convertDateFormat from '@/lib/convertDateFormat';
 
 const favouriteData = [
   {
@@ -154,6 +157,20 @@ const labsData: TableTData[] = [
   },
 ];
 
+const patientData = {
+  name: 'Angellina Perreira',
+  gender: 'Female',
+  age: 32,
+  dob: '03 July 1992',
+  phone: '+1 (903) 533 0955',
+  email: 'perreira@gmail.com',
+  address: '1010 11th St. Sausalito, CA 96922',
+  startDate: 'Mar 12, 2023',
+  insurance: {
+    provider: 'Aetna',
+    code: 'W2113 69935',
+  },
+};
 export default function OrderPage() {
   // const [loading, setLoading] = useState(false);
   const [ordersData, setOrdersData] = useState([]);
@@ -161,11 +178,37 @@ export default function OrderPage() {
   const { loading, error, filters, sort } = useSelector((state: RootState) => state.page);
 
   useEffect(() => {
-    dispatch(setLoading(true));
-    //
+    const fetchOrderData = async () => {
+      dispatch(setLoading(true)); // 🔹 Start loading before API call
 
-    dispatch(setLoading(false));
-  }, []);
+      try {
+        const response = await fetch('/api/lab-order', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ patientId: 1 }),
+        });
+
+        if (response.ok) {
+          const obj = await response.json();
+          console.log(obj);
+
+          setOrdersData(obj);
+        } else {
+          setOrdersData([]);
+        }
+      } catch (error) {
+        console.error('Fetch Error:', error);
+        dispatch(setError(error.message));
+        setOrdersData([]);
+      } finally {
+        dispatch(setLoading(false));
+      }
+    };
+
+    fetchOrderData();
+  }, [dispatch]);
 
   return (
     <>
@@ -183,11 +226,20 @@ export default function OrderPage() {
             <Icon name="search" className="absolute left-3 top-2 text-gray-400" />
           </div>
 
-          <div className="w-full overflow-y-auto flex-1 [&::-webkit-scrollbar]:hidden">
-            {ordersData.map((item, index) => (
-              <OrderCard key={index} {...item} />
-            ))}
-          </div>
+          {loading ? (
+            <Loader />
+          ) : (
+            <div className="w-full overflow-y-auto flex-1 [&::-webkit-scrollbar]:hidden">
+              {ordersData.map((item, index) => (
+                <OrderCard
+                  key={index}
+                  category={item.lab_orders[0].lab_order_items[0].lab_product.name}
+                  name={patientData.name}
+                  date={convertDateFormat(item.created_at)}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Right Column */}

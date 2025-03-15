@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import { passage } from '@/lib/passage';
 import { usePathname, useRouter } from 'next/navigation';
 import { NoAuthRoutes } from '@/config/routes';
-import LoadingPage from './loading/page';
+import { Loader } from '@/components/common/loader';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -56,13 +56,12 @@ export default function RootLayout({
     if (!NoAuthRoutes.includes(pathname)) checkAuth();
   }, [pathname, router]);
 
-  // if (isLoading) return <LoadingPage />;
   return (
     <html lang="en" className={inter.variable}>
       <body className={`font-inter antialiased`}>
         <Script src="https://cdn.passage.id/passage-web.js" strategy="beforeInteractive" />
         <ReduxProvider>
-          {isAuthenticated && pathname !== '/login' ? <Layout>{children}</Layout> : !isLoading && children}
+          {isLoading ? <Loader /> : isAuthenticated && pathname !== '/login' ? <Layout>{children}</Layout> : children}
         </ReduxProvider>
       </body>
     </html>

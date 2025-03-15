@@ -3,39 +3,43 @@ import { NextResponse } from 'next/server';
 
 const API_BASE_URL = process.env.API_BASE_URL || 'https://ferrari38totem33igloo23beach98.org';
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
-  //   const { patient_id } = req.query;
-  //   const url = new URL(req.url);
-  //   const patient_id = url.searchParams.get('patient_id');
+export async function POST(req: NextApiRequest, res: NextApiResponse) {
+  const { patientId } = await req.json();
+  console.log('patientId', patientId);
 
-  //   if (!patient_id || isNaN(Number(patient_id))) {
-  //     return NextResponse.json({ error: { message: 'Invalid or missing patient_id.' } });
-  //   }
-  const patient_id = 1;
+  if (!patientId || isNaN(Number(patientId))) {
+    return NextResponse.json({ error: { message: 'Invalid or missing patientId.' } }, { status: 400 });
+  }
 
-  const psg_auth_token = process.env.psg_auth_token;
-  if (!psg_auth_token) return NextResponse.json({ error: { message: 'No defined psg_auth_token!' } });
-  console.log('API test', psg_auth_token);
+  const X_Auth_Token = process.env.X_AUTH_TOKEN;
+  if (!X_Auth_Token)
+    return NextResponse.json(
+      {
+        error: { message: 'No defined X_Auth_Token!' },
+      },
+      { status: 403 }
+    );
+  // console.log('API test', X_Auth_Token);
 
   try {
-    const response = await fetch(`${API_BASE_URL}/v1/order/1`, {
+    const response = await fetch(`${API_BASE_URL}/v1/order/all/patient/${patientId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${psg_auth_token}`,
+        'X-Auth-Token': X_Auth_Token,
       },
     });
 
     const data = await response.json();
 
     if (response.ok) {
-      console.log(data); // For debugging purposes; consider removing in production
-      return NextResponse.json({ data });
+      console.log(data);
+      return NextResponse.json(data, { status: 200 });
     } else {
-      return NextResponse.json({ error: { message: data } });
+      return NextResponse.json({ error: { message: data } }, { status: 500 });
     }
   } catch (error) {
     console.error('Error fetching data:', error);
-    return NextResponse.json({ error: { message: `Fetch Data Error: ${error}` } });
+    return NextResponse.json({ error: { message: `Fetch Data Error: ${error}` } }, { status: 500 });
   }
 }

@@ -20,7 +20,7 @@ export const Loader: FC<Props> = ({ className, label }) => {
     'ease-linear'
   );
   return (
-    <div>
+    <div className="w-full items-center">
       <div className={twMerge(loaderClasses, className)} />
       <div className={clsx('text-[#1A1A1A]', 'text-sm', 'mt-2')}>{(label && label) ?? 'Loading...'}</div>
     </div>
