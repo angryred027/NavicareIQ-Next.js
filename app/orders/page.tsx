@@ -12,7 +12,6 @@ import OrderCard from '@/modules/orders/order-card/OrderCard';
 import FavouriteCard from '@/modules/orders/favourite-card/FavouriteCard';
 import { TableTData } from '@/components/table/table.type';
 import { Loader } from '@/components/common';
-import { PatientInfo } from '@/modules/reports/patient-info/PatientInfo';
 import convertDateFormat from '@/lib/convertDateFormat';
 
 const favouriteData = [
@@ -44,119 +43,6 @@ const favouriteData = [
   },
 ];
 
-const ordersData = [
-  {
-    category: 'Quantitative hCG Pregnancy +2',
-    name: 'Angelina Perreira ',
-    date: 'Jan 28, 2025',
-  },
-  {
-    category: 'Quantitative hCG Pregnancy +2',
-    name: 'Angelina Perreira ',
-    date: 'Jan 28, 2025',
-  },
-  {
-    category: 'Quantitative hCG Pregnancy +2',
-    name: 'Angelina Perreira ',
-    date: 'Jan 28, 2025',
-  },
-  {
-    category: 'Quantitative hCG Pregnancy +2',
-    name: 'Angelina Perreira ',
-    date: 'Jan 28, 2025',
-  },
-  {
-    category: 'Quantitative hCG Pregnancy +2',
-    name: 'Angelina Perreira ',
-    date: 'Jan 28, 2025',
-  },
-  {
-    category: 'Quantitative hCG Pregnancy +2',
-    name: 'Angelina Perreira ',
-    date: 'Jan 28, 2025',
-  },
-  {
-    category: 'Quantitative hCG Pregnancy +2',
-    name: 'Angelina Perreira ',
-    date: 'Jan 28, 2025',
-  },
-  {
-    category: 'Quantitative hCG Pregnancy +2',
-    name: 'Angelina Perreira ',
-    date: 'Jan 28, 2025',
-  },
-  {
-    category: 'Quantitative hCG Pregnancy +2',
-    name: 'Angelina Perreira ',
-    date: 'Jan 28, 2025',
-  },
-  {
-    category: 'Quantitative hCG Pregnancy +2',
-    name: 'Angelina Perreira ',
-    date: 'Jan 28, 2025',
-  },
-];
-
-const labsData: TableTData[] = [
-  {
-    'Lab Name': {
-      value: 'Standard Thyroid',
-      subValue: 'LabCorp',
-      icon: 'favourite',
-      recommended: true,
-    },
-    price: '$50',
-    btns: {
-      value: (
-        <Button onClick={() => alert('Welcome!')}>
-          <div className="flex items-center gap-2 px-2">+ Add to Order</div>
-        </Button>
-      ),
-      subValue: null,
-      recommended: false,
-      icon: null,
-    },
-  },
-  {
-    'Lab Name': {
-      value: 'Tuberculosis (TB) Blood',
-      subValue: 'LabCorp',
-      icon: 'favourite',
-      recommended: false,
-    },
-    price: '$250',
-    btns: {
-      value: (
-        <Button onClick={() => alert('Welcome!')}>
-          <div className="flex items-center gap-2 px-2">+ Add to Order</div>
-        </Button>
-      ),
-      subValue: null,
-      recommended: false,
-      icon: null,
-    },
-  },
-  {
-    'Lab Name': {
-      value: 'Quantitative hCG Pregnancy',
-      subValue: 'Sonora Quest',
-      icon: 'favourite',
-      recommended: false,
-    },
-    price: '$120',
-    btns: {
-      value: (
-        <Button onClick={() => alert('Welcome!')}>
-          <div className="flex items-center gap-2 px-2">+ Add to Order</div>
-        </Button>
-      ),
-      subValue: null,
-      recommended: false,
-      icon: null,
-    },
-  },
-];
-
 const patientData = {
   name: 'Angellina Perreira',
   gender: 'Female',
@@ -171,14 +57,29 @@ const patientData = {
     code: 'W2113 69935',
   },
 };
-export default function OrderPage() {
-  const [ordersData, setOrdersData] = useState([]);
-  const dispatch = useDispatch<AppDispatch>();
-  const { loading, error, filters, sort } = useSelector((state: RootState) => state.page);
-  const [query, setQuery] = useState('');
 
-  const filteredItems = useMemo(() => {
-    if (query === '' || query === undefined) {
+export default function OrderPage() {
+  const { loading, error, filters, sort } = useSelector((state: RootState) => state.page);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const [ordersData, setOrdersData] = useState<any[]>([]);
+  const [labsData, setLabsData] = useState<any[]>([]);
+  const [query, setQuery] = useState<string>('');
+
+  const handleAddToOrder = (rowData: TableTData) => {
+    const handleAddToOrder = (rowData: TableTData) => {
+      const labName = rowData['Lab Name'];
+
+      if (typeof labName === 'object' && labName !== null && 'value' in labName) {
+        alert(`Added ${labName.value} to order!`);
+      } else {
+        alert('Lab Name is not valid!');
+      }
+    };
+  };
+
+  const filteredOrdersData = useMemo(() => {
+    if (!query) {
       return ordersData;
     } else {
       return ordersData.filter((item) =>
@@ -188,6 +89,38 @@ export default function OrderPage() {
       );
     }
   }, [query, ordersData]);
+
+  const generateLabsTableData = (labsData: any[]) => {
+    const labsTableData = labsData.map((lab, item) => {
+      const labName = lab.name || 'Unknown';
+      const provider = lab.provider || 'Unknown';
+      const icon = lab.provider || '';
+      const recommended = lab.recommended || false;
+      const price = lab.price || 0;
+      const rowData = {
+        'Lab Name': {
+          value: labName,
+          subValue: provider,
+          icon: icon,
+          recommended: recommended,
+        },
+        price: `$${price}`,
+        btns: {
+          value: (
+            <Button onClick={() => alert(`Added ${rowData['Lab Name'].value} to order!`)}>
+              <div className="flex items-center gap-2 px-2">+ Add to Order</div>
+            </Button>
+          ),
+          subValue: null,
+          recommended: false,
+          icon: null,
+        },
+      };
+      return rowData;
+    });
+
+    return labsTableData;
+  };
 
   useEffect(() => {
     const fetchOrderData = async () => {
@@ -205,15 +138,19 @@ export default function OrderPage() {
         if (response.ok) {
           const obj = await response.json();
           console.log(obj);
-
-          setOrdersData(obj);
+          setOrdersData(obj.ordersData);
+          setLabsData(obj.labsData);
         } else {
           setOrdersData([]);
         }
       } catch (error) {
-        console.error('Fetch Error:', error);
-        dispatch(setError(error.message));
+        if (error instanceof Error) {
+          dispatch(setError(error.message));
+        } else {
+          dispatch(setError('An unknown error occurred'));
+        }
         setOrdersData([]);
+        setLabsData([]);
       } finally {
         dispatch(setLoading(false));
       }
@@ -221,6 +158,12 @@ export default function OrderPage() {
 
     fetchOrderData();
   }, [dispatch]);
+
+  const labsTableData = useMemo(() => {
+    const tableData = generateLabsTableData(labsData);
+    console.log('TableData: ', tableData);
+    return tableData;
+  }, [labsData]);
 
   return (
     <>
@@ -243,7 +186,7 @@ export default function OrderPage() {
             <Loader />
           ) : (
             <div className="w-full overflow-y-auto flex-1 [&::-webkit-scrollbar]:hidden">
-              {filteredItems.map((item, index) => (
+              {filteredOrdersData.map((item, index) => (
                 <OrderCard
                   key={index}
                   category={item.lab_orders[0].lab_order_items[0].lab_product.name}
@@ -258,9 +201,9 @@ export default function OrderPage() {
         {/* Right Column */}
         <div className="flex-1 flex flex-col gap-4">
           <div className="p-4 bg-[#F6F9FA] border border-[#E6F0F8] rounded-xl flex flex-col sm:flex-row justify-between items-center">
-            <div className="mb-4 sm:mb-0">
+            <div className="mb-4 mr-4 sm:mb-0">
               <span className="block font-bold text-lg text-[#000005]">Labs</span>
-              <span className="text-sm text-[#757B80]">Displaying: 124</span>
+              <span className="text-sm text-[#757B80]">Displaying: {labsTableData.length}</span>
             </div>
 
             <div className="flex flex-col sm:flex-row items-center w-full sm:w-auto gap-2">
@@ -293,13 +236,14 @@ export default function OrderPage() {
                 </div>
               ))}
               <div className="w-full h-36 flex items-center justify-center bg-white rounded-2xl shadow-md border">
-                <Icon name="roundPlus" />
+                <Icon name="roundPlus" className="cursor-pointer" />
               </div>
             </div>
           </div>
           <TableProvider
-            data={labsData}
+            data={labsTableData}
             colsAlign={{
+              'Lab Name': 'left',
               price: 'right',
               btns: 'right',
             }}

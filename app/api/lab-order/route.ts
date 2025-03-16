@@ -22,21 +22,37 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
   // console.log('API test', X_Auth_Token);
 
   try {
-    const response = await fetch(`${API_BASE_URL}/v1/order/all/patient/${patientId}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Auth-Token': X_Auth_Token,
-      },
-    });
+    const [ordersRes, labsRes] = await Promise.all([
+      fetch(`${API_BASE_URL}/v1/order/all/patient/${patientId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Auth-Token': X_Auth_Token,
+        },
+      }),
+      fetch(`${API_BASE_URL}/v1/lab/all`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Auth-Token': X_Auth_Token,
+        },
+      }),
+    ]);
 
-    const data = await response.json();
+    const ordersData = await ordersRes.json();
+    const labsData = await labsRes.json();
 
-    if (response.ok) {
-      console.log(data);
+    if (ordersRes.ok && labsRes.ok) {
+      const data = {
+        ordersData: ordersData,
+        labsData: labsData,
+      };
       return NextResponse.json(data, { status: 200 });
     } else {
-      return NextResponse.json({ error: { message: data } }, { status: 500 });
+      return NextResponse.json(
+        { error: { message: `Error: Orders - ${ordersRes.status}, Labs - ${labsData.status}` } },
+        { status: 500 }
+      );
     }
   } catch (error) {
     console.error('Error fetching data:', error);
