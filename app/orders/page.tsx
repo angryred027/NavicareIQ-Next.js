@@ -44,6 +44,7 @@ const favouriteData = [
 ];
 
 const patientData = {
+  patientId: 1,
   name: 'Angellina Perreira',
   gender: 'Female',
   age: 32,
@@ -64,32 +65,30 @@ export default function OrderPage() {
 
   const [ordersData, setOrdersData] = useState<any[]>([]);
   const [labsData, setLabsData] = useState<any[]>([]);
-  const [query, setQuery] = useState<string>('');
+  const [orderQuery, setOrderQuery] = useState<string>('');
+  const [labQuery, setLabQuery] = useState<string>('');
 
   const handleAddToOrder = (rowData: TableTData) => {
-    const handleAddToOrder = (rowData: TableTData) => {
-      const labName = rowData['Lab Name'];
+    const labName = rowData['Lab Name'];
 
-      if (typeof labName === 'object' && labName !== null && 'value' in labName) {
-        alert(`Added ${labName.value} to order!`);
-      } else {
-        alert('Lab Name is not valid!');
-      }
-    };
+    if (typeof labName === 'object' && labName !== null && 'value' in labName) {
+      alert(`Added ${labName.value} to order!`);
+    } else {
+      alert('Lab Name is not valid!');
+    }
   };
 
   const filteredOrdersData = useMemo(() => {
-    if (!query) {
+    if (!orderQuery) {
       return ordersData;
     } else {
       return ordersData.filter((item) =>
         JSON.stringify(item.lab_orders[0].lab_order_items[0].lab_product.name)
           .toLowerCase()
-          .includes(query.toLowerCase())
+          .includes(orderQuery.toLowerCase())
       );
     }
-  }, [query, ordersData]);
-
+  }, [orderQuery, ordersData]);
   const generateLabsTableData = (labsData: any[]) => {
     const labsTableData = labsData.map((lab, item) => {
       const labName = lab.name || 'Unknown';
@@ -107,7 +106,11 @@ export default function OrderPage() {
         price: `$${price}`,
         btns: {
           value: (
-            <Button onClick={() => alert(`Added ${rowData['Lab Name'].value} to order!`)}>
+            <Button
+              onClick={() => {
+                handleAddToOrder(rowData);
+              }}
+            >
               <div className="flex items-center gap-2 px-2">+ Add to Order</div>
             </Button>
           ),
@@ -121,6 +124,21 @@ export default function OrderPage() {
 
     return labsTableData;
   };
+  const labsTableData = useMemo(() => {
+    const tableData = generateLabsTableData(labsData);
+    console.log('TableData: ', tableData);
+    return tableData;
+  }, [labsData]);
+
+  const filteredLabsData = useMemo(() => {
+    if (!labQuery) {
+      return labsTableData;
+    } else {
+      return labsTableData.filter((item) =>
+        JSON.stringify(item['Lab Name'].value, item['Lab Name'].subValue).toLowerCase().includes(labQuery.toLowerCase())
+      );
+    }
+  }, [labQuery, labsTableData]);
 
   useEffect(() => {
     const fetchOrderData = async () => {
@@ -132,7 +150,7 @@ export default function OrderPage() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ patientId: 1 }),
+          body: JSON.stringify({ patientId: patientData.patientId }),
         });
 
         if (response.ok) {
@@ -159,12 +177,6 @@ export default function OrderPage() {
     fetchOrderData();
   }, [dispatch]);
 
-  const labsTableData = useMemo(() => {
-    const tableData = generateLabsTableData(labsData);
-    console.log('TableData: ', tableData);
-    return tableData;
-  }, [labsData]);
-
   return (
     <>
       <div className="flex flex-col md:flex-row h-screen gap-4 p-4">
@@ -176,7 +188,7 @@ export default function OrderPage() {
             <input
               type="text"
               placeholder="Search..."
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(e) => setOrderQuery(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-[#BFCFDA] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <Icon name="search" className="absolute left-3 top-2 text-gray-400" />
@@ -203,7 +215,7 @@ export default function OrderPage() {
           <div className="p-4 bg-[#F6F9FA] border border-[#E6F0F8] rounded-xl flex flex-col sm:flex-row justify-between items-center">
             <div className="mb-4 mr-4 sm:mb-0">
               <span className="block font-bold text-lg text-[#000005]">Labs</span>
-              <span className="text-sm text-[#757B80]">Displaying: {labsTableData.length}</span>
+              <span className="text-sm text-[#757B80]">Displaying: {filteredLabsData.length}</span>
             </div>
 
             <div className="flex flex-col sm:flex-row items-center w-full sm:w-auto gap-2">
@@ -211,6 +223,9 @@ export default function OrderPage() {
                 <input
                   type="text"
                   placeholder="Search..."
+                  onChange={(e) => {
+                    setLabQuery(e.target.value);
+                  }}
                   className="w-full pl-10 pr-4 py-2 border border-[#BFCFDA] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <Icon name="search" className="absolute left-3 top-2 text-gray-400" />
@@ -241,7 +256,7 @@ export default function OrderPage() {
             </div>
           </div>
           <TableProvider
-            data={labsTableData}
+            data={filteredLabsData}
             colsAlign={{
               'Lab Name': 'left',
               price: 'right',
