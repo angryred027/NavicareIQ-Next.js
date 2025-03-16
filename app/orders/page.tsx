@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '@/store/store';
 import { setError, setLoading } from '@/store/features/pageSlice';
@@ -172,10 +172,22 @@ const patientData = {
   },
 };
 export default function OrderPage() {
-  // const [loading, setLoading] = useState(false);
   const [ordersData, setOrdersData] = useState([]);
   const dispatch = useDispatch<AppDispatch>();
   const { loading, error, filters, sort } = useSelector((state: RootState) => state.page);
+  const [query, setQuery] = useState('');
+
+  const filteredItems = useMemo(() => {
+    if (query === '' || query === undefined) {
+      return ordersData;
+    } else {
+      return ordersData.filter((item) =>
+        JSON.stringify(item.lab_orders[0].lab_order_items[0].lab_product.name)
+          .toLowerCase()
+          .includes(query.toLowerCase())
+      );
+    }
+  }, [query, ordersData]);
 
   useEffect(() => {
     const fetchOrderData = async () => {
@@ -221,6 +233,7 @@ export default function OrderPage() {
             <input
               type="text"
               placeholder="Search..."
+              onChange={(e) => setQuery(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-[#BFCFDA] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <Icon name="search" className="absolute left-3 top-2 text-gray-400" />
@@ -230,7 +243,7 @@ export default function OrderPage() {
             <Loader />
           ) : (
             <div className="w-full overflow-y-auto flex-1 [&::-webkit-scrollbar]:hidden">
-              {ordersData.map((item, index) => (
+              {filteredItems.map((item, index) => (
                 <OrderCard
                   key={index}
                   category={item.lab_orders[0].lab_order_items[0].lab_product.name}
