@@ -69,33 +69,6 @@ const patientData = {
   },
 };
 
-const sortOptions = [
-  {
-    value: 'Latest',
-    onClick: () => {},
-  },
-  {
-    value: 'Oldest',
-    onClick: () => {},
-  },
-  {
-    value: 'Highest',
-    onClick: () => {},
-  },
-  {
-    value: 'Lowest',
-    onClick: () => {},
-  },
-  {
-    value: 'A-Z',
-    onClick: () => {},
-  },
-  {
-    value: 'Z-A',
-    onClick: () => {},
-  },
-];
-
 export default function OrderPage() {
   const { loading, error, filters, sort } = useSelector((state: RootState) => state.page);
   const dispatch = useDispatch<AppDispatch>();
@@ -166,6 +139,45 @@ export default function OrderPage() {
     label: 'Sort by',
     icon: <Image src={SortIcon} alt="sort" width={24} height={24} />,
   });
+
+  const sortOptions = [
+    {
+      value: 'Latest',
+      onClick: () => {
+        setActiveSort({ label: 'Latest', icon: null });
+      },
+    },
+    {
+      value: 'Oldest',
+      onClick: () => {
+        setActiveSort({ label: 'Oldest', icon: null });
+      },
+    },
+    {
+      value: 'Highest',
+      onClick: () => {
+        setActiveSort({ label: 'Highest', icon: null });
+      },
+    },
+    {
+      value: 'Lowest',
+      onClick: () => {
+        setActiveSort({ label: 'Lowest', icon: null });
+      },
+    },
+    {
+      value: 'A-Z',
+      onClick: () => {
+        setActiveSort({ label: 'A-Z', icon: null });
+      },
+    },
+    {
+      value: 'Z-A',
+      onClick: () => {
+        setActiveSort({ label: 'Z-A', icon: null });
+      },
+    },
+  ];
 
   const labsTableData = useMemo(() => {
     const tableData = generateLabsTableData(labsData);
@@ -278,7 +290,7 @@ export default function OrderPage() {
               </Button>
               <div>
                 <DropDown
-                  btnLabel={activeSort.label ?? 'Sort by'}
+                  btnLabel={activeSort.label ?? 'abc'}
                   className="min-w-[145px]"
                   startSlot={<div>{activeSort.icon}</div>}
                   items={sortOptions}
