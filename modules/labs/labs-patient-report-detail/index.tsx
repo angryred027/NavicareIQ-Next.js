@@ -4,6 +4,9 @@ import { Grid, GridItem, Card } from '@/components/common';
 import PatientInformation from '@/modules/patients/patient-details/patient-information';
 import Tabs from '@/components/tabs/Tabs';
 import LabReportCard from './lab-report-card';
+import SummaryLabPatientReportLab from './summary-lab-patient-report-detail';
+import NavigationPanel from './NavigationPanel';
+
 const tabsIds = [
   {
     id: '1',
@@ -34,10 +37,14 @@ const PatientReportDetail: FC = () => {
           </div>
         </GridItem>
         <GridItem col={7} className="h-full">
-          <Card className="h-full p-[8px]">Lab Report #PLJ22113</Card>
+          <Card className="h-full p-[8px]">
+            <SummaryLabPatientReportLab />
+          </Card>
         </GridItem>
         <GridItem col={3}>
-          <Card className="w-[182px] p-[8px]">Filters</Card>
+          <Card className="w-[182px] p-[8px]">
+            <NavigationPanel />
+          </Card>
         </GridItem>
       </Grid>
     </div>
