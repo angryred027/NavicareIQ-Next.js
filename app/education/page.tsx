@@ -1,6 +1,13 @@
+'use client';
 import Button from '@/components/button/Button';
 import Icon from '@/components/icon/Icon';
 import MedicineCard from '@/modules/education/medicine-card/MedicineCard';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, AppDispatch } from '@/store/store';
+import { setError, setLoading } from '@/store/features/pageSlice';
+import { useState, useEffect, useMemo } from 'react';
+import { Loader } from '@/components/common';
 const medicineData = [
   {
     image: './images/2d17230684438c7dcc508c348a84972c.jpg',
@@ -53,6 +60,56 @@ const medicineData = [
 ];
 
 export default function EducationPage() {
+  const { loading, error, filters, sort } = useSelector((state: RootState) => state.page);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const [medicationsData, setMedicationsData] = useState<any[]>(medicineData);
+  const [query, setQuery] = useState('');
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     dispatch(setLoading(true));
+  //     try {
+  //       const response = await fetch('/api/education', {
+  //         method: 'GET',
+  //         headers: {
+  //           'Content-type': 'application/json',
+  //         },
+  //       });
+  //       const obj = await response.json();
+
+  //       if (!response.ok) {
+  //         dispatch(setError(`Error fetch data: ${response.status}`));
+  //         setMedicationsData([]);
+  //         return;
+  //       }
+  //       setMedicationsData(obj.data);
+  //       console.log('Medications Data: ', obj.data);
+  //     } catch (error) {
+  //       if (error instanceof Error) {
+  //         dispatch(setError(error.message));
+  //       } else {
+  //         dispatch(setError('An unknown error occurred'));
+  //       }
+  //       setMedicationsData([]);
+  //     } finally {
+  //       dispatch(setLoading(false));
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+
+  const filteredMedicationsData = useMemo(() => {
+    if (!query) {
+      return medicationsData;
+    } else {
+      return medicationsData.filter((medication) =>
+        JSON.stringify(medication).toLowerCase().includes(query.toLowerCase())
+      );
+    }
+  }, [query, medicationsData]);
+
   return (
     <div className="p-6 max-w-7xl mx-auto">
       {/* Header */}
@@ -60,7 +117,7 @@ export default function EducationPage() {
         <div className="block mr-2 mb-4 sm:mb-0 flex-1 sm:flex-none">
           <span className="block font-inter font-bold text-[1rem] leading-[1.5rem] text-[#000005]">Education</span>
           <span className="font-inter font-medium text-[0.75rem] leading-[1.25rem] text-[#757B80]">
-            Displaying: {medicineData.length}
+            Displaying: {filteredMedicationsData.length}
           </span>
         </div>
 
@@ -69,6 +126,7 @@ export default function EducationPage() {
             <input
               type="text"
               placeholder="Search..."
+              onChange={(e) => setQuery(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-[#BFCFDA] rounded-[0.75rem] focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <Icon name="search" className="absolute left-3 top-2 text-gray-400" />
@@ -86,9 +144,13 @@ export default function EducationPage() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {medicineData.map((item, index) => (
-          <MedicineCard key={index} image={item.image} name={item.name} category={item.category} uses={item.uses} />
-        ))}
+        {loading ? (
+          <Loader />
+        ) : (
+          filteredMedicationsData.map((item, index) => (
+            <MedicineCard key={index} image={item.image} name={item.name} category={item.category} uses={item.uses} />
+          ))
+        )}
       </div>
     </div>
   );
