@@ -6,8 +6,20 @@ import MedicineCard from '@/modules/education/medicine-card/MedicineCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '@/store/store';
 import { setError, setLoading } from '@/store/features/pageSlice';
-import { useState, useEffect, useMemo } from 'react';
+import { ReactNode, useState, useEffect, useMemo } from 'react';
 import { Loader } from '@/components/common';
+
+import Image from 'next/image';
+import SortIcon from '@/assets/icons/sort.svg';
+import SortUpIcon from '@/assets/icons/sort-arrow-up.svg';
+import SortDownIcon from '@/assets/icons/sort-arrow-down.svg';
+import { DropDown } from '@/components/common';
+
+type ActiveSort = {
+  label: string;
+  icon: ReactNode;
+};
+
 const medicineData = [
   {
     image: './images/2d17230684438c7dcc508c348a84972c.jpg',
@@ -59,46 +71,77 @@ const medicineData = [
   },
 ];
 
+const sortOptions = [
+  {
+    value: 'Latest',
+    onClick: () => {},
+  },
+  {
+    value: 'Oldest',
+    onClick: () => {},
+  },
+  {
+    value: 'Highest',
+    onClick: () => {},
+  },
+  {
+    value: 'Lowest',
+    onClick: () => {},
+  },
+  {
+    value: 'A-Z',
+    onClick: () => {},
+  },
+  {
+    value: 'Z-A',
+    onClick: () => {},
+  },
+];
+
 export default function EducationPage() {
   const { loading, error, filters, sort } = useSelector((state: RootState) => state.page);
   const dispatch = useDispatch<AppDispatch>();
 
   const [medicationsData, setMedicationsData] = useState<any[]>(medicineData);
   const [query, setQuery] = useState('');
+  const [activeSort, setActiveSort] = useState<ActiveSort>({
+    label: 'Sort by',
+    icon: <Image src={SortIcon} alt="sort" width={24} height={24} />,
+  });
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     dispatch(setLoading(true));
-  //     try {
-  //       const response = await fetch('/api/education', {
-  //         method: 'GET',
-  //         headers: {
-  //           'Content-type': 'application/json',
-  //         },
-  //       });
-  //       const obj = await response.json();
+  useEffect(() => {
+    const fetchData = async () => {
+      dispatch(setLoading(true));
+      try {
+        const response = await fetch('/api/education', {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json',
+          },
+        });
+        const obj = await response.json();
 
-  //       if (!response.ok) {
-  //         dispatch(setError(`Error fetch data: ${response.status}`));
-  //         setMedicationsData([]);
-  //         return;
-  //       }
-  //       setMedicationsData(obj.data);
-  //       console.log('Medications Data: ', obj.data);
-  //     } catch (error) {
-  //       if (error instanceof Error) {
-  //         dispatch(setError(error.message));
-  //       } else {
-  //         dispatch(setError('An unknown error occurred'));
-  //       }
-  //       setMedicationsData([]);
-  //     } finally {
-  //       dispatch(setLoading(false));
-  //     }
-  //   };
+        if (!response.ok) {
+          dispatch(setError(`Error fetch data: ${response.status}`));
+          setMedicationsData([]);
+          return;
+        }
+        // setMedicationsData(obj.data);
+        console.log('Medications Data: ', obj.data);
+      } catch (error) {
+        if (error instanceof Error) {
+          dispatch(setError(error.message));
+        } else {
+          dispatch(setError('An unknown error occurred'));
+        }
+        setMedicationsData([]);
+      } finally {
+        dispatch(setLoading(false));
+      }
+    };
 
-  //   fetchData();
-  // }, []);
+    fetchData();
+  }, []);
 
   const filteredMedicationsData = useMemo(() => {
     if (!query) {
@@ -136,9 +179,14 @@ export default function EducationPage() {
             <Button variant="gray" className="mb-4 sm:mb-0">
               <Icon name="filter" className="mr-4" /> Filter
             </Button>
-            <Button variant="gray">
-              <Icon name="sort" className="mr-2" /> Sort By
-            </Button>
+            <div>
+              <DropDown
+                btnLabel={activeSort.label ?? 'Sort by'}
+                className="min-w-[145px]"
+                startSlot={<div>{activeSort.icon}</div>}
+                items={sortOptions}
+              />
+            </div>
           </div>
         </div>
       </div>
