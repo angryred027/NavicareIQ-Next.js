@@ -16,14 +16,15 @@ type Props = {
     disabled?: boolean;
     onClick?: (e?: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   }[];
+  disabled?: boolean;
 };
 
-export const DropDown: FC<Props> = ({ btnLabel, items, startSlot, endSlot, className }) => {
+export const DropDown: FC<Props> = ({ btnLabel, items, startSlot, endSlot, className, disabled }) => {
   const menuButtonClasses = clsx('flex', 'flex-start', 'gap-[8px]', 'capitalize');
 
   return (
     <Menu>
-      <MenuButton className={twMerge(btnOutlinedClassesName, menuButtonClasses, className)}>
+      <MenuButton disabled={disabled} className={twMerge(btnOutlinedClassesName, menuButtonClasses, className)}>
         {startSlot && <div>{startSlot}</div>}
         {btnLabel && <div>{btnLabel}</div>}
         {endSlot && <div>{endSlot}</div>}

@@ -8,6 +8,8 @@ export interface TableProviderProps<T extends TableTData> extends TTableProps<T>
   children: ReactNode;
   data: T[];
   colsAlign?: Record<keyof T, Align>;
+  canSelect?: boolean;
+  colsSort?: string[];
 }
 
 export const TableContext = createContext<TTableContext | undefined>(undefined);

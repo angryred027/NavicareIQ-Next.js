@@ -31,6 +31,8 @@ export type TTableProps<T extends TableTData> = {
   loading?: boolean;
   colsFilters?: ColFilter[];
   colsAlign?: Record<keyof T, Align>;
+  canSelect?: boolean;
+  colsSort?: string[];
 };
 
 export type TChangePage = 'next' | 'prev' | 'first' | 'last' | number;

@@ -50,7 +50,10 @@ export const Table: FC = () => {
                   'border-t-[1px]',
                   'border-[#E6F0F8]',
                   'first:rounded-tl-[8px]',
-                  'last:rounded-tr-[8px]'
+                  'last:rounded-tr-[8px]',
+                  {
+                    'w-[24px]': header.id === 'select',
+                  }
                 )}
                 key={header.id}
               >
@@ -93,7 +96,11 @@ export const Table: FC = () => {
                       key={cell.id}
                       className={clsx('border-b-[1px]', 'border-b-[#E6F0F8]', 'first:border-l-[1px]', {
                         'w-[190px]': cell.isActionRow,
+                        'w-[24px]': cell.id === 'select',
                       })}
+                      onClick={(e) => {
+                        (cell.id === 'select' || cell.isActionRow) && e.stopPropagation();
+                      }}
                     >
                       <div className={clsx('p-[16px]', 'font-normal', 'leading-[20px]', 'text-[14px]')}>
                         {cell.value}

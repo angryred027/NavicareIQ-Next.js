@@ -12,6 +12,7 @@ type GridProps = {
 type GridItemProps = {
   children?: React.ReactNode;
   col?: number;
+  colWidth?: string;
   className?: string;
 };
 
@@ -26,12 +27,13 @@ export const Grid: FC<GridProps> = ({ children, columns = 12, gap = 16, classNam
   );
 };
 
-export const GridItem: FC<GridItemProps> = ({ children, col = 1, className }) => {
+export const GridItem: FC<GridItemProps> = ({ children, col = 1, className, colWidth }) => {
   return (
     <div
       className={twMerge(className)}
       style={{
         gridColumn: `span ${col}`,
+        width: colWidth,
       }}
     >
       {children}

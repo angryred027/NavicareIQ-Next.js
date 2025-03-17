@@ -12,8 +12,10 @@ type Props<T extends TableTData> = {
   onRowClick?: (row: TRows) => void;
   loading?: boolean;
   colsFilters?: ColFilter[];
+  colsSort?: string[];
   colsAlign?: Record<keyof T, Align>;
   extraContent?: ReactNode;
+  canSelect?: boolean;
 };
 
 const TableV1 = <T extends TableTData>({ extraContent, title, ...props }: Props<T>) => {

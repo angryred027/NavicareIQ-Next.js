@@ -21,12 +21,15 @@ import clsx from 'clsx';
 import Badge from '@/components/badge/Badge';
 import Icon from '@/components/icon/Icon';
 import { Align } from '@/types/help';
+import { IndeterminateCheckbox } from '@/components/common';
 
 const useGenerateTable = <T extends TableTData>({
   data,
   loading: loadingProp,
   colsFilters,
   colsAlign,
+  canSelect,
+  colsSort,
   ...rest
 }: TTableProps<T>) => {
   const [pagination, setPagination] = useState<PaginationState>({
@@ -35,12 +38,46 @@ const useGenerateTable = <T extends TableTData>({
   });
   const columnHelper = createColumnHelper<T>();
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [rowSelection, setRowSelection] = useState({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(loadingProp ?? false);
   }, [loadingProp]);
+
+  const createSelectColumn = useCallback(() => {
+    return columnHelper.accessor('select' as unknown as AccessorFn<T>, {
+      id: 'select',
+      header: ({ table }) => (
+        <IndeterminateCheckbox
+          {...{
+            checked: table.getIsAllRowsSelected(),
+            indeterminate: table.getIsSomeRowsSelected(),
+            onChange: table.getToggleAllRowsSelectedHandler(),
+          }}
+        />
+      ),
+      cell: ({ row }) => (
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+          className="size-[24px]"
+        >
+          <IndeterminateCheckbox
+            {...{
+              checked: row.getIsSelected(),
+              disabled: !row.getCanSelect(),
+              indeterminate: row.getIsSomeSelected(),
+              onChange: row.getToggleSelectedHandler(),
+            }}
+          />
+        </div>
+      ),
+      footer: (info) => info.column.id,
+    });
+  }, [columnHelper]);
 
   const createColumn = useCallback(
     (column: keyof T, filterVariant?: FilterType, align?: Align) => {
@@ -109,24 +146,28 @@ const useGenerateTable = <T extends TableTData>({
   );
 
   const columns = useMemo(() => {
+    const colsToRender = [];
     if (data && data.length === 0) return [];
     else {
       const firstColumn = data[0];
 
       const keys = Object.keys(firstColumn) as Array<keyof T>;
-      return keys.map((key) => {
+
+      canSelect && colsToRender.push(createSelectColumn());
+      keys.map((key) => {
         const filterType = colsFilters?.find((filter) => filter.id === key)?.filterType;
         const align = colsAlign?.[key] ?? 'left';
-
-        return createColumn(key, filterType, align);
+        colsToRender.push(createColumn(key, filterType, align));
       });
+      return colsToRender;
     }
-  }, [colsAlign, colsFilters, createColumn, data]);
+  }, [canSelect, colsAlign, colsFilters, createColumn, createSelectColumn, data]);
 
   const table = useReactTable({
     data,
     columns,
     onColumnFiltersChange: setColumnFilters,
+    onRowSelectionChange: setRowSelection,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -140,6 +181,7 @@ const useGenerateTable = <T extends TableTData>({
       pagination,
       sorting,
       columnFilters,
+      rowSelection,
     },
   });
 
@@ -268,6 +310,7 @@ const useGenerateTable = <T extends TableTData>({
     setIsLoading,
     isEmpty,
     handleResetFilters,
+    colsSort,
     ...rest,
   };
 };

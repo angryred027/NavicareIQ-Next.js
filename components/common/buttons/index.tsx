@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import ButtonOutlined from './btn-outlined';
+import ButtonFilled from './btn-filled';
 import { TButtons } from './buttons-type';
 
 type Props = TButtons & {
@@ -9,7 +10,7 @@ type Props = TButtons & {
 export const Button: FC<Props> = ({ variant, ...rest }) => {
   switch (variant) {
     case 'primary':
-      return <ButtonOutlined {...rest} />;
+      return <ButtonFilled {...rest} />;
     case 'secondary':
       return <ButtonOutlined {...rest} />;
     case 'outlined':

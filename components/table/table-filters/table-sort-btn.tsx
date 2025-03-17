@@ -12,7 +12,7 @@ type ActiveSort = {
 };
 
 export const TableSortBtn: FC = () => {
-  const { cols, sorting } = useTableContext();
+  const { cols, sorting, colsSort = [] } = useTableContext();
   const [activeSort, setActiveSort] = useState<ActiveSort>({
     label: 'Sort by',
     icon: <Image src={SortIcon} alt="sort" width={24} height={24} />,
@@ -33,17 +33,20 @@ export const TableSortBtn: FC = () => {
     }
   }, [sorting]);
 
-  const colsOptions = cols.headers.map((header) => {
-    return {
-      value: header.label,
-      onClick: (e?: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        e?.preventDefault();
-        e?.stopPropagation();
-
-        header.handleSort();
-      },
-    };
-  });
+  const colsOptions = colsSort
+    .map((col) => {
+      const findCol = cols.headers.find((header) => header.id === col);
+      if (!findCol) return null;
+      return {
+        value: findCol.label,
+        onClick: (e?: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+          e?.preventDefault();
+          e?.stopPropagation();
+          findCol.handleSort();
+        },
+      };
+    })
+    .filter((col) => col !== null);
 
   return (
     <div>
@@ -52,6 +55,7 @@ export const TableSortBtn: FC = () => {
         className="min-w-[145px]"
         startSlot={<div>{activeSort.icon}</div>}
         items={colsOptions}
+        disabled={colsOptions.length === 0}
       />
     </div>
   );
