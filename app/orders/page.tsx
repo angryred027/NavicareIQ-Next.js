@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useMemo } from 'react';
+import { type ReactNode, useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '@/store/store';
 import { setError, setLoading } from '@/store/features/pageSlice';
@@ -13,6 +13,16 @@ import FavouriteCard from '@/modules/orders/favourite-card/FavouriteCard';
 import { TableTData } from '@/components/table/table.type';
 import { Loader } from '@/components/common';
 import convertDateFormat from '@/lib/convertDateFormat';
+import Image from 'next/image';
+import SortIcon from '@/assets/icons/sort.svg';
+import SortUpIcon from '@/assets/icons/sort-arrow-up.svg';
+import SortDownIcon from '@/assets/icons/sort-arrow-down.svg';
+import { DropDown } from '@/components/common';
+
+type ActiveSort = {
+  label: string;
+  icon: ReactNode;
+};
 
 const favouriteData = [
   {
@@ -58,6 +68,33 @@ const patientData = {
     code: 'W2113 69935',
   },
 };
+
+const sortOptions = [
+  {
+    value: 'Latest',
+    onClick: () => {},
+  },
+  {
+    value: 'Oldest',
+    onClick: () => {},
+  },
+  {
+    value: 'Highest',
+    onClick: () => {},
+  },
+  {
+    value: 'Lowest',
+    onClick: () => {},
+  },
+  {
+    value: 'A-Z',
+    onClick: () => {},
+  },
+  {
+    value: 'Z-A',
+    onClick: () => {},
+  },
+];
 
 export default function OrderPage() {
   const { loading, error, filters, sort } = useSelector((state: RootState) => state.page);
@@ -124,6 +161,12 @@ export default function OrderPage() {
 
     return labsTableData;
   };
+
+  const [activeSort, setActiveSort] = useState<ActiveSort>({
+    label: 'Sort by',
+    icon: <Image src={SortIcon} alt="sort" width={24} height={24} />,
+  });
+
   const labsTableData = useMemo(() => {
     const tableData = generateLabsTableData(labsData);
     console.log('TableData: ', tableData);
@@ -233,9 +276,14 @@ export default function OrderPage() {
               <Button variant="gray" className="flex items-center">
                 <Icon name="filter" className="mr-2" /> Filter
               </Button>
-              <Button variant="gray" className="flex items-center">
-                <Icon name="sort" className="mr-2" /> Sort By
-              </Button>
+              <div>
+                <DropDown
+                  btnLabel={activeSort.label ?? 'Sort by'}
+                  className="min-w-[145px]"
+                  startSlot={<div>{activeSort.icon}</div>}
+                  items={sortOptions}
+                />
+              </div>
             </div>
           </div>
 
