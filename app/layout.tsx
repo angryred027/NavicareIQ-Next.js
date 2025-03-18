@@ -43,7 +43,7 @@ export default function RootLayout({
           const token = localStorage.getItem('psg_auth_token');
           document.cookie = `psg_auth_token=${token}; path=/; max-age=${7 * 24 * 60 * 60}; Secure; SameSite=Strict`; // Corrected the cookie max-age value
 
-          router.push('/'); // Redirect authenticated users away from login
+          router.push('/kijo'); // Redirect authenticated users away from login
         }
       } catch {
         setIsAuthenticated(false);
@@ -62,7 +62,11 @@ export default function RootLayout({
       <body className={`font-inter antialiased`}>
         <Script src="https://cdn.passage.id/passage-web.js" strategy="beforeInteractive" />
         <ReduxProvider>
-          {isAuthenticated && pathname !== '/login' ? <Layout>{children}</Layout> : !isLoading && children}
+          {isAuthenticated && pathname !== '/login' && pathname !== '/signup' ? (
+            <Layout>{children}</Layout>
+          ) : (
+            !isLoading && children
+          )}
         </ReduxProvider>
       </body>
     </html>
