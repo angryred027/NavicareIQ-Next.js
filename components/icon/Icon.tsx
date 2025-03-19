@@ -8,6 +8,7 @@ type IconProps = {
   size?: number;
   viewBox?: string;
   color?: string;
+  onClick?: () => void;
 };
 
 const icons = {
@@ -31,6 +32,7 @@ const icons = {
       <path d="M8.03003 2H15.97" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </>
   ),
+
   location: (
     <>
       <path
@@ -55,6 +57,7 @@ const icons = {
       />
     </>
   ),
+
   users: (
     <>
       <path
@@ -101,6 +104,7 @@ const icons = {
       />
     </>
   ),
+
   paper: (
     <>
       <path
@@ -121,6 +125,7 @@ const icons = {
       <path d="M8 13L16 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </>
   ),
+
   'info-romb': (
     <>
       <path d="M12 16L12 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -140,6 +145,7 @@ const icons = {
       />
     </>
   ),
+
   'info-circle': (
     <>
       <path
@@ -151,17 +157,20 @@ const icons = {
       />
     </>
   ),
+
   close: (
     <>
       <path d="M18 6L6 18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       <path d="M6 6L18 18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </>
   ),
+
   'chevron-down': (
     <>
       <path d="M11 1L6 6L1 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </>
   ),
+
   calendar: (
     <>
       <path
@@ -659,6 +668,7 @@ const icons = {
       <path d="M9.99997 14L9.99997 6" stroke="#515253" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </>
   ),
+
   copy: (
     <>
       <path
@@ -720,6 +730,7 @@ const icons = {
       <path d="M5.83325 12.5C7.33325 10.3571 7.86249 9.16226 8.90143 9.44444C9.66848 9.65278 9.73365 10.6556 10.606 10.8333C11.7748 11.0714 12.2083 9.28571 13.3333 7.5" />
     </>
   ),
+
   bookmark: (
     <path
       d="M11 8.16666C11 11.9167 11 16.5 10.2308 16.5C9.46153 16.5 6.76923 14 6 14C5.23076 14 2.53846 16.5 1.76923 16.5C1 16.5 1 11.9167 1 8.16666C1 1.5 1.38461 1.5 6 1.5C10.6154 1.5 11 1.5 11 8.16666Z"
@@ -729,6 +740,7 @@ const icons = {
       strokeLinejoin="round"
     />
   ),
+
   bookmarked: (
     <path
       d="M11 8.16666C11 11.9167 11 16.5 10.2308 16.5C9.46153 16.5 6.76923 14 6 14C5.23076 14 2.53846 16.5 1.76923 16.5C1 16.5 1 11.9167 1 8.16666C1 1.5 1.38461 1.5 6 1.5C10.6154 1.5 11 1.5 11 8.16666Z"
@@ -741,15 +753,16 @@ const icons = {
   ),
 };
 
-export default function Icon({ name, className, size = 24, viewBox = '0 0 24 24', color }: IconProps) {
+export default function Icon({ name, className, size = 24, viewBox = '0 0 24 24', color, onClick }: IconProps) {
   return (
     <svg
-      className={className}
+      className={`${className} hover: cursor-pointer`}
       width={size}
       height={size}
       viewBox={viewBox}
       fill="none"
       stroke={color || 'currentColor'}
+      onClick={onClick}
     >
       {icons[name as keyof typeof icons]}
     </svg>

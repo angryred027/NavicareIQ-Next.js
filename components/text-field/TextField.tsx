@@ -5,7 +5,7 @@ import Image from 'next/image';
 import InfoIcon from '@/assets/icons/info.svg';
 import InfoErrorIcon from '@/assets/icons/info-error.svg';
 import EyeIcon from '@/assets/icons/eye.svg';
-
+import Icon from '../icon/Icon';
 
 type TextFieldProps = {
   label?: string;
@@ -39,7 +39,15 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   ) => {
     const [isFocused, setIsFocused] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-    const hasValue = value !== undefined ? !!value : !!defaultValue;
+    const [inputValue, setInputValue] = useState(value || defaultValue || '');
+    const hasValue = inputValue !== undefined ? !!inputValue : !!defaultValue;
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setInputValue(e.target.value);
+      if (props.onChange) {
+        props.onChange(e);
+      }
+    };
 
     const isPassword = type === 'password';
     const inputType = isPassword ? (showPassword ? 'text' : 'password') : type;
@@ -85,17 +93,13 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       transition-all
       duration-150
       pointer-events-none
-      ${(isFocused || hasValue) 
-        ? 'transform -translate-y-2 top-[15px] text-system-dark-500' 
-        : 'top-1/2 -translate-y-1/2 text-system-dark-500'
+      ${
+        isFocused || hasValue
+          ? 'transform -translate-y-2 top-[15px] text-system-dark-500'
+          : 'top-1/2 -translate-y-1/2 text-system-dark-500'
       }
       ${disabled ? 'text-system-dark-300' : ''}
-      ${error 
-        ? 'text-status-error-600' 
-        : isFocused 
-          ? 'text-poppy-500' 
-          : 'text-system-dark-300'
-      }
+      ${error ? 'text-status-error-600' : isFocused ? 'text-poppy-500' : 'text-system-dark-300'}
     `;
 
     const helperTextStyles = `
@@ -133,15 +137,13 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     return (
       <div className={className}>
         <div className="relative">
-          {startIcon && (
-            <span className={`${iconStyles} left-4`}>{startIcon}</span>
-          )}
-          
+          {startIcon && <span className={`${iconStyles} left-4`}>{startIcon}</span>}
+
           <input
             ref={ref}
             type={inputType}
             disabled={disabled}
-            value={value}
+            value={inputValue}
             defaultValue={defaultValue}
             className={`
               ${baseInputStyles}
@@ -149,18 +151,19 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
               ${startIcon ? 'pl-12' : ''}
               ${endIcon ? 'pr-12' : ''}
             `}
+            onChange={handleChange}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             {...props}
           />
-          
+
           {label && (
             <label className={labelStyles}>
               {label}
               {required && <span className="text-status-error-600 ml-1">*</span>}
             </label>
           )}
-          
+
           {isPassword ? (
             <button
               type="button"
@@ -171,7 +174,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
               {showPassword ? (
                 <Image src={EyeIcon} alt="eye" />
               ) : (
-                <Image src={EyeIcon} alt="eye" />
+                <Icon name="shield" className="hover:cursor-pointer" />
               )}
             </button>
           ) : (
