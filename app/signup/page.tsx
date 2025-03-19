@@ -14,7 +14,7 @@ import RegisterPhysician from '@/modules/signup/physician/RegisterPhysician';
 import ProviderAgreement from '@/modules/signup/provider/ProviderAgreement';
 import ConsentForm from '@/modules/signup/consent/ConsentForm';
 
-export default function LoginPage() {
+export default function SignUpPage() {
   const [step, setStep] = useState(0);
 
   const nextStep = () => {
