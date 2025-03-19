@@ -43,7 +43,7 @@ export default function RootLayout({
           const token = localStorage.getItem('psg_auth_token');
           document.cookie = `psg_auth_token=${token}; path=/; max-age=${7 * 24 * 60 * 60}; Secure; SameSite=Strict`; // Corrected the cookie max-age value
 
-          router.push('/kijo'); // Redirect authenticated users away from login
+          router.push('/signup'); // Redirect authenticated users away from login
         }
       } catch {
         setIsAuthenticated(false);
