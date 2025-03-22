@@ -15,7 +15,7 @@ type MenuItem = {
 const menuItems: MenuItem[] = [
   {
     icon: 'flask',
-    path: '/laboratory',
+    path: '/labs',
   },
   {
     icon: 'location',
@@ -23,27 +23,28 @@ const menuItems: MenuItem[] = [
   },
   {
     icon: 'users',
-    path: '/users',
+    path: '/patients',
+  },
+  {
+    icon: 'capsule',
+    path: '/medications',
   },
   {
     icon: 'paper',
-    path: '/paper',
+    path: '/education',
   },
 ];
 
 const helpMenuItem: MenuItem = {
   icon: 'info-romb',
-  path: '/help'
-}
+  path: '/help',
+};
 
 export const Sidebar = () => {
   const pathname = usePathname();
 
-  const RenderMenu = ({item}: {item: MenuItem}) => (
-    <Link
-      href={item.path}
-      className={`px-6 py-3 ${pathname === item.path ? 'border-r-2 border-[#4167AF]' : ''}`}
-    >
+  const RenderMenu = ({ item }: { item: MenuItem }) => (
+    <Link href={item.path} className={`px-6 py-3 ${pathname === item.path ? 'border-r-2 border-[#4167AF]' : ''}`}>
       <div className="w-6 h-6 rounded-[12px] flex items-center justify-center cursor-pointer transition-colors hover:bg-[#EDF2F6]">
         <Icon
           name={item.icon}
@@ -74,7 +75,12 @@ export const Sidebar = () => {
         <RenderMenu item={helpMenuItem} />
 
         <div>
-          <Image src={AvatarIcon} alt="info" width={48} height={48} />
+          <Link
+            href={'/physician'}
+            className={`px-6 py-3 ${pathname === '/physician' ? 'border-r-2 border-[#4167AF]' : ''}`}
+          >
+            <Image src={AvatarIcon} className="cursor-pointer hover:opacity-80" alt="info" width={48} height={48} />
+          </Link>
         </div>
       </div>
     </aside>

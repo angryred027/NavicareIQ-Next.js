@@ -10,9 +10,9 @@ export type TableTData = Record<
   | boolean
   | {
       value: string | ReactNode;
-      subValue: string | ReactNode;
-      recommended: boolean | ReactNode;
-      icon: string | ReactNode | AvailableIcons;
+      subValue?: string | ReactNode;
+      recommended?: boolean | ReactNode;
+      icon?: string | ReactNode | AvailableIcons;
       filterType?: FilterType;
       align?: 'left' | 'right' | 'center';
     }

@@ -126,6 +126,26 @@ const icons = {
     </>
   ),
 
+  paper1: (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="24" height="24" rx="8" fill="#E6E9EA" />
+      <path
+        d="M16.8 11.9999C16.8 15.5999 16.2667 17.3999 12 17.3999C7.73338 17.3999 7.20004 15.5999 7.20004 11.9999C7.20004 8.39985 7.80004 6.59985 12 6.59985C16.2 6.59985 16.8 8.39985 16.8 11.9999Z"
+        stroke="#515253"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M10.2 7.19995C10.2 7.19995 10.5628 8.63721 9.90005 9.29995C9.23731 9.96269 7.80005 9.59995 7.80005 9.59995"
+        stroke="#515253"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M9.60004 14.3999H12" stroke="#515253" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M9.60004 12.5999H14.4" stroke="#515253" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+
   'info-romb': (
     <>
       <path d="M12 16L12 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -589,6 +609,33 @@ const icons = {
     </>
   ),
 
+  circleThreeDot: (
+    <>
+      <circle cx="10" cy="10" r="7.5" stroke="#91A3B0" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M10.4167 10.0001C10.4167 9.76996 10.2302 9.58341 10 9.58341C9.76992 9.58341 9.58337 9.76996 9.58337 10.0001C9.58337 10.2302 9.76992 10.4167 10 10.4167C10.2302 10.4167 10.4167 10.2302 10.4167 10.0001Z"
+        fill="#91A3B0"
+        stroke="#91A3B0"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M13.75 10.0001C13.75 9.76996 13.5634 9.58341 13.3333 9.58341C13.1032 9.58341 12.9166 9.76996 12.9166 10.0001C12.9166 10.2302 13.1032 10.4167 13.3333 10.4167C13.5634 10.4167 13.75 10.2302 13.75 10.0001Z"
+        fill="#91A3B0"
+        stroke="#91A3B0"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M7.08333 10.0001C7.08333 9.76996 6.89679 9.58341 6.66667 9.58341C6.43655 9.58341 6.25 9.76996 6.25 10.0001C6.25 10.2302 6.43655 10.4167 6.66667 10.4167C6.89679 10.4167 7.08333 10.2302 7.08333 10.0001Z"
+        fill="#91A3B0"
+        stroke="#91A3B0"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </>
+  ),
+
   search: (
     <path
       strokeLinecap="round"
@@ -761,7 +808,7 @@ export default function Icon({ name, className, size = 24, viewBox = '0 0 24 24'
       height={size}
       viewBox={viewBox}
       fill="none"
-      stroke={color || 'currentColor'}
+      stroke={color}
       onClick={onClick}
     >
       {icons[name as keyof typeof icons]}

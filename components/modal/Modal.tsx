@@ -45,7 +45,7 @@ const Modal = ({ isOpen, onClose, title, children, footer, className = '' }: Mod
         ${className}
       `}
       >
-        <div className="p-5 border-b border-system-light-200">
+        <div className="p-5 pt-4 border-b border-system-light-200">
           <button
             onClick={onClose}
             className="absolute top-3.5 left-2.5 p-2 hover:bg-system-light-100 rounded-full transition-colors"
@@ -55,9 +55,9 @@ const Modal = ({ isOpen, onClose, title, children, footer, className = '' }: Mod
           {title && <h2 className="text-h4 text-system-dark-900 text-center">{title}</h2>}
         </div>
 
-        <div className="p-6 overflow-y-auto  max-h-[calc(90vh-140px)] [&::-webkit-scrollbar]:hidden">{children}</div>
+        <div className="p-5 overflow-y-auto  max-h-[calc(90vh-140px)] [&::-webkit-scrollbar]:hidden">{children}</div>
 
-        {footer && <div className="p-6 border-t border-system-light-200 flex justify-end gap-3">{footer}</div>}
+        {footer && <div className="p-5 border-t border-system-light-200 flex justify-end gap-3">{footer}</div>}
       </div>
     </>
   );

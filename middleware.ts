@@ -4,6 +4,8 @@ import { passageServer } from '@/lib/passageServer';
 import { NoAuthRoutes } from './config/routes';
 
 export async function middleware(request: NextRequest) {
+  return NextResponse.next();
+
   if (NoAuthRoutes.includes(request.nextUrl.pathname)) return;
 
   if (request.nextUrl.pathname === '/') {

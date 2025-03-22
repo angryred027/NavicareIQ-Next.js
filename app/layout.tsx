@@ -62,11 +62,12 @@ export default function RootLayout({
       <body className={`font-inter antialiased`}>
         <Script src="https://cdn.passage.id/passage-web.js" strategy="beforeInteractive" />
         <ReduxProvider>
-          {isAuthenticated && pathname !== '/login' && pathname !== '/signup' ? (
+          {/* {isAuthenticated && pathname !== '/login' && pathname !== '/signup' ? (
             <Layout>{children}</Layout>
           ) : (
             !isLoading && children
-          )}
+          )} */}
+          <Layout>{children}</Layout>
         </ReduxProvider>
       </body>
     </html>

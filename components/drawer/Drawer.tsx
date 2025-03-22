@@ -12,15 +12,7 @@ interface DrawerProps {
   className?: string;
 }
 
-const Drawer = ({ 
-  isOpen, 
-  onClose, 
-  title, 
-  children, 
-  footer,
-  position = 'right',
-  className = '' 
-}: DrawerProps) => {
+const Drawer = ({ isOpen, onClose, title, children, footer, position = 'right', className = '' }: DrawerProps) => {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -36,12 +28,9 @@ const Drawer = ({
 
   return (
     <>
-      <div 
-        className="fixed inset-0 bg-black bg-opacity-50 z-40"
-        onClick={onClose}
-      />
+      <div className="fixed inset-0 bg-black bg-opacity-50 z-40" onClick={onClose} />
 
-      <div 
+      <div
         className={`
           fixed 
           top-0 
@@ -53,35 +42,26 @@ const Drawer = ({
           max-w-[310px]
           transition-transform
           duration-300
-          ${isOpen 
-            ? 'translate-x-0' 
-            : `${position === 'right' ? 'translate-x-full' : '-translate-x-full'}`
-          }
+          ${isOpen ? 'translate-x-0' : `${position === 'right' ? 'translate-x-full' : '-translate-x-full'}`}
           ${className}
         `}
       >
-        <div className="p-5 border-b border-system-light-200">
-          {title && (
-            <h2 className="text-h4 text-system-dark-900 text-center">{title}</h2>
-          )}
-          <Button
-            variant='ghost'
-            onClick={onClose}
-            className="absolute top-3.5 right-6 px-2 transition-colors"
-          >
-            <Icon name="close" />
+        <div className="flex items-center justify-between p-5 border-b border-system-light-200">
+          {title && <h2 className="text-h4 text-system-dark-900 text-center">{title}</h2>}
+          <Button variant="ghost" onClick={onClose} className=" transition-colors w-[40px] h-[40px] p-[8px]">
+            <Icon name="close" viewBox="0 0 24 24" size={24} />
           </Button>
         </div>
 
-        <div className="p-6 overflow-y-auto h-[calc(100vh-140px)]">
+        <div className="flex flex-1 p-6 overflow-y-auto h-[calc(100vh-60px)] [&::-webkit-scrollbar]:none">
           {children}
         </div>
 
-        {footer && (
+        {/* {footer && (
           <div className="absolute bottom-0 left-0 right-0 p-6 bg-white">
             {footer}
           </div>
-        )}
+        )} */}
       </div>
     </>
   );

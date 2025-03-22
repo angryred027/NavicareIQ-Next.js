@@ -156,7 +156,7 @@ const labsData: TableTData[] = [
 
 export default function OrderPage() {
   // const [loading, setLoading] = useState(false);
-  const [ordersData, setOrdersData] = useState([]);
+  const [ordersData, setOrdersData] = useState<any[any]>([]);
   const dispatch = useDispatch<AppDispatch>();
   const { loading, error, filters, sort } = useSelector((state: RootState) => state.page);
 
@@ -184,7 +184,7 @@ export default function OrderPage() {
           </div>
 
           <div className="w-full overflow-y-auto flex-1 [&::-webkit-scrollbar]:hidden">
-            {ordersData.map((item, index) => (
+            {ordersData.map((item: any, index: number) => (
               <OrderCard key={index} {...item} />
             ))}
           </div>

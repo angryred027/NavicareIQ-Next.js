@@ -136,7 +136,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
     return (
       <div className={className}>
-        <div className="relative">
+        <div className="relative ">
           {startIcon && <span className={`${iconStyles} left-4`}>{startIcon}</span>}
 
           <input
