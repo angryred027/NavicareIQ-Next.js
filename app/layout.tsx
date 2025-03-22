@@ -36,7 +36,7 @@ export default function RootLayout({
         setIsAuthenticated(!!isAuth);
 
         if (!isAuth && pathname !== '/login') {
-          router.push('/login'); // Redirect unauthenticated users
+          // router.push('/login'); // Redirect unauthenticated users
         }
 
         if (isAuth && pathname === '/login') {
@@ -47,7 +47,7 @@ export default function RootLayout({
         }
       } catch {
         setIsAuthenticated(false);
-        if (pathname !== '/login') router.push('/login');
+        // if (pathname !== '/login') router.push('/login');
       } finally {
         setIsLoading(false); // Set loading to false after the auth check is complete
       }
@@ -62,11 +62,12 @@ export default function RootLayout({
       <body className={`font-inter antialiased`}>
         <Script src="https://cdn.passage.id/passage-web.js" strategy="beforeInteractive" />
         <ReduxProvider>
-          {isAuthenticated && pathname !== '/login' && pathname !== '/signup' ? (
+          {/* {isAuthenticated && pathname !== '/login' && pathname !== '/signup' ? (
             <Layout>{children}</Layout>
           ) : (
             !isLoading && children
-          )}
+          )} */}
+          <Layout>{children}</Layout>
         </ReduxProvider>
       </body>
     </html>

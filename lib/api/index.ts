@@ -23,7 +23,7 @@ api.interceptors.response.use(
     if (axios.isAxiosError(error)) {
       if (error.response?.status === 401) {
         localStorage.removeItem('x-auth-token'); // Optional: Remove token on unauthorized error
-        window.location.href = '/login';
+        // window.location.href = '/login';
       }
     }
     return Promise.reject(error.response?.data || { error: 'An unknown error occurred' });
