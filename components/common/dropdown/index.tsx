@@ -32,7 +32,7 @@ export const DropDown: FC<Props> = ({ btnLabel, items, startSlot, endSlot, class
     <Menu>
       <MenuButton disabled={disabled} className={twMerge(btnOutlinedClassesName, menuButtonClasses, className)}>
         {startSlot && <div>{startSlot}</div>}
-        {btnLabel && <div>{btnLabel}</div>}
+        <div>{selectedValue ? selectedValue : btnLabel}</div>
         {endSlot && <div>{endSlot}</div>}
       </MenuButton>
       <MenuItems
@@ -54,7 +54,8 @@ export const DropDown: FC<Props> = ({ btnLabel, items, startSlot, endSlot, class
           'focus:outline-none',
           'data-[closed]:scale-95',
           'data-[closed]:opacity-0',
-          'cursor-pointer'
+          'cursor-pointer',
+          'z-50'
         )}
       >
         {items.map(({ value, divider, startSlot, endSlot, onClick }, index) => (
