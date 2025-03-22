@@ -1,4 +1,4 @@
-import React, { FC, Fragment, ReactNode } from 'react';
+import React, { useState, FC, Fragment, ReactNode } from 'react';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import clsx from 'clsx';
 import { btnOutlinedClassesName } from '../buttons/btn-outlined';
@@ -9,7 +9,7 @@ type Props = {
   endSlot?: ReactNode;
   className?: string;
   items: {
-    value: ReactNode;
+    value: ReactNode | string;
     startSlot?: ReactNode;
     endSlot?: ReactNode;
     divider?: boolean;
@@ -21,6 +21,12 @@ type Props = {
 
 export const DropDown: FC<Props> = ({ btnLabel, items, startSlot, endSlot, className, disabled }) => {
   const menuButtonClasses = clsx('flex', 'flex-start', 'gap-[8px]', 'capitalize');
+  const [selectedValue, setSelectedValue] = useState<ReactNode | string>(items[0]?.value);
+
+  const handleSelect = (value: ReactNode, onClick?: (e?: React.MouseEvent<HTMLDivElement, MouseEvent>) => void) => {
+    setSelectedValue(value);
+    if (onClick) onClick();
+  };
 
   return (
     <Menu>
@@ -55,7 +61,7 @@ export const DropDown: FC<Props> = ({ btnLabel, items, startSlot, endSlot, class
           <Fragment key={index}>
             <MenuItem key={index}>
               <div
-                onClick={onClick}
+                onClick={() => handleSelect(value, onClick)}
                 className={clsx(
                   'p-2',
                   'data-[focus]:bg-[#E6F0F8]',
@@ -64,7 +70,8 @@ export const DropDown: FC<Props> = ({ btnLabel, items, startSlot, endSlot, class
                   'gap-2',
                   'capitalize',
                   startSlot && 'justify-start',
-                  endSlot && 'justify-between'
+                  endSlot && 'justify-between',
+                  selectedValue === value ? 'bg-[#E6F0F8] font-semibold' : ''
                 )}
               >
                 {startSlot && <div>{startSlot}</div>}
