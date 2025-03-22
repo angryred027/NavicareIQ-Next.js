@@ -1,3 +1,8 @@
+type Insurance = {
+  provider: string;
+  code: string;
+};
+
 export type Patient = {
   city: string;
   conditions: string;
@@ -15,7 +20,9 @@ export type Patient = {
   state: string;
   street_address: string;
   updated_at: string;
-  zip: 12345;
+  zip: string;
+
+  insurance: Insurance;
 };
 
 export type PatientPayload = {
