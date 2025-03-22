@@ -3,24 +3,25 @@ import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headless
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
 
-type SelectProps = {
-  label: ReactNode;
-  value?: string;
-  onChange?: (value: string) => void;
-  options: SelectOption[];
-};
-
-type SelectOption = {
+type SelectOption<T = any> = {
   value: string;
   label: ReactNode;
+  extraData?: T;
 };
 
-export const SelectDropDown: FC<SelectProps> = ({ label, value, onChange, options }) => {
+type SelectProps<T = any> = {
+  label: ReactNode;
+  value?: string;
+  onChange?: (value: string, extraData?: T) => void;
+  options: SelectOption<T>[];
+};
+
+export const SelectDropDown: FC<SelectProps> = <T,>({ label, value, onChange, options }: SelectProps<T>) => {
   const [selected, setSelected] = useState<SelectOption | null>(null);
 
   useEffect(() => {
     if (selected) {
-      onChange?.(selected.value);
+      onChange?.(selected.value, selected.extraData);
     }
   }, [selected, onChange]);
 
