@@ -126,6 +126,25 @@ const icons = {
     </>
   ),
 
+  paper1: (
+    <>
+      <path
+        d="M16.8 11.9999C16.8 15.5999 16.2667 17.3999 12 17.3999C7.73338 17.3999 7.20004 15.5999 7.20004 11.9999C7.20004 8.39985 7.80004 6.59985 12 6.59985C16.2 6.59985 16.8 8.39985 16.8 11.9999Z"
+        stroke="#515253"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M10.2 7.19995C10.2 7.19995 10.5628 8.63721 9.90005 9.29995C9.23731 9.96269 7.80005 9.59995 7.80005 9.59995"
+        stroke="#515253"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M9.60004 14.3999H12" stroke="#515253" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M9.60004 12.5999H14.4" stroke="#515253" strokeLinecap="round" strokeLinejoin="round" />
+    </>
+  ),
+
   'info-romb': (
     <>
       <path d="M12 16L12 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
