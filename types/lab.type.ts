@@ -24,6 +24,4 @@ export type LabOrderItem = {
   ordered_date?: string;
 };
 
-export type LabOrderItems = {
-  labOrders: LabOrderItem[] | undefined;
-};
+export type LabOrderItems = LabOrderItem[];

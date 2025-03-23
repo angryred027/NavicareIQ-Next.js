@@ -17,6 +17,4 @@ export type MedicationOrderItem = {
   quantity: number;
 };
 
-export type MedicationOrderItems = {
-  medicationOrders: MedicationOrderItem[] | undefined;
-};
+export type MedicationOrderItems = MedicationOrderItem[];
