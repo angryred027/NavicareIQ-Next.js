@@ -3,13 +3,25 @@ import { Sidebar } from '../sidebar/Sidebar';
 import { Breadcrumbs } from '../breadcrumbs/Breadcrumbs';
 import { ReactElement, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { useDispatch, UseDispatch, useSelector } from 'react-redux';
+import { RootState, AppDispatch } from '@/store/store';
 import { getCurrentUser } from '@/store/features/authSlice';
+import {
+  addLabOrder,
+  addMedicationOrder,
+  setMedicationQuantity,
+  loadStoredOrderData,
+} from '@/store/features/orderSlice';
+
 import { usePathname } from 'next/navigation';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const dispatch = useAppDispatch();
+  const { labOrders, medicationOrders } = useSelector((state: RootState) => state.order);
+
   useEffect(() => {
     dispatch(getCurrentUser());
+    dispatch(loadStoredOrderData());
   }, []);
 
   const pathname = usePathname();
