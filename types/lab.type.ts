@@ -18,3 +18,12 @@ export type LabTest = {
   created_at?: string;
   updated_at?: string;
 };
+
+export type LabOrderItem = {
+  lab: Lab | undefined;
+  ordered_date?: string;
+};
+
+export type LabOrderItems = {
+  labOrders: LabOrderItem[] | undefined;
+};
