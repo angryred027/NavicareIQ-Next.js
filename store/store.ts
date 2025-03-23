@@ -1,3 +1,4 @@
+// store.tsx
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './features/authSlice';
 import pageReducer from './features/pageSlice';
