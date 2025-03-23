@@ -12,10 +12,11 @@ export type Medication = {
   updated_at: string;
 };
 
-export type MedicationPayload = {
-  name: string;
-  type: string;
-  storage: string;
-  price: number;
-  description: string;
+export type MedicationOrderItem = {
+  medication: Medication | undefined;
+  quantity: number;
+};
+
+export type MedicationOrderItems = {
+  medicationOrders: MedicationOrderItem[] | undefined;
 };
