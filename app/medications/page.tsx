@@ -4,26 +4,46 @@ import { PatientInfo } from '@/modules/reports/patient-info/PatientInfo';
 import { TableTData, TRows } from '@/components/table/table.type';
 import { Table } from '@/components/table/table-component';
 import { TableProvider } from '@/components/table/context';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState, AppDispatch } from '@/store/store';
 
 import AddOrderModal from '@/modules/medications/add-order-modal/AddOrderModal';
 import Button from '@/components/button/Button';
 import Badge from '@/components/badge/Badge';
 import Icon from '@/components/icon/Icon';
 
-import { setError, setLoading } from '@/store/features/pageSlice';
 import { ReactNode, useState, useEffect, useMemo } from 'react';
 import { Medication } from '@/types/medication.type';
+import { Patient } from '@/types/patient.type';
 
-const patientListData = [
+const patientListData: Patient[] = [
   {
-    value: '1',
-    label: 'Angelina Perreira',
+    id: 1,
+    name: 'Dean Friedland',
+    gender: 'Male',
+    age: 32,
+    dob: '03 July 1992',
+    phone: '+1 (903) 533 0955',
+    email: 'perreira@gmail.com',
+    address: '1010 11th St. Sausalito, CA, 96922',
+    startDate: 'Mar 12, 2023',
+    insurance: {
+      provider: 'Aetna',
+      code: 'W2113 69935',
+    },
   },
   {
-    value: '2',
-    label: 'Dean Friedland',
+    id: 2,
+    name: 'Angelina Perreira',
+    gender: 'Female',
+    age: 32,
+    dob: '03 July 1992',
+    phone: '+1 (903) 533 0955',
+    email: 'perreira@gmail.com',
+    address: '1010 11th St. Sausalito, CA, 96922',
+    startDate: 'Mar 12, 2023',
+    insurance: {
+      provider: 'Aetna',
+      code: 'W2113 69935',
+    },
   },
 ];
 
@@ -31,84 +51,6 @@ type PhysicianInfo = {
   name: string;
   physicianId: string;
 };
-
-const medicationsData: TableTData[] = [
-  {
-    name: 'Isotretinoin',
-    'Primary Use': 'Blood pressure management',
-    vial: '0.25 mg/mL',
-    form: 'Capsule',
-    'Qty. per pkg.': 20,
-    price: `$20`,
-    btns: {
-      value: (
-        <Button onClick={() => alert('Welcome!')}>
-          <div className="flex items-center">+</div>
-        </Button>
-      ),
-    },
-  },
-  {
-    name: 'Clotrimazole',
-    'Primary Use': 'Blood pressure management',
-    vial: '0.25 mg/pkg',
-    form: 'Powder',
-    'Qty. per pkg.': 10,
-    price: `$10`,
-    btns: {
-      value: (
-        <Button onClick={() => alert('Welcome!')}>
-          <div className="flex items-center">+</div>
-        </Button>
-      ),
-    },
-  },
-  {
-    name: 'Montelukast',
-    'Primary Use': 'Blood pressure management',
-    vial: '0.4 mg/mL',
-    form: 'Capsule',
-    'Qty. per pkg.': 12,
-    price: `$15`,
-    btns: {
-      value: (
-        <Button onClick={() => alert('Welcome!')}>
-          <div className="flex items-center">+</div>
-        </Button>
-      ),
-    },
-  },
-  {
-    name: 'Sertraline',
-    'Primary Use': 'Blood pressure management',
-    vial: '0.4 mg/mL',
-    form: 'Capsule',
-    'Qty. per pkg.': 12,
-    price: `$15`,
-    btns: {
-      value: (
-        <Button onClick={() => alert('Welcome!')}>
-          <div className="flex items-center">+</div>
-        </Button>
-      ),
-    },
-  },
-  {
-    name: 'Clonazepam',
-    'Primary Use': 'Blood pressure management',
-    vial: '0.4 mg/mL',
-    form: 'Capsule',
-    'Qty. per pkg.': 12,
-    price: `$15`,
-    btns: {
-      value: (
-        <Button onClick={() => alert('Welcome!')}>
-          <div className="flex items-center">+</div>
-        </Button>
-      ),
-    },
-  },
-];
 
 const patientData = {
   id: 1,
@@ -136,6 +78,8 @@ const physicianData = {
 };
 
 export default function MedicationsPage() {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
   const medicinesData: TableTData[] = [
     {
       name: 'Isotretinoin',
@@ -219,11 +163,6 @@ export default function MedicationsPage() {
     console.log(`Modal State Before:`, isModalOpen);
   };
 
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-  const { loading, error, filters, sort } = useSelector((state: RootState) => state.page);
-  const dispatch = useDispatch<AppDispatch>();
-
   const [medicationsData, setMedicationsData] = useState<TableTData[]>(medicinesData);
   const [query, setQuery] = useState<string>('');
   const filteredMedicationsData = useMemo(() => {
@@ -285,7 +224,16 @@ export default function MedicationsPage() {
       >
         <Table />
       </TableProvider>
-      {isModalOpen && <AddOrderModal isOpen={isModalOpen} physician={physicianData} patients={patientListData} />}
+      {isModalOpen && (
+        <AddOrderModal
+          isOpen={true}
+          onClose={() => {
+            setIsModalOpen(false);
+          }}
+          physician={physicianData}
+          patients={patientListData}
+        />
+      )}
     </>
   );
 }
