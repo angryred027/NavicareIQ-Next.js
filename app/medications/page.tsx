@@ -14,6 +14,7 @@ import Icon from '@/components/icon/Icon';
 
 import { setError, setLoading } from '@/store/features/pageSlice';
 import { ReactNode, useState, useEffect, useMemo } from 'react';
+import { Medication } from '@/types/medication.type';
 
 const patientListData = [
   {
@@ -26,35 +27,9 @@ const patientListData = [
   },
 ];
 
-type InsuranceItem = {
-  provider: string;
-  code: string;
-};
-
-type PatientInfo = {
-  name: string;
-  gender: string;
-  age: number;
-  dob: string;
-  phone: string;
-  email: string;
-  address: string;
-  startDate: string;
-  insurance: InsuranceItem;
-};
-
 type PhysicianInfo = {
   name: string;
   physicianId: string;
-};
-
-type LabItem = {
-  name: string;
-};
-
-type VendorItem = {
-  value: string;
-  label: string;
 };
 
 const medicationsData: TableTData[] = [
@@ -68,7 +43,7 @@ const medicationsData: TableTData[] = [
     btns: {
       value: (
         <Button onClick={() => alert('Welcome!')}>
-          <div className="flex items-center gap-2 px-2">+</div>
+          <div className="flex items-center">+</div>
         </Button>
       ),
     },
@@ -83,7 +58,7 @@ const medicationsData: TableTData[] = [
     btns: {
       value: (
         <Button onClick={() => alert('Welcome!')}>
-          <div className="flex items-center gap-2 px-2">+</div>
+          <div className="flex items-center">+</div>
         </Button>
       ),
     },
@@ -98,7 +73,7 @@ const medicationsData: TableTData[] = [
     btns: {
       value: (
         <Button onClick={() => alert('Welcome!')}>
-          <div className="flex items-center gap-2 px-2">+</div>
+          <div className="flex items-center">+</div>
         </Button>
       ),
     },
@@ -113,7 +88,7 @@ const medicationsData: TableTData[] = [
     btns: {
       value: (
         <Button onClick={() => alert('Welcome!')}>
-          <div className="flex items-center gap-2 px-2">+</div>
+          <div className="flex items-center">+</div>
         </Button>
       ),
     },
@@ -128,7 +103,7 @@ const medicationsData: TableTData[] = [
     btns: {
       value: (
         <Button onClick={() => alert('Welcome!')}>
-          <div className="flex items-center gap-2 px-2">+</div>
+          <div className="flex items-center">+</div>
         </Button>
       ),
     },
@@ -171,8 +146,8 @@ export default function MedicationsPage() {
       price: `$20`,
       btns: {
         value: (
-          <Button onClick={() => alert('Welcome!')}>
-            <div className="flex items-center gap-2 px-2">+</div>
+          <Button onClick={() => handleAddToOrder('Isotretinoin')}>
+            <div className="flex items-center">+</div>
           </Button>
         ),
       },
@@ -186,8 +161,8 @@ export default function MedicationsPage() {
       price: `$10`,
       btns: {
         value: (
-          <Button onClick={() => alert('Welcome!')}>
-            <div className="flex items-center gap-2 px-2">+</div>
+          <Button onClick={() => handleAddToOrder('Clotrimazole')}>
+            <div className="flex items-center">+</div>
           </Button>
         ),
       },
@@ -201,8 +176,8 @@ export default function MedicationsPage() {
       price: `$15`,
       btns: {
         value: (
-          <Button onClick={() => alert('Welcome!')}>
-            <div className="flex items-center gap-2 px-2">+</div>
+          <Button onClick={() => handleAddToOrder('Montelukast')}>
+            <div className="flex items-center">+</div>
           </Button>
         ),
       },
@@ -216,8 +191,8 @@ export default function MedicationsPage() {
       price: `$15`,
       btns: {
         value: (
-          <Button onClick={() => alert('Welcome!')}>
-            <div className="flex items-center gap-2 px-2">+</div>
+          <Button onClick={() => handleAddToOrder('Sertraline')}>
+            <div className="flex items-center">+</div>
           </Button>
         ),
       },
@@ -231,13 +206,18 @@ export default function MedicationsPage() {
       price: `$15`,
       btns: {
         value: (
-          <Button onClick={() => alert('Welcome!')}>
-            <div className="flex items-center gap-2 px-2">+</div>
+          <Button onClick={() => handleAddToOrder('Clonazepam')}>
+            <div className="flex items-center">+</div>
           </Button>
         ),
       },
     },
   ];
+
+  const handleAddToOrder = (medication: string) => {
+    setIsModalOpen(true);
+    console.log(`Modal State Before:`, isModalOpen);
+  };
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
@@ -305,7 +285,7 @@ export default function MedicationsPage() {
       >
         <Table />
       </TableProvider>
-      <AddOrderModal isOpen={isModalOpen} physician={physicianData} patients={patientListData} />
+      {isModalOpen && <AddOrderModal isOpen={isModalOpen} physician={physicianData} patients={patientListData} />}
     </>
   );
 }
