@@ -1,46 +1,46 @@
 import Icon from '@/components/icon/Icon';
 import Collapse from '@/components/collapse/Collapse';
+import calculateAge from '@/lib/CalculateAge';
 
-const patientData = {
-  name: 'Angellina Perreira',
+import { Patient } from '@/types/patient.type';
+
+const patientData: Patient = {
+  id: 1,
+  first_name: 'Angelina',
+  last_name: 'Perreira',
   gender: 'Female',
-  age: 32,
-  dob: '03 July 1992',
-  phone: '+1 (903) 533 0955',
-  email: 'perreira@gmail.com',
-  address: '1010 11th St. Sausalito, CA 96922',
-  startDate: 'Mar 12, 2023',
+  dob: '1992-07-03',
+  phone: '+1 (903) 533-0955',
+  email: 'angelina.perreira@gmail.com',
+  city: 'Sausalito',
+  state: 'CA',
+  zip: '96922',
+  street_address: '1010 11th St.',
+  conditions: 'Hypertension, Asthma',
+  diagnoses_codes: 'I10, J45',
+  drug_allergies: 'Penicillin, Ibuprofen',
+  medications: 'Lisinopril, Albuterol',
+  facility_id: 101,
+  created_at: '2024-03-12T08:30:00Z',
+  updated_at: '2024-03-20T14:45:00Z',
   insurance: {
     provider: 'Aetna',
     code: 'W2113 69935',
   },
 };
 
-type InsuranceItem = {
-  provider: string;
-  code: string;
-};
-
-type PatientData = {
-  name: string;
-  gender: string;
-  age: number;
-  dob: string;
-  phone: string;
-  email: string;
-  address: string;
-  startDate: string;
-  insurance: InsuranceItem;
-};
-
 type PatientInfoProps = {
-  patient: PatientData;
+  patient: Patient;
 };
 
 export const PatientInfo = ({ patient = patientData }: PatientInfoProps) => {
   return (
     <div className="w-full space-y-4 flex justify-center align-middle gap-5 bg-transparent relative z-100">
-      <Collapse title={patient.name} subTitle={patient.gender + `, ${patient.age}`} defaultOpen>
+      <Collapse
+        title={`${patient.first_name}${patient.last_name}`}
+        subTitle={patient.gender + `, ${calculateAge(patient.dob)}`}
+        defaultOpen
+      >
         <div className="space-y-8 border-t border-system-light-200 pt-4">
           <div className="flex items-start gap-2 flex-wrap">
             <Icon name="calendar" size={18} viewBox="0 0 18 18" />
@@ -71,7 +71,7 @@ export const PatientInfo = ({ patient = patientData }: PatientInfoProps) => {
             <div className="flex flex-col gap-1">
               <span className="text-xs sm:text-sm leading-[1rem] font-medium text-[#757B80]">Address</span>
               <span className="text-sm sm:text-base leading-[1.25rem] font-normal text-[#000005]">
-                {patient.address}
+                {`${patient.street_address}, ${patient.city}, ${patient.state}, ${patient.zip}`}
               </span>
             </div>
           </div>
@@ -81,7 +81,7 @@ export const PatientInfo = ({ patient = patientData }: PatientInfoProps) => {
             <div className="flex flex-col gap-1">
               <span className="text-xs sm:text-sm leading-[1rem] font-medium text-[#757B80]">Since</span>
               <span className="text-sm sm:text-base leading-[1.25rem] font-normal text-[#000005]">
-                {patient.startDate}
+                {patient.created_at}
               </span>
               <span className="text-xs sm:text-sm leading-[1rem] font-normal text-[#91A3B0]">{'1 year, 3 months'}</span>
             </div>
