@@ -21,6 +21,7 @@ type AddOrderModalProps = {
   physician: Physician;
   medication: Medication;
   pharmacies: Pharmacy[];
+  onClose: () => void;
 };
 
 const physicianData = {
@@ -101,6 +102,7 @@ export default function AddOrderModal({
   patients,
   physician = physicianData,
   medication = medicationData,
+  onClose,
 }: AddOrderModalProps) {
   const [copiedText, setCopiedText] = useState<string>('');
   const textRef = useRef<HTMLInputElement>(null);
@@ -145,7 +147,13 @@ export default function AddOrderModal({
 
   return (
     <>
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Add to Order">
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => {
+          onClose();
+        }}
+        title="Add to Order"
+      >
         <div className="overflow-y-auto [&::-webkit-scrollbar]:none">
           <div className="m-1">
             <SelectDropDown
