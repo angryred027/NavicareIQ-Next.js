@@ -4,6 +4,7 @@ type Insurance = {
 };
 
 export type Patient = {
+  email?: string;
   city: string;
   conditions: string;
   created_at: string;
