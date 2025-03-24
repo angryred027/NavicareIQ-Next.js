@@ -20,16 +20,18 @@ import {
   setMedicationQuantity,
   loadStoredOrderData,
 } from '@/store/features/orderSlice';
+import { setIsDrawerOpen } from '@/store/features/pageSlice';
 import QuantityDropdown from './QuantityDropdown';
 
 type OrderDrawerProps = {
   patient: Patient;
+  isOpen: boolean;
 };
 
-export default function OrderDrawer({ patient }: OrderDrawerProps) {
+export default function OrderDrawer({ patient, isOpen = false }: OrderDrawerProps) {
   const dispatch = useAppDispatch();
   const { labOrders, medicationOrders } = useSelector((state: RootState) => state.order);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(true);
+  const { isDrawerOpen } = useSelector((state: RootState) => state.page);
   const drawerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -38,7 +40,7 @@ export default function OrderDrawer({ patient }: OrderDrawerProps) {
 
     const handleClickOutside = (event: MouseEvent) => {
       if (drawerRef.current && !drawerRef.current.contains(event.target as Node)) {
-        setIsDrawerOpen(false);
+        dispatch(setIsDrawerOpen(false));
       }
     };
 
@@ -47,11 +49,11 @@ export default function OrderDrawer({ patient }: OrderDrawerProps) {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [isDrawerOpen]);
 
   return (
     <>
-      {isDrawerOpen && (
+      {isOpen && (
         <div
           ref={drawerRef}
           className="overflow-y-auto [&::-webkit-scrollbar]:none fixed top-0 right-0 z-50 w-[400px] h-full bg-white shadow-lg p-4"
