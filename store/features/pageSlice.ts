@@ -7,6 +7,7 @@ interface pageState {
   filters?: Record<string, any>[] | undefined;
   sort?: string | null;
   toggled?: boolean;
+  isDrawerOpen?: boolean;
 }
 
 const initialState: pageState = {
@@ -15,6 +16,7 @@ const initialState: pageState = {
   filters: [],
   sort: null,
   toggled: false,
+  isDrawerOpen: false,
 };
 
 const pageSlice = createSlice({
@@ -40,8 +42,12 @@ const pageSlice = createSlice({
     setToggle: (state, action: PayloadAction<boolean>) => {
       state.toggled = action.payload;
     },
+
+    setIsDrawerOpen: (state, action: PayloadAction<boolean>) => {
+      state.isDrawerOpen = action.payload;
+    },
   },
 });
 
-export const { setLoading, setError, setFilters, setSort, setToggle } = pageSlice.actions;
+export const { setLoading, setError, setFilters, setSort, setToggle, setIsDrawerOpen } = pageSlice.actions;
 export default pageSlice.reducer;
