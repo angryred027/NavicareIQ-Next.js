@@ -1,6 +1,6 @@
 import Icon from '@/components/icon/Icon';
 import Collapse from '@/components/collapse/Collapse';
-import calculateAge from '@/lib/CalculateAge';
+import calculateAge from '@/lib/calculateAge';
 
 import { Patient } from '@/types/patient.type';
 
